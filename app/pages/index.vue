@@ -168,7 +168,7 @@ watch([selectedTypology, selectedYear, selectedCountry], () => {
       const rect = target.getBoundingClientRect();
       // If the top of the grid is not visible (scrolled up too far), scroll to it
       if (rect.top > 150 || rect.top < 0) {
-        scrollToProjects(1000);
+        scrollToProjects();
       }
     }
   }
@@ -181,39 +181,20 @@ const { data: projects } = await useAsyncData('home-projects', () =>
     .all()
 );
 
-const smoothScrollTo = (targetId: string, duration: number = 1500) => {
+const scrollToSection = (targetId: string, offset: number = 96, behavior: ScrollBehavior = 'smooth') => {
   const target = document.getElementById(targetId);
   if (!target) return;
 
-  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 120;
-  const startPosition = window.pageYOffset;
-  const distance = targetPosition - startPosition;
-  let startTime: number | null = null;
-
-  const animation = (currentTime: number) => {
-    if (startTime === null) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    const run = ease(timeElapsed, startPosition, distance, duration);
-    window.scrollTo(0, run);
-    if (timeElapsed < duration) requestAnimationFrame(animation);
-  };
-
-  const ease = (t: number, b: number, c: number, d: number) => {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  };
-
-  requestAnimationFrame(animation);
+  const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, targetPosition), behavior });
 };
 
 const scrollToContact = () => {
-  smoothScrollTo('contact', 1200);
+  scrollToSection('contact', 80);
 };
 
-const scrollToProjects = (duration: number = 2000) => {
-  smoothScrollTo('projects-grid', duration);
+const scrollToProjects = () => {
+  scrollToSection('projects-grid');
 };
 
 watchEffect(() => {

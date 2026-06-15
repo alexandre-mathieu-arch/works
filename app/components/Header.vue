@@ -10,7 +10,7 @@
       <NuxtLink 
         :to="projectsLinkTarget" 
         class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link px-2 py-1 transition-all duration-500 hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
-        @click="handleLinkClick('Projets')"
+        @click.prevent="handleProjectsClick"
         @mouseenter="emit('linkHover', 'Projets')"
         @mouseleave="emit('linkHover', '')"
       >
@@ -28,7 +28,7 @@
             :class="[
               (link.to === '/' ? route.path === '/' : route.path.startsWith(link.to)) ? 'is-active' : 'group-hover/nav:opacity-50 hover:!opacity-100'
             ]"
-            @click="handleLinkClick(link.label)"
+            @click="handleDesktopLinkClick(link, $event)"
             @mouseenter="emit('linkHover', link.label)"
             @mouseleave="emit('linkHover', '')"
           >
@@ -161,7 +161,7 @@
         </button>
         <button 
           type="button"
-          @click="toggleMenu" 
+          @click.stop="toggleMenu" 
           class="p-2 rounded-md text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
           :aria-expanded="isMenuOpen"
           aria-controls="mobile-menu"
@@ -178,13 +178,14 @@
       <div
         v-if="isMenuOpen"
         id="mobile-menu"
-        class="md:hidden fixed inset-0 h-screen w-screen glass-fluted bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] z-50 flex flex-col items-end justify-start pt-24 px-6 space-y-4"
+        class="md:hidden fixed inset-0 h-screen w-screen glass-fluted bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] z-[70] flex flex-col items-end justify-start pt-24 px-6 space-y-4"
         role="dialog"
         aria-modal="true"
+        @click.stop
       >
         <button
           type="button"
-          @click="toggleMenu"
+          @click.stop="closeMenu"
           class="absolute top-4 right-6 p-3 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
           aria-label="Fermer le menu"
         >
@@ -214,7 +215,7 @@
               :key="result.path" 
               :to="result.path"
               class="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-900 border-b border-gray-50 dark:border-gray-800 last:border-0"
-              @click="clearSearch(); isMenuOpen = false"
+              @click="handleMobileSearchResultClick"
             >
               <div class="text-[12px] font-bold text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] tracking-wider">{{ result.title }}</div>
               <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
@@ -234,7 +235,7 @@
             :key="link.to" 
             :to="link.to === '/' ? projectsLinkTarget : link.to"
             class="u-h2 text-[24px] text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] mobile-link px-4 py-3 min-h-11 border border-[#121212]/10 dark:border-white/10 w-fit"
-            @click="handleLinkClick(link.label); isMenuOpen = false"
+            @click="handleMobileLinkClick(link, $event)"
           >
             {{ link.label }}
           </NuxtLink>
@@ -270,14 +271,19 @@ const themeTitle = computed(() => {
 
 const { hoveredProjectTitle } = useHoverProject();
 
-const links = [
+type HeaderLink = {
+  label: string;
+  to: string;
+};
+
+const links: HeaderLink[] = [
   { label: 'Projets', to: '/' },
   { label: 'À propos', to: '/about' },
   { label: 'Corpus', to: '/corpus' },
   { label: 'Art', to: '/art' }
 ];
 
-const projectsLinkTarget = { path: '/', query: { view: 'grid' }, hash: '#projects-grid' };
+const projectsLinkTarget = { path: '/', query: { view: 'grid' } };
 
 const emit = defineEmits(['linkClick', 'linkHover']);
 
@@ -287,6 +293,9 @@ const searchTerm = ref(''); // Reactive search term
 const isSearchExpanded = ref(false);
 const searchInput = ref<any>(null);
 const isSearching = ref(false);
+const route = useRoute();
+const router = useRouter();
+const lockedBodyOverflow = ref<string | null>(null);
 
 const { data: allContent } = await useAsyncData('all-site-content', () =>
   queryCollection('content')
@@ -294,8 +303,6 @@ const { data: allContent } = await useAsyncData('all-site-content', () =>
     .where('draft', '<>', true)
     .all()
 );
-
-const route = useRoute();
 
 const searchResults = computed(() => {
   if (!searchTerm.value || !allContent.value) return [];
@@ -334,23 +341,91 @@ const handleLinkClick = (label: string) => {
   emit('linkClick', label);
 };
 
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
+const setBodyScrollLock = (locked: boolean) => {
   if (import.meta.client) {
-    document.body.style.overflow = isMenuOpen.value ? 'hidden' : '';
+    if (locked) {
+      if (lockedBodyOverflow.value === null) {
+        lockedBodyOverflow.value = document.body.style.overflow;
+      }
+      document.body.style.overflow = 'hidden';
+    } else if (lockedBodyOverflow.value !== null) {
+      document.body.style.overflow = lockedBodyOverflow.value;
+      lockedBodyOverflow.value = null;
+    }
   }
 };
 
-watch(isMenuOpen, (newValue) => {
-  if (import.meta.client) {
-    document.body.style.overflow = newValue ? 'hidden' : '';
+const setMenuOpen = (open: boolean) => {
+  isMenuOpen.value = open;
+  setBodyScrollLock(open);
+};
+
+const toggleMenu = () => {
+  setMenuOpen(!isMenuOpen.value);
+};
+
+const closeMenu = () => {
+  setMenuOpen(false);
+};
+
+const scrollToProjectsGrid = () => {
+  if (!import.meta.client) return;
+
+  const target = document.getElementById('projects-grid');
+  if (!target) return;
+
+  const targetPosition = target.getBoundingClientRect().top + window.scrollY - 96;
+  window.scrollTo({ top: Math.max(0, targetPosition), behavior: 'smooth' });
+};
+
+const handleProjectsClick = async (event?: MouseEvent) => {
+  event?.preventDefault();
+  handleLinkClick('Projets');
+  closeMenu();
+
+  if (route.path === '/') {
+    await nextTick();
+    scrollToProjectsGrid();
+    return;
   }
+
+  await router.push(projectsLinkTarget);
+};
+
+const handleDesktopLinkClick = (link: HeaderLink, event: MouseEvent) => {
+  if (link.to === '/') {
+    void handleProjectsClick(event);
+    return;
+  }
+
+  handleLinkClick(link.label);
+};
+
+const handleMobileLinkClick = (link: HeaderLink, event: MouseEvent) => {
+  if (link.to === '/') {
+    void handleProjectsClick(event);
+    return;
+  }
+
+  handleLinkClick(link.label);
+  closeMenu();
+};
+
+const handleMobileSearchResultClick = () => {
+  clearSearch();
+  closeMenu();
+};
+
+watch(isMenuOpen, (newValue) => {
+  setBodyScrollLock(newValue);
+});
+
+watch(() => route.fullPath, () => {
+  closeMenu();
 });
 
 onUnmounted(() => {
-  if (import.meta.client) {
-    document.body.style.overflow = '';
-  }
+  setBodyScrollLock(false);
 });
 </script>
 
