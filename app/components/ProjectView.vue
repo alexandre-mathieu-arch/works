@@ -51,6 +51,30 @@
                 </div>
               </div>
             </div>
+
+            <nav
+              v-if="mobilePrevProject || mobileNextProject"
+              class="lg:hidden mt-8 grid grid-cols-2 gap-3 border-t border-[#121212]/10 pt-4 dark:border-white/10"
+              aria-label="Navigation entre projets"
+            >
+              <NuxtLink
+                v-if="mobilePrevProject"
+                :to="mobilePrevProject.path"
+                class="min-h-11 border border-[#121212]/15 px-3 py-3 transition-colors duration-500 hover:border-[#121212]/40 dark:border-white/15 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
+              >
+                <span class="u-legend block opacity-50">Precedent</span>
+                <span class="u-h4 block truncate !tracking-normal">{{ mobilePrevProject.title }}</span>
+              </NuxtLink>
+              <span v-else></span>
+              <NuxtLink
+                v-if="mobileNextProject"
+                :to="mobileNextProject.path"
+                class="min-h-11 border border-[#121212]/15 px-3 py-3 text-right transition-colors duration-500 hover:border-[#121212]/40 dark:border-white/15 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
+              >
+                <span class="u-legend block opacity-50">Suivant</span>
+                <span class="u-h4 block truncate !tracking-normal">{{ mobileNextProject.title }}</span>
+              </NuxtLink>
+            </nav>
           </div>
         </div>
       </div>
@@ -69,9 +93,45 @@ const props = defineProps<{
   isHero?: boolean;
 }>();
 
+const route = useRoute();
 const { currentImageIndex, setCurrentImageIndex, setTotalImages } = useCarouselState();
 const { setHoveredProject } = useHoverProject();
 const { getParallaxStyle } = useParallax(30);
+
+const { data: mobileProjectNavItems } = await useAsyncData('project-view-mobile-nav', () =>
+  queryCollection('content')
+    .select('path', 'title', 'date')
+    .where('path', 'LIKE', '/projets/%')
+    .where('draft', '<>', true)
+    .all()
+);
+
+const orderedMobileProjects = computed(() => {
+  if (!mobileProjectNavItems.value) return [];
+  return [...mobileProjectNavItems.value].sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+    return dateB - dateA;
+  });
+});
+
+const mobileCurrentProjectIndex = computed(() => {
+  return orderedMobileProjects.value.findIndex(p => p.path === route.path);
+});
+
+const mobilePrevProject = computed(() => {
+  if (mobileCurrentProjectIndex.value > 0) {
+    return orderedMobileProjects.value[mobileCurrentProjectIndex.value - 1];
+  }
+  return null;
+});
+
+const mobileNextProject = computed(() => {
+  if (mobileCurrentProjectIndex.value >= 0 && mobileCurrentProjectIndex.value < orderedMobileProjects.value.length - 1) {
+    return orderedMobileProjects.value[mobileCurrentProjectIndex.value + 1];
+  }
+  return null;
+});
 
 const detailImgRefs = ref<HTMLElement[]>([]);
 const setDetailImgRef = (el: any, index: number) => {

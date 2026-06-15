@@ -162,7 +162,7 @@
           <template v-if="isProjectPage">
             <!-- Column 2+: Sequence Navigation (Arrows + Counters) -->
             <!-- We allow this column to span across the rest of the grid to accommodate many images -->
-            <div class="min-h-11 md:h-[30px] flex items-center col-span-full md:col-span-2 xl:col-span-3 w-full md:w-fit">
+            <div class="hidden lg:flex min-h-11 md:h-[30px] items-center col-span-full md:col-span-2 xl:col-span-3 w-full md:w-fit">
               <SequenceCounter
                 v-if="totalImages > 0"
                 :model-value="carouselCurrentImageIndex"
