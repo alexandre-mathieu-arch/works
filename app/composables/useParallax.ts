@@ -3,12 +3,22 @@ import { ref, onMounted, onUnmounted } from 'vue'
 export const useParallax = (intensity = 15) => {
   const scrollY = ref(0)
   const windowHeight = ref(0)
+  const isEnabled = ref(false)
+  let ticking = false
 
   const updateScroll = () => {
-    scrollY.value = window.scrollY
+    if (!isEnabled.value || ticking) return
+
+    ticking = true
+    requestAnimationFrame(() => {
+      scrollY.value = window.scrollY
+      ticking = false
+    })
   }
 
   const updateDimensions = () => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    isEnabled.value = window.matchMedia('(min-width: 1024px)').matches && !reducedMotion
     windowHeight.value = window.innerHeight
   }
 
@@ -24,7 +34,9 @@ export const useParallax = (intensity = 15) => {
   })
 
   const getParallaxStyle = (el: any) => {
-    if (!process.client || typeof window === 'undefined' || !el) return {}
+    if (!process.client || typeof window === 'undefined' || !isEnabled.value || !el) return {}
+
+    scrollY.value
     
     // Handle Vue component refs or raw elements
     const element = el.$el || el
@@ -44,8 +56,8 @@ export const useParallax = (intensity = 15) => {
     const translateY = clampedDistance * intensity
 
     return {
-      transform: `translateY(${translateY}px)`,
-      transition: 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)'
+      transform: `translate3d(0, ${translateY}px, 0)`,
+      willChange: 'transform'
     }
   }
 

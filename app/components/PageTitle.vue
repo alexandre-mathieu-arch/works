@@ -37,11 +37,131 @@
     </div>
     
     <div v-if="showFilters || $slots.triggers" class="mt-0 relative" ref="filterContainer">
+      <div v-if="showFilters && !readonlyFilters && !isProjectPage" class="md:hidden">
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            @click="isMobileFiltersOpen = true"
+            class="flex min-h-11 flex-1 items-center justify-between border border-[#121212]/30 bg-white/50 px-3 text-left u-h4 !tracking-normal text-[#121212] transition-colors duration-500 dark:border-white/20 dark:bg-white/5 dark:text-white doux:text-[#4A4443] nuit:bg-[#161D2F] nuit:text-[#CDD6F4]"
+            :aria-expanded="isMobileFiltersOpen"
+            aria-controls="mobile-filters-panel"
+          >
+            <span>Filtres</span>
+            <span v-if="activeFilterCount" class="ml-3 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#121212] px-1.5 text-[10px] leading-none text-white dark:bg-white dark:text-[#121212]">
+              {{ activeFilterCount }}
+            </span>
+          </button>
+          <button
+            v-if="hasActiveFilters"
+            type="button"
+            @click="resetFilters"
+            class="flex h-11 w-11 shrink-0 items-center justify-center border border-primary-900/30 bg-white/50 text-primary-900 transition-colors duration-500 dark:border-primary-400/30 dark:bg-white/5 dark:text-primary-400 nuit:bg-[#161D2F]"
+            aria-label="Réinitialiser les filtres"
+          >
+            <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+            </svg>
+          </button>
+        </div>
+
+        <Teleport to="body">
+          <Transition
+            enter-active-class="transition duration-300 ease-out"
+            enter-from-class="opacity-0"
+            enter-to-class="opacity-100"
+            leave-active-class="transition duration-200 ease-in"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+          >
+            <div
+              v-if="isMobileFiltersOpen"
+              class="fixed inset-0 z-[90] md:hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="mobile-filters-title"
+            >
+              <button
+                type="button"
+                class="absolute inset-0 bg-[#121212]/35"
+                aria-label="Fermer les filtres"
+                @click="isMobileFiltersOpen = false"
+              />
+              <div
+                id="mobile-filters-panel"
+                class="absolute inset-x-0 bottom-0 max-h-[82dvh] overflow-y-auto border-t border-[#121212]/10 bg-white px-[var(--main-padding)] pb-[calc(env(safe-area-inset-bottom)+1rem)] pt-4 shadow-2xl dark:border-white/10 dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238]"
+              >
+                <div class="mb-5 flex items-center justify-between gap-4">
+                  <h2 id="mobile-filters-title" class="u-h3 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">
+                    Filtres
+                  </h2>
+                  <button
+                    type="button"
+                    @click="isMobileFiltersOpen = false"
+                    class="flex h-11 w-11 items-center justify-center border border-[#121212]/20 text-[#121212] dark:border-white/20 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
+                    aria-label="Fermer les filtres"
+                  >
+                    <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                      <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="space-y-6">
+                  <section v-for="group in mobileFilterGroups" :key="group.id">
+                    <div class="mb-2 u-h4 text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70">
+                      {{ group.label }}
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        @click="selectMobileFilter(group.id, null)"
+                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-300"
+                        :class="isMobileFilterActive(group.id, null) ? 'border-primary-900 bg-primary-900 text-white dark:border-primary-400 dark:bg-primary-400 dark:text-[#121212]' : 'border-[#121212]/20 text-[#121212]/70 dark:border-white/20 dark:text-white/70 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70'"
+                      >
+                        {{ group.emptyLabel }}
+                      </button>
+                      <button
+                        v-for="option in group.options"
+                        :key="option"
+                        type="button"
+                        @click="selectMobileFilter(group.id, option)"
+                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-300"
+                        :class="isMobileFilterActive(group.id, option) ? 'border-primary-900 bg-primary-900 text-white dark:border-primary-400 dark:bg-primary-400 dark:text-[#121212]' : 'border-[#121212]/20 text-[#121212]/70 dark:border-white/20 dark:text-white/70 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70'"
+                      >
+                        {{ option }}
+                      </button>
+                    </div>
+                  </section>
+                </div>
+
+                <div class="sticky bottom-0 -mx-[var(--main-padding)] mt-6 flex gap-2 border-t border-[#121212]/10 bg-white px-[var(--main-padding)] py-3 dark:border-white/10 dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238]">
+                  <button
+                    v-if="hasActiveFilters"
+                    type="button"
+                    @click="resetFilters"
+                    class="min-h-11 flex-1 border border-[#121212]/20 px-3 u-h4 !tracking-normal text-[#121212] dark:border-white/20 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
+                  >
+                    Tout effacer
+                  </button>
+                  <button
+                    type="button"
+                    @click="isMobileFiltersOpen = false"
+                    class="min-h-11 flex-1 border border-[#121212] bg-[#121212] px-3 u-h4 !tracking-normal text-white dark:border-white dark:bg-white dark:text-[#121212] doux:border-[#4A4443] doux:bg-[#4A4443] doux:text-[#E5E1E0] nuit:border-[#CDD6F4] nuit:bg-[#CDD6F4] nuit:text-[#1A2238]"
+                  >
+                    Voir les projets
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Transition>
+        </Teleport>
+      </div>
+
       <!-- Custom triggers slot -->
       <slot name="triggers">
         <!-- Grid aligned triggers -->
         <div 
-          class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-3 md:gap-8 items-start"
+          class="hidden md:grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-3 md:gap-8 items-start"
           style="view-transition-name: page-triggers;"
         >
           <!-- Standard Filters (Grid) or Project Info (Detail) -->
@@ -281,6 +401,52 @@ const {
 } = useProjectFilters();
 
 const activeMenu = ref<string | null>(null);
+const isMobileFiltersOpen = ref(false);
+
+type MobileFilterId = 'typology' | 'year' | 'country';
+
+const mobileFilterGroups = computed<Array<{ id: MobileFilterId; label: string; emptyLabel: string; options: string[] }>>(() => [
+  {
+    id: 'typology',
+    label: 'Typologie',
+    emptyLabel: 'Toutes',
+    options: typologyOptions.value
+  },
+  {
+    id: 'year',
+    label: 'Année',
+    emptyLabel: 'Toutes',
+    options: yearOptions.value
+  },
+  {
+    id: 'country',
+    label: 'Pays',
+    emptyLabel: 'Tous',
+    options: countryOptions.value
+  }
+]);
+
+const selectMobileFilter = (id: MobileFilterId, value: string | null) => {
+  if (id === 'typology') selectedTypology.value = value;
+  if (id === 'year') selectedYear.value = value;
+  if (id === 'country') selectedCountry.value = value;
+};
+
+const isMobileFilterActive = (id: MobileFilterId, value: string | null) => {
+  if (id === 'typology') return selectedTypology.value === value;
+  if (id === 'year') return selectedYear.value === value;
+  return selectedCountry.value === value;
+};
+
+const activeFilterCount = computed(() => {
+  return [
+    selectedTypology.value,
+    selectedSize.value,
+    selectedYear.value,
+    selectedCountry.value,
+    selectedProjectTitle.value
+  ].filter(Boolean).length;
+});
 
 const handleClickOutside = (event: MouseEvent) => {
   if (filterContainer.value && !filterContainer.value.contains(event.target as Node)) {
@@ -294,6 +460,20 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
+  if (isMobileFiltersOpen.value) {
+    document.body.style.overflow = '';
+  }
+});
+
+watch(() => route.fullPath, () => {
+  activeMenu.value = null;
+  isMobileFiltersOpen.value = false;
+});
+
+watch(isMobileFiltersOpen, (isOpen) => {
+  if (import.meta.client) {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
 });
 
 const filters = computed(() => {
@@ -362,9 +542,7 @@ const toggleMenu = (id: string) => {
   }
 };
 
-const hasActiveFilters = computed(() => {
-  return selectedTypology.value || selectedSize.value || selectedYear.value || selectedCountry.value || selectedProjectTitle.value;
-});
+const hasActiveFilters = computed(() => activeFilterCount.value > 0);
 </script>
 
 <style scoped>

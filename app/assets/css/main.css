@@ -204,6 +204,12 @@ header a[href="https://ui.nuxt.com"] {
   @apply bg-white dark:bg-[#121212] transition-colors duration-700;
 }
 
+@media (max-width: 767px) {
+  #wrapper {
+    margin-bottom: 0;
+  }
+}
+
 .doux #wrapper {
   background-color: #E5E1E0 !important;
 }
@@ -451,6 +457,30 @@ header a[href="https://ui.nuxt.com"] {
 @keyframes slide-in-from-left {
   from { transform: translateX(-30px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 767px) {
+  .page-enter-active,
+  .page-leave-active,
+  .layout-enter-active,
+  .layout-leave-active {
+    transition-duration: 0.25s;
+    transition-property: opacity;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.25s;
+  }
+
+  ::view-transition-old(root) {
+    animation: 0.25s ease both fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: 0.25s ease both fade-in;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

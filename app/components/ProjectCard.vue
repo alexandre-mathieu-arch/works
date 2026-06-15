@@ -1,6 +1,5 @@
 <template>
   <NuxtLink 
-    ref="cardRef"
     :to="project.path" 
     class="block w-full group"
     :class="{ 'pointer-events-none': !isRevealed }"
@@ -62,20 +61,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue';
+import { computed, ref } from 'vue';
 import { useVisitedProjects } from '~/composables/useVisitedProjects';
 import { useHoverProject } from '~/composables/useHoverProject';
 import { useParallax } from '~/composables/useParallax';
 import { useRevealedState } from '~/composables/useRevealedState';
 
 const { setHoveredProject } = useHoverProject();
-const { addVisited, isVisited } = useVisitedProjects();
+const { addVisited } = useVisitedProjects();
 const { getParallaxStyle } = useParallax(15);
 const { isRevealed } = useRevealedState();
 
-const cardRef = ref<any>(null);
 const parallaxRef = ref<HTMLElement | null>(null);
-let observer: IntersectionObserver | null = null;
 
 const props = defineProps<{
   project: {
@@ -95,36 +92,6 @@ const props = defineProps<{
     ratio?: string;
   };
 }>();
-
-onMounted(() => {
-  // Mobile scroll detection: activate title when card is centered
-  const isMobile = window.innerWidth < 1024;
-  
-  if (isMobile && cardRef.value) {
-    const options = {
-      root: null,
-      rootMargin: '-45% 0px -45% 0px',
-      threshold: 0
-    };
-
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && isRevealed.value) {
-          setHoveredProject(props.project);
-        }
-      });
-    }, options);
-
-    const el = cardRef.value.$el || cardRef.value;
-    if (el) observer.observe(el);
-  }
-});
-
-onUnmounted(() => {
-  if (observer) {
-    observer.disconnect();
-  }
-});
 
 const displayImage = computed(() => {
   if (props.project.thumbnail) {

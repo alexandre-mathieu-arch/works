@@ -1,5 +1,5 @@
 <template>
-  <footer class="fixed bottom-0 left-0 right-0 z-40 glass-fluted transition-colors duration-300 pointer-events-none">
+  <footer class="hidden md:block fixed bottom-0 left-0 right-0 z-40 glass-fluted transition-colors duration-300 pointer-events-none">
     <div class="main-container h-[45px] flex justify-between md:justify-end items-center gap-2 md:gap-12 pointer-events-auto">
       <a 
         href="mailto:alexandre.mat+w@protonmail.com" 
