@@ -106,6 +106,7 @@ useSeoMeta({
 const route = useRoute();
 const scrollProgress = ref(0);
 const PROJECTS_GRID_SCROLL_OFFSET = 160;
+let activeScrollFrame: number | null = null;
 
 const handleScroll = () => {
   if (import.meta.client) {
@@ -120,6 +121,7 @@ const shouldOpenProjectsGrid = () => {
 const jumpToProjects = (attempt = 0) => {
   const target = document.getElementById('projects-grid');
   if (target) {
+    cancelActiveScroll();
     const targetPosition = target.getBoundingClientRect().top + window.scrollY - PROJECTS_GRID_SCROLL_OFFSET;
     window.scrollTo({ top: targetPosition, behavior: 'auto' });
   } else if (attempt < 10) {
@@ -143,6 +145,13 @@ onMounted(() => {
 watch(() => route.fullPath, () => {
   if (import.meta.client && shouldOpenProjectsGrid()) {
     setTimeout(() => jumpToProjects(), 50);
+  }
+});
+
+onUnmounted(() => {
+  if (import.meta.client) {
+    window.removeEventListener('scroll', handleScroll);
+    cancelActiveScroll();
   }
 });
 
@@ -182,20 +191,62 @@ const { data: projects } = await useAsyncData('home-projects', () =>
     .all()
 );
 
-const scrollToSection = (targetId: string, offset: number = 96, behavior: ScrollBehavior = 'smooth') => {
+const cancelActiveScroll = () => {
+  if (!import.meta.client || activeScrollFrame === null) return;
+
+  cancelAnimationFrame(activeScrollFrame);
+  activeScrollFrame = null;
+};
+
+const animateDesktopScrollTo = (targetPosition: number, duration = 900) => {
+  if (!import.meta.client) return;
+
+  const top = Math.max(0, targetPosition);
+  const startPosition = window.scrollY;
+  const distance = top - startPosition;
+  const shouldAnimate = window.matchMedia('(min-width: 768px)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    && Math.abs(distance) > 2;
+
+  cancelActiveScroll();
+
+  if (!shouldAnimate) {
+    window.scrollTo({ top, behavior: 'smooth' });
+    return;
+  }
+
+  const startTime = performance.now();
+  const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
+
+  const step = (currentTime: number) => {
+    const progress = Math.min(1, (currentTime - startTime) / duration);
+    window.scrollTo(0, startPosition + distance * easeOutCubic(progress));
+
+    if (progress < 1) {
+      activeScrollFrame = requestAnimationFrame(step);
+      return;
+    }
+
+    activeScrollFrame = null;
+  };
+
+  activeScrollFrame = requestAnimationFrame(step);
+};
+
+const scrollToSection = (targetId: string, offset: number = 96, duration = 900) => {
   const target = document.getElementById(targetId);
   if (!target) return;
 
   const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({ top: Math.max(0, targetPosition), behavior });
+  animateDesktopScrollTo(targetPosition, duration);
 };
 
 const scrollToContact = () => {
-  scrollToSection('contact', 80);
+  scrollToSection('contact', 80, 800);
 };
 
 const scrollToProjects = () => {
-  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET);
+  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, 900);
 };
 
 watchEffect(() => {
