@@ -45,13 +45,15 @@
       <!-- Large Space -->
       <div class="flex-grow"></div>
 
-      <!-- Desktop Search Bar, Theme Toggle & Lang Toggle -->
+      <!-- Desktop Search Bar & Theme Toggle -->
       <div class="hidden md:flex items-center gap-[20px]">
         <!-- Theme Toggle -->
         <button 
+          type="button"
           @click="cycleTheme" 
           class="p-2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] transition-all duration-500 flex items-center justify-center hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
           :title="themeTitle"
+          :aria-label="themeTitle"
         >
           <!-- Light: Empty Circle -->
           <svg v-if="colorMode.preference === 'light'" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -73,15 +75,6 @@
           </svg>
         </button>
 
-        <!-- Lang Toggle -->
-        <UButton
-          :label="currentLang"
-          variant="ghost"
-          color="[#121212]"
-          class="px-2 py-1 hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] u-h4 font-medium transition-all duration-500 hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238] text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
-          @click="toggleLang"
-        />
-
         <!-- Search Bar -->
         <div class="flex items-center relative">
           <div 
@@ -91,6 +84,7 @@
             <UInput 
               ref="searchInput"
               v-model="searchTerm" 
+              id="site-search"
               placeholder="Rechercher..." 
               icon="i-heroicons-magnifying-glass-20-solid" 
               class="header-search-input text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
@@ -102,8 +96,12 @@
           </div>
           <button 
             v-if="!isSearchExpanded"
+            type="button"
             @click="isSearchExpanded = true"
             class="p-2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238] transition-all duration-500 flex items-center justify-center"
+            aria-label="Ouvrir la recherche"
+            :aria-expanded="isSearchExpanded"
+            aria-controls="site-search"
           >
             <UIcon name="i-heroicons-magnifying-glass-20-solid" class="w-5 h-5" />
           </button>
@@ -136,8 +134,11 @@
       <!-- Mobile Toggle Button -->
       <div class="md:hidden flex items-center gap-2">
         <button 
+          type="button"
           @click="cycleTheme" 
           class="p-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
+          :title="themeTitle"
+          :aria-label="themeTitle"
         >
           <!-- Light: Empty Circle -->
           <svg v-if="colorMode.preference === 'light'" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -158,16 +159,13 @@
             <circle cx="12" cy="12" r="9" fill="currentColor" />
           </svg>
         </button>
-        <UButton
-          :label="currentLang"
-          variant="ghost"
-          color="[#121212]"
-          class="p-1 hover:bg-transparent u-h4 font-medium transition-all text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
-          @click="toggleLang"
-        />
         <button 
+          type="button"
           @click="toggleMenu" 
           class="p-2 rounded-md text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
+          :aria-expanded="isMenuOpen"
+          aria-controls="mobile-menu"
+          :aria-label="isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
         >
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path :class="{ 'hidden': isMenuOpen, 'block': !isMenuOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -177,11 +175,29 @@
       </div>
 
       <!-- Mobile Navigation Overlay -->
-      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 h-screen w-screen glass-fluted bg-white dark:bg-[#121212] z-50 flex flex-col items-end justify-start pt-24 px-6 space-y-4">
+      <div
+        v-if="isMenuOpen"
+        id="mobile-menu"
+        class="md:hidden fixed inset-0 h-screen w-screen glass-fluted bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] z-50 flex flex-col items-end justify-start pt-24 px-6 space-y-4"
+        role="dialog"
+        aria-modal="true"
+      >
+        <button
+          type="button"
+          @click="toggleMenu"
+          class="absolute top-4 right-6 p-3 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
+          aria-label="Fermer le menu"
+        >
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
         <!-- Search Bar (Mobile) -->
         <div class="w-full max-w-xs mb-8">
           <UInput 
             v-model="searchTerm" 
+            id="mobile-site-search"
             placeholder="Rechercher..." 
             icon="i-heroicons-magnifying-glass-20-solid" 
             class="header-search-input"
@@ -189,14 +205,35 @@
             variant="none"
             size="lg"
           />
+          <div 
+            v-if="searchTerm && searchResults.length > 0" 
+            class="mt-3 w-full glass-fluted bg-white/80 dark:bg-[#121212]/80 border border-gray-100 dark:border-gray-800 shadow-xl max-h-64 overflow-y-auto"
+          >
+            <NuxtLink 
+              v-for="result in searchResults" 
+              :key="result.path" 
+              :to="result.path"
+              class="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-900 border-b border-gray-50 dark:border-gray-800 last:border-0"
+              @click="clearSearch(); isMenuOpen = false"
+            >
+              <div class="text-[12px] font-bold text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] tracking-wider">{{ result.title }}</div>
+              <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
+            </NuxtLink>
+          </div>
+          <div 
+            v-else-if="searchTerm && !isSearching" 
+            class="mt-3 w-full bg-white/80 dark:bg-[#121212]/80 border border-gray-100 dark:border-gray-800 p-4 shadow-xl text-[10px] text-gray-400 tracking-widest text-center"
+          >
+            Aucun resultat
+          </div>
         </div>
 
         <nav class="flex flex-col items-end space-y-4 w-full">
           <NuxtLink 
             v-for="link in links" 
             :key="link.to" 
-            :to="link.to"
-            class="u-h2 text-[24px] text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] mobile-link px-4 py-2 border border-[#121212]/10 dark:border-white/10 w-fit"
+            :to="link.to === '/' ? { path: '/', query: { view: 'grid' } } : link.to"
+            class="u-h2 text-[24px] text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] mobile-link px-4 py-3 min-h-11 border border-[#121212]/10 dark:border-white/10 w-fit"
             @click="handleLinkClick(link.label); isMenuOpen = false"
           >
             {{ link.label }}
@@ -243,7 +280,6 @@ const links = [
 const emit = defineEmits(['linkClick', 'linkHover']);
 
 const activeLink = ref('');
-const currentLang = ref('EN');
 const isMenuOpen = ref(false); // State for mobile menu
 const searchTerm = ref(''); // Reactive search term
 const isSearchExpanded = ref(false);
@@ -294,10 +330,6 @@ watch(isSearchExpanded, (newValue) => {
 const handleLinkClick = (label: string) => {
   activeLink.value = label;
   emit('linkClick', label);
-};
-
-const toggleLang = () => {
-  currentLang.value = currentLang.value === 'EN' ? 'FR' : 'EN';
 };
 
 const toggleMenu = () => {

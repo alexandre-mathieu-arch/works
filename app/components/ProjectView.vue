@@ -5,15 +5,15 @@
         <!-- Carousel Section -->
         <div class="col-span-1 md:col-span-1 xl:col-span-3 z-0 order-1 md:order-2" :class="isHero ? '' : '-mx-[var(--main-padding)] md:mx-0'">
           <div 
-            class="relative w-full aspect-[4/3] md:aspect-[16/9] transition-colors duration-300"
+            class="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] transition-colors duration-300"
           >
-            <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="project.path" />
+            <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="project.path" :alt="project.title" />
           </div>
         </div>
 
         <!-- Info / Description -->
         <div class="col-span-1 pt-0 z-0 order-2 md:order-1" :style="!isHero ? 'view-transition-name: project-description;' : ''">
-          <div class="project-description flex flex-col pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-300" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
+          <div class="project-description flex flex-col pr-0 md:pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-300" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
             <div class="flex-grow pb-4 md:pb-6">
               <p v-if="project.description" class="u-body mb-8 font-medium italic opacity-80 leading-relaxed">{{ project.description }}</p>
               <div class="content-renderer">

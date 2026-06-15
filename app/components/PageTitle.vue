@@ -8,7 +8,7 @@
     ]"
   >
     <!-- Project Title Slot: Permanent height to avoid folding effect -->
-    <div class="h-[30px] relative flex items-center"> 
+    <div class="h-9 md:h-[30px] relative flex items-center"> 
       <Transition
         enter-active-class="transition duration-700 ease-out"
         enter-from-class="opacity-0 translate-y-1"
@@ -41,7 +41,7 @@
       <slot name="triggers">
         <!-- Grid aligned triggers -->
         <div 
-          class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-4 md:gap-8 items-start"
+          class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-3 md:gap-8 items-start"
           style="view-transition-name: page-triggers;"
         >
           <!-- Standard Filters (Grid) or Project Info (Detail) -->
@@ -53,7 +53,9 @@
             >
               <button 
                 @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-                class="flex items-center justify-between gap-1 md:gap-2 u-h4 transition-all duration-700 px-1 md:px-3 h-[30px] -mt-[1px] w-full group !tracking-normal capitalize"
+                class="flex items-center justify-between gap-2 u-h4 transition-all duration-700 px-3 min-h-11 md:h-[30px] md:min-h-0 -mt-[1px] w-full group !tracking-normal capitalize"
+                :aria-expanded="activeMenu === filter.id"
+                :aria-controls="'filter-menu-' + filter.id"
                 :class="[
                   readonlyFilters 
                     ? 'bg-transparent border border-primary-900 text-primary-900 dark:border-primary-400 dark:text-primary-400 cursor-default pointer-events-none' 
@@ -91,14 +93,15 @@
               >
                 <div 
                   v-if="activeMenu === filter.id" 
-                  class="absolute left-0 top-full mt-1 z-50 bg-white dark:bg-[#1A1A1A] doux:bg-[#E5E1E0] nuit:bg-[#1E2538] border border-[#121212]/10 dark:border-white/10 shadow-lg min-w-full overflow-hidden"
+                  :id="'filter-menu-' + filter.id"
+                  class="absolute left-0 top-full mt-1 z-50 bg-white dark:bg-[#1A1A1A] doux:bg-[#E5E1E0] nuit:bg-[#1E2538] border border-[#121212]/10 dark:border-white/10 shadow-lg min-w-full w-[min(22rem,calc(100vw-2rem))] max-h-[60vh] overflow-y-auto"
                   :class="{ 'right-0 left-auto': filter.id === 'country' && !isProjectPage }"
                 >
                   <div class="flex flex-col py-1">
                     <template v-if="activeMenu === 'typology'">
                       <button 
                         @click="selectedTypology = null; activeMenu = null" 
-                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
                         :class="selectedTypology === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Toutes
@@ -107,7 +110,7 @@
                         v-for="opt in typologyOptions" 
                         :key="opt" 
                         @click="selectedTypology = opt; activeMenu = null" 
-                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
                         :class="selectedTypology === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -116,7 +119,7 @@
                     <template v-if="activeMenu === 'year'">
                       <button 
                         @click="selectedYear = null; activeMenu = null" 
-                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
                         :class="selectedYear === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Toutes
@@ -125,7 +128,7 @@
                         v-for="opt in yearOptions" 
                         :key="opt" 
                         @click="selectedYear = opt; activeMenu = null" 
-                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
                         :class="selectedYear === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -134,7 +137,7 @@
                     <template v-if="activeMenu === 'country'">
                       <button 
                         @click="selectedCountry = null; activeMenu = null" 
-                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
                         :class="selectedCountry === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Tous
@@ -143,7 +146,7 @@
                         v-for="opt in countryOptions" 
                         :key="opt" 
                         @click="selectedCountry = opt; activeMenu = null" 
-                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
                         :class="selectedCountry === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -159,7 +162,7 @@
           <template v-if="isProjectPage">
             <!-- Column 2+: Sequence Navigation (Arrows + Counters) -->
             <!-- We allow this column to span across the rest of the grid to accommodate many images -->
-            <div class="h-[30px] flex items-center col-span-full md:col-span-2 xl:col-span-3 w-fit">
+            <div class="min-h-11 md:h-[30px] flex items-center col-span-full md:col-span-2 xl:col-span-3 w-full md:w-fit">
               <SequenceCounter
                 v-if="totalImages > 0"
                 :model-value="carouselCurrentImageIndex"
@@ -173,11 +176,11 @@
           </template>
 
           <!-- Reset Buttons Column -->
-          <div class="flex justify-end md:col-start-3 xl:col-start-4 gap-2">
+          <div class="flex justify-start sm:justify-end sm:col-start-3 xl:col-start-4 gap-2">
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex items-center gap-2 u-h4 px-3 h-[30px] border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 nuit:bg-[#161D2F] hover:bg-primary-900 hover:text-white dark:hover:bg-primary-400 dark:hover:text-[#121212] transition-all duration-700 -mt-[1px] whitespace-nowrap group/reset !tracking-normal"
+              class="flex items-center gap-2 u-h4 px-3 min-h-11 md:h-[30px] md:min-h-0 border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 nuit:bg-[#161D2F] hover:bg-primary-900 hover:text-white dark:hover:bg-primary-400 dark:hover:text-[#121212] transition-all duration-700 -mt-[1px] whitespace-nowrap group/reset !tracking-normal"
               title="Réinitialiser les filtres"
             >
               <span class="text-[9px] md:text-[10px] capitalize font-medium">Tout effacer</span>

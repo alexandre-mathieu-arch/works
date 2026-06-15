@@ -5,6 +5,7 @@
       <HeroSection 
         :scroll-progress="scrollProgress" 
         @scroll-to-projects="scrollToProjects"
+        @scroll-to-contact="scrollToContact"
       />
     </div>
 
@@ -45,6 +46,15 @@
         <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>
       </div>
 
+      <button
+        type="button"
+        @click="scrollToContact"
+        class="xl:hidden mt-8 flex min-h-11 w-full items-center justify-between border border-[#121212]/20 px-4 py-3 text-left transition-colors duration-500 hover:border-[#121212] dark:border-white/20 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
+      >
+        <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Demarrer un projet ?</span>
+        <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]" aria-hidden="true">-&gt;</span>
+      </button>
+
       <!-- Collaborations & Parcours Section -->
       <CollaborationsList />
 
@@ -56,7 +66,7 @@
           </p>
         </div>
         <div class="flex flex-col gap-y-6">
-          <a href="mailto:alexandre.mat+w@protonmail.com" class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit">
+          <a href="mailto:alexandre.mat+w@protonmail.com" class="u-h3 text-[13px] sm:text-[15px] font-normal tracking-[0.08em] sm:tracking-[0.2em] hover:text-gray-500 transition-colors w-fit break-all sm:break-normal">
             alexandre.mat+w@protonmail.com
           </a>
           <a href="tel:+33658215300" class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit">
@@ -84,6 +94,14 @@ definePageMeta({
 
 useHead({
   title: 'Alexandre Mathieu — architecture & design'
+})
+
+useSeoMeta({
+  description: "Portfolio d'Alexandre Mathieu: projets d'architecture, design, rehabilitation et recherche constructive.",
+  ogTitle: 'Alexandre Mathieu - architecture & design',
+  ogDescription: "Portfolio d'Alexandre Mathieu: projets d'architecture, design, rehabilitation et recherche constructive.",
+  twitterTitle: 'Alexandre Mathieu - architecture & design',
+  twitterDescription: "Portfolio d'Alexandre Mathieu: projets d'architecture, design, rehabilitation et recherche constructive."
 })
 
 const route = useRoute();

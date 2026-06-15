@@ -22,6 +22,15 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+useSeoMeta({
+  title: () => page.value?.title ? `${page.value.title} - Alexandre Mathieu` : 'Alexandre Mathieu',
+  description: () => page.value?.description || "Projet d'architecture et de design par Alexandre Mathieu.",
+  ogTitle: () => page.value?.title ? `${page.value.title} - Alexandre Mathieu` : 'Alexandre Mathieu',
+  ogDescription: () => page.value?.description || "Projet d'architecture et de design par Alexandre Mathieu.",
+  twitterTitle: () => page.value?.title ? `${page.value.title} - Alexandre Mathieu` : 'Alexandre Mathieu',
+  twitterDescription: () => page.value?.description || "Projet d'architecture et de design par Alexandre Mathieu."
+})
+
 const { setHoveredProject } = useHoverProject();
 watchEffect(() => {
   if (page.value) {

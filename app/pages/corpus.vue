@@ -69,4 +69,9 @@ definePageMeta({
 useHead({
   title: 'Corpus — Alexandre Mathieu'
 })
+useSeoMeta({
+  description: "Essais et notes sur l'architecture, le design, la conception parametrique et les pratiques constructives.",
+  ogTitle: 'Corpus - Alexandre Mathieu',
+  ogDescription: "Essais et notes sur l'architecture, le design, la conception parametrique et les pratiques constructives."
+})
 </script>

@@ -28,21 +28,21 @@
     <!-- Content: Integrated desktop grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-4 -mt-[10px] items-start">
       <!-- Column 1: Equipe -->
-      <div class="opacity-100 pt-0">
+      <div class="opacity-100 pt-0 order-1">
         <div v-if="equipe" class="prose dark:prose-invert max-w-none pb-4">
           <ContentRenderer :value="equipe" />
         </div>
       </div>
 
       <!-- Column 2: Pratique -->
-      <div class="opacity-100">
+      <div class="opacity-100 order-3 md:order-2">
         <div v-if="pratique" class="prose dark:prose-invert max-w-none pb-4">
           <ContentRenderer :value="pratique" />
         </div>
       </div>
 
       <!-- Column 3: Portrait -->
-      <div class="opacity-100 sticky top-24">
+      <div class="opacity-100 order-2 md:order-3 md:sticky md:top-24">
         <div class="overflow-hidden w-full aspect-[4/5]">
           <NuxtImg 
             src="/profil.jpg" 
@@ -65,7 +65,7 @@
       <!-- Downloads -->
       <div class="flex flex-col md:flex-row items-start gap-x-12 gap-y-4">
         <a 
-          href="/cv-alexandre-mathieu-fr.pdf" 
+          :href="cvFrUrl" 
           target="_blank" 
           download 
           class="inline-flex items-center gap-2 px-0 py-1 u-h4 hover:text-black dark:hover:text-white transition-all duration-300 no-underline group"
@@ -76,7 +76,7 @@
           <span class="whitespace-nowrap">Télécharger le CV (FR)</span>
         </a>
         <a 
-          href="/cv-alexandre-mathieu-en.pdf" 
+          :href="cvEnUrl" 
           target="_blank" 
           download 
           class="inline-flex items-center gap-2 px-0 py-1 u-h4 hover:text-black dark:hover:text-white transition-all duration-300 no-underline group"
@@ -93,6 +93,11 @@
 
 <script setup lang="ts">
 import PageTitle from '~/components/PageTitle.vue'
+
+const runtimeConfig = useRuntimeConfig()
+const assetPath = (path: string) => `${runtimeConfig.app.baseURL}${path.replace(/^\//, '')}`
+const cvFrUrl = assetPath('/cv-alexandre-mathieu-fr.pdf')
+const cvEnUrl = assetPath('/cv-alexandre-mathieu-en.pdf')
 
 const { data: pratique } = await useAsyncData('about-pratique', () => {
   return queryCollection('content').path('/about/pratique').first()
@@ -114,6 +119,11 @@ definePageMeta({
 
 useHead({
   title: 'À propos — Alexandre Mathieu'
+})
+useSeoMeta({
+  description: "Presentation de la pratique, du parcours et des references d'Alexandre Mathieu.",
+  ogTitle: 'A propos - Alexandre Mathieu',
+  ogDescription: "Presentation de la pratique, du parcours et des references d'Alexandre Mathieu."
 })
 </script>
 

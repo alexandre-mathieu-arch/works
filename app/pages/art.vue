@@ -115,6 +115,12 @@ useHead({
   title: 'Art — Alexandre Mathieu'
 })
 
+useSeoMeta({
+  description: "Dessins, croquis, aquarelles et recherches graphiques d'Alexandre Mathieu.",
+  ogTitle: 'Art - Alexandre Mathieu',
+  ogDescription: "Dessins, croquis, aquarelles et recherches graphiques d'Alexandre Mathieu."
+})
+
 const handleKeydown = (e: KeyboardEvent) => {
   if (e.key === 'Escape') selectedImage.value = null
 }

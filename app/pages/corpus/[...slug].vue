@@ -60,6 +60,12 @@ if (!page.value) {
 useHead({
   title: computed(() => `${page.value?.title} — Corpus`)
 })
+useSeoMeta({
+  title: () => page.value?.title ? `${page.value.title} - Corpus` : 'Corpus',
+  description: () => page.value?.description || "Article du corpus d'Alexandre Mathieu.",
+  ogTitle: () => page.value?.title ? `${page.value.title} - Corpus` : 'Corpus',
+  ogDescription: () => page.value?.description || "Article du corpus d'Alexandre Mathieu."
+})
 </script>
 
 <style scoped>

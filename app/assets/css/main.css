@@ -1,10 +1,11 @@
-/* Force no-underline globally */
-* {
-  text-decoration: none !important;
+/* Keep editorial links identifiable without forcing decoration on navigation. */
+a {
+  text-underline-offset: 0.18em;
 }
 
 html, body {
   height: 100%;
+  overflow-x: clip;
   scrollbar-gutter: stable;
   @apply bg-white dark:bg-[#121212] transition-colors duration-700;
   font-family: var(--font-primary);
@@ -292,15 +293,21 @@ header a[href="https://ui.nuxt.com"] {
 
 @utility u-h2 {
   @apply text-[21px] md:text-[25px] font-bold leading-none dark:text-white;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.12em;
   font-family: var(--font-primary);
+  @media (min-width: 768px) {
+    letter-spacing: 0.2em;
+  }
   .doux & { color: #4A4443; }
   .nuit & { color: #CDD6F4; }
 }
 
 @utility u-sub-link {
   @apply font-medium text-[#121212] dark:text-white hover:text-gray-400 tracking-widest text-[21px] transition-colors uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.12em;
+  @media (min-width: 768px) {
+    letter-spacing: 0.2em;
+  }
   .doux & { color: #4A4443; }
   .nuit & { color: #CDD6F4; }
 }
@@ -314,8 +321,11 @@ header a[href="https://ui.nuxt.com"] {
 
 @utility u-h4 {
   @apply text-[13px] font-normal dark:text-white;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.12em;
   font-family: var(--font-primary);
+  @media (min-width: 768px) {
+    letter-spacing: 0.2em;
+  }
   .doux & { color: #4A4443; }
   .nuit & { color: #CDD6F4; }
 }
@@ -340,6 +350,7 @@ header a[href="https://ui.nuxt.com"] {
 .prose h3 { @apply u-h3 mb-2; }
 .prose h4 { @apply u-h4 mb-2; }
 .prose p, .prose li { @apply u-body mb-3; }
+.prose a { @apply underline decoration-[0.06em] underline-offset-[0.18em]; }
 .dark .prose { @apply prose-invert; }
 
 /* View Transitions animations */
@@ -440,4 +451,21 @@ header a[href="https://ui.nuxt.com"] {
 @keyframes slide-in-from-left {
   from { transform: translateX(-30px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+  }
 }

@@ -1,11 +1,12 @@
 <template>
-  <div class="sequence-navigation flex items-center h-[30px] border border-[#121212]/30 dark:border-white/20 bg-white/50 dark:bg-white/5 -mt-[1px] overflow-x-auto whitespace-nowrap scrollbar-hide">
+  <div class="sequence-navigation flex items-center min-h-11 md:h-[30px] md:min-h-0 border border-[#121212]/30 dark:border-white/20 bg-white/50 dark:bg-white/5 -mt-[1px] overflow-x-auto whitespace-nowrap scrollbar-hide">
     <!-- Previous Project Button -->
     <NuxtLink 
       v-if="prevProject" 
       :to="prevProject.path" 
       class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
       @click="$emit('nav', 'prev')"
+      aria-label="Projet precedent"
     >
       &lt;
     </NuxtLink>
@@ -17,6 +18,7 @@
       :key="index"
       @click="$emit('update:modelValue', index - 1)"
       class="u-h4 h-full px-2 sm:px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 border-r border-[#121212]/10 dark:border-white/10 bg-transparent"
+      :aria-label="`Afficher l'image ${index}`"
       :class="[
         modelValue === index - 1 
           ? 'font-bold text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-100' 
@@ -33,6 +35,7 @@
       class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
       @click="$emit('nav', 'next')"
       title="Projet suivant"
+      aria-label="Projet suivant"
     >
       &gt;
     </NuxtLink>
