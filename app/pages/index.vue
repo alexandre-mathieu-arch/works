@@ -105,6 +105,7 @@ useSeoMeta({
 
 const route = useRoute();
 const scrollProgress = ref(0);
+const PROJECTS_GRID_SCROLL_OFFSET = 160;
 
 const handleScroll = () => {
   if (import.meta.client) {
@@ -119,7 +120,7 @@ const shouldOpenProjectsGrid = () => {
 const jumpToProjects = (attempt = 0) => {
   const target = document.getElementById('projects-grid');
   if (target) {
-    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 120;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY - PROJECTS_GRID_SCROLL_OFFSET;
     window.scrollTo({ top: targetPosition, behavior: 'auto' });
   } else if (attempt < 10) {
     setTimeout(() => jumpToProjects(attempt + 1), 80);
@@ -167,7 +168,7 @@ watch([selectedTypology, selectedYear, selectedCountry], () => {
     if (target) {
       const rect = target.getBoundingClientRect();
       // If the top of the grid is not visible (scrolled up too far), scroll to it
-      if (rect.top > 150 || rect.top < 0) {
+      if (rect.top > PROJECTS_GRID_SCROLL_OFFSET + 24 || rect.top < PROJECTS_GRID_SCROLL_OFFSET) {
         scrollToProjects();
       }
     }
@@ -194,7 +195,7 @@ const scrollToContact = () => {
 };
 
 const scrollToProjects = () => {
-  scrollToSection('projects-grid');
+  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET);
 };
 
 watchEffect(() => {

@@ -296,6 +296,7 @@ const isSearching = ref(false);
 const route = useRoute();
 const router = useRouter();
 const lockedBodyOverflow = ref<string | null>(null);
+const PROJECTS_GRID_SCROLL_OFFSET = 160;
 
 const { data: allContent } = await useAsyncData('all-site-content', () =>
   queryCollection('content')
@@ -374,7 +375,7 @@ const scrollToProjectsGrid = () => {
   const target = document.getElementById('projects-grid');
   if (!target) return;
 
-  const targetPosition = target.getBoundingClientRect().top + window.scrollY - 96;
+  const targetPosition = target.getBoundingClientRect().top + window.scrollY - PROJECTS_GRID_SCROLL_OFFSET;
   window.scrollTo({ top: Math.max(0, targetPosition), behavior: 'smooth' });
 };
 
