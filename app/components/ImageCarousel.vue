@@ -131,21 +131,37 @@ onUnmounted(() => {
 .slide-left-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  inset: 0;
+  position: absolute;
+  transition:
+    transform 1.15s var(--motion-luxury-ease),
+    opacity 1.15s var(--motion-luxury-ease);
+  will-change: transform, opacity;
 }
 
 .slide-left-enter-from {
-  transform: translateX(100%);
+  opacity: 0.98;
+  transform: translate3d(100%, 0, 0);
+}
+.slide-left-enter-to,
+.slide-left-leave-from,
+.slide-right-enter-to,
+.slide-right-leave-from {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 .slide-left-leave-to {
-  transform: translateX(-100%);
+  opacity: 0.98;
+  transform: translate3d(-100%, 0, 0);
 }
 
 .slide-right-enter-from {
-  transform: translateX(-100%);
+  opacity: 0.98;
+  transform: translate3d(-100%, 0, 0);
 }
 .slide-right-leave-to {
-  transform: translateX(100%);
+  opacity: 0.98;
+  transform: translate3d(100%, 0, 0);
 }
 
 /* Custom cursors using inline SVGs */

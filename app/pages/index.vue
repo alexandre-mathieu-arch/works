@@ -4,7 +4,7 @@
     <div class="-mt-[var(--header-height)]">
       <HeroSection 
         :scroll-progress="scrollProgress" 
-        @scroll-to-projects="scrollToProjects"
+        @scroll-to-projects="scrollToProjectsFromHero"
       />
     </div>
 
@@ -251,6 +251,10 @@ const scrollToContact = () => {
 
 const scrollToProjects = () => {
   scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, 1300);
+};
+
+const scrollToProjectsFromHero = () => {
+  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, 2200);
 };
 
 watchEffect(() => {

@@ -295,7 +295,15 @@ const searchInput = ref<any>(null);
 const isSearching = ref(false);
 const route = useRoute();
 const router = useRouter();
-const lockedBodyOverflow = ref<string | null>(null);
+const lockedBodyState = ref<{
+  overflow: string;
+  position: string;
+  top: string;
+  left: string;
+  right: string;
+  width: string;
+} | null>(null);
+const lockedScrollY = ref(0);
 const PROJECTS_GRID_SCROLL_OFFSET = 160;
 
 const { data: allContent } = await useAsyncData('all-site-content', () =>
@@ -345,13 +353,33 @@ const handleLinkClick = (label: string) => {
 const setBodyScrollLock = (locked: boolean) => {
   if (import.meta.client) {
     if (locked) {
-      if (lockedBodyOverflow.value === null) {
-        lockedBodyOverflow.value = document.body.style.overflow;
+      if (lockedBodyState.value === null) {
+        lockedScrollY.value = window.scrollY;
+        lockedBodyState.value = {
+          overflow: document.body.style.overflow,
+          position: document.body.style.position,
+          top: document.body.style.top,
+          left: document.body.style.left,
+          right: document.body.style.right,
+          width: document.body.style.width
+        };
       }
+
       document.body.style.overflow = 'hidden';
-    } else if (lockedBodyOverflow.value !== null) {
-      document.body.style.overflow = lockedBodyOverflow.value;
-      lockedBodyOverflow.value = null;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${lockedScrollY.value}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    } else if (lockedBodyState.value !== null) {
+      document.body.style.overflow = lockedBodyState.value.overflow;
+      document.body.style.position = lockedBodyState.value.position;
+      document.body.style.top = lockedBodyState.value.top;
+      document.body.style.left = lockedBodyState.value.left;
+      document.body.style.right = lockedBodyState.value.right;
+      document.body.style.width = lockedBodyState.value.width;
+      window.scrollTo({ top: lockedScrollY.value, behavior: 'auto' });
+      lockedBodyState.value = null;
     }
   }
 };
