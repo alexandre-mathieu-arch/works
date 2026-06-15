@@ -6,40 +6,34 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{xcolor}
-\usepackage{titlesec}
 \usepackage{fancyhdr}
-\usepackage{enumitem}
 \usepackage{tocloft}
 \usepackage{multicol}
-\usepackage{afterpage}
 \usepackage{hyperref}
-\usepackage{tikz}
+\usepackage{microtype}
+\usepackage{ragged2e}
 
-% --- Configuration des liens ---
-\hypersetup{
-    colorlinks=true,
-    linkcolor=darkgray,
-    urlcolor=mediumgray
-}
-
-% --- Configuration des marges ---
+% --- Page ---
 \geometry{
-    left=1.2cm,
-    right=1.2cm,
-    top=1.2cm,
-    bottom=1.2cm,
-    footskip=0.8cm
+    left=1.05cm,
+    right=1.05cm,
+    top=0.95cm,
+    bottom=0.95cm,
+    footskip=0.45cm
 }
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.42em}
+\setlength{\columnsep}{1.2cm}
+\setlength{\emergencystretch}{2em}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
 
 % --- Couleurs ---
-\definecolor{warmdark}{HTML}{1A1614} % Sombre ton chaud
-\definecolor{warmwhite}{HTML}{FDFBF7} % Blanc chaud
-\definecolor{archiblue}{HTML}{1E1B4B} % Indigo profond
-\definecolor{paleblue}{HTML}{F0F4FF}  % Bleu extrêmement pâle
-\definecolor{darkgray}{HTML}{121212}
-\definecolor{mediumgray}{HTML}{5B5453}
-\definecolor{lightgray}{HTML}{A1A1A1}
-\definecolor{bordergray}{HTML}{E5E5E5}
+\definecolor{ink}{HTML}{121212}
+\definecolor{muted}{HTML}{6F6F6F}
+\definecolor{soft}{HTML}{A9A9A9}
+\definecolor{rulegray}{HTML}{D9D9D9}
+\definecolor{paper}{HTML}{FFFFFF}
 
 % --- Typographie ---
 \setmainfont{Satoshi-Regular.otf}[
@@ -47,105 +41,138 @@
     BoldFont = Satoshi-Bold.otf,
     ItalicFont = Satoshi-Italic.otf
 ]
-\newfontfamily\titlefont{Satoshi-Medium.otf}[Path = ../font/]
-\newfontfamily\boldtitlefont{Satoshi-Bold.otf}[Path = ../font/]
-\newfontfamily\lightfont{Satoshi-Light.otf}[Path = ../font/]
-\newfontfamily\mediumfont{Satoshi-Medium.otf}[Path = ../font/]
+\newfontfamily\displayfont{Satoshi-Bold.otf}[Path = ../font/]
+\newfontfamily\mediumfont{Satoshi-Medium.otf}[Path = ../font/, BoldFont = Satoshi-Bold.otf]
+\newfontfamily\lightfont{Satoshi-Light.otf}[Path = ../font/, BoldFont = Satoshi-Bold.otf, ItalicFont = Satoshi-Italic.otf]
 
-% --- Personnalisation du Sommaire ---
-\renewcommand{\contentsname}{S O M M A I R E}
-\renewcommand{\cfttoctitlefont}{\hfill\small\mediumfont\color{darkgray}}
-\renewcommand{\cftaftertoctitle}{\hfill}
-\renewcommand{\cftsecfont}{\lightfont\tiny}
-\renewcommand{\cftsecpagefont}{\lightfont\tiny}
-\renewcommand{\cftsecleader}{\textcolor{bordergray}{\cftdotfill{0.5}}}
+% --- Liens ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ink,
+    urlcolor=muted,
+    pdfauthor={Alexandre Mathieu},
+    pdftitle={Portfolio 2019-2026}
+}
+
+% --- Sommaire ---
+\renewcommand{\contentsname}{}
+\renewcommand{\cftsecfont}{\fontsize{7.4}{9}\selectfont\lightfont\color{ink}}
+\renewcommand{\cftsecpagefont}{\fontsize{7.4}{9}\selectfont\lightfont\color{muted}}
+\renewcommand{\cftsecleader}{\textcolor{rulegray}{\cftdotfill{0.45}}}
 \renewcommand{\cftsecindent}{0pt}
-\setlength{\cftbeforesecskip}{0.15cm}
+\setlength{\cftbeforesecskip}{0.18cm}
 
-% --- Commandes de mise en page ---
-
-\newcommand{\projectIntroPage}[4]{
-    \newpage
-    \thispagestyle{empty}
-    \begin{flushleft}
-        \vspace*{0.4cm}
-        {\fontsize{6}{7}\selectfont \lightfont \color{lightgray} #3} \par
-        \vspace{0.2cm}
-        {\LARGE \titlefont \color{darkgray} #1} \hfill {\small \lightfont \color{lightgray} #2} \par
-        \vspace{0.4cm}
-        {\color{bordergray} \hrule height 0.2pt} \par
-        \vspace{1cm}
-        \ifx&#4&\else
-            \begin{center}
-                \includegraphics[height=8cm,width=17cm,keepaspectratio]{#4}
-            \end{center}
-        \fi
-    \end{flushleft}
-}
-
-\newcommand{\projectDetailsPage}[2]{
-    \newpage
-    \begin{flushleft}
-        {\fontsize{7}{9}\selectfont \mediumfont \color{darkgray} #1}
-    \end{flushleft}
-    \vspace{0.6cm}
-    \begin{multicols}{2}
-        {\fontsize{8}{11}\selectfont \lightfont \color{mediumgray} #2}
-    \end{multicols}
-}
-
-\newcommand{\detailImage}[1]{
-    \par\vspace{0.4cm}
-    \begin{center}
-        \includegraphics[width=\linewidth,height=6cm,keepaspectratio]{#1}
-    \end{center}
-    \vspace{0.4cm}
-}
-
-% --- Entête et pied de page ---
+% --- Entete et pied ---
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
-\fancyfoot[L]{\fontsize{6}{7}\selectfont \lightfont \color{lightgray} Alexandre MATHIEU --- Portfolio}
-\fancyfoot[R]{\fontsize{6}{7}\selectfont \lightfont \color{lightgray} \thepage}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{5.8}{7}\selectfont\lightfont\color{soft} Alexandre Mathieu}
+\fancyfoot[R]{\fontsize{5.8}{7}\selectfont\lightfont\color{soft} \thepage}
+
+\newcommand{\hairline}{\textcolor{rulegray}{\rule{\linewidth}{0.18pt}}}
+
+\newcommand{\projectMetaItem}[2]{%
+    {\fontsize{5.8}{7}\selectfont\mediumfont\color{soft}\MakeUppercase{#1}}\par
+    {\fontsize{7.2}{9}\selectfont\lightfont\color{ink}#2}\par
+    \vspace{0.28cm}
+}
+
+\newcommand{\leadText}[1]{%
+    {\fontsize{8.2}{10.4}\selectfont\mediumfont\color{ink}#1}\par\vspace{0.22cm}
+}
+
+\newcommand{\projectSubheading}[1]{%
+    \vspace{0.15cm}
+    {\fontsize{7.2}{9}\selectfont\mediumfont\color{ink}#1}\par
+    \vspace{-0.08cm}
+}
+
+\newcommand{\projectIntroPage}[5]{%
+    \clearpage
+    \thispagestyle{plain}
+    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#1}\hfill
+    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#3}\par
+    \vspace{0.18cm}
+    {\fontsize{19}{21}\selectfont\displayfont\color{ink}#2}\par
+    \vspace{0.08cm}
+    {\fontsize{6.4}{8}\selectfont\lightfont\color{muted}#4}\par
+    \vspace{0.34cm}
+    \hairline
+    \vspace{0.56cm}
+    \ifx&#5&\else
+        \begin{center}
+            \includegraphics[width=\linewidth,height=8.7cm,keepaspectratio]{#5}
+        \end{center}
+    \fi
+}
+
+\long\def\projectTextPage#1#2{%
+    \clearpage
+    \thispagestyle{plain}
+    \begin{minipage}[t]{0.27\linewidth}
+        #1
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.66\linewidth}
+        \RaggedRight
+        {\fontsize{7.35}{9.75}\selectfont\lightfont\color{ink}#2}
+    \end{minipage}
+}
+
+\newcommand{\galleryHeader}[2]{%
+    \clearpage
+    \thispagestyle{plain}
+    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#2}\par
+    \vspace{0.12cm}
+    {\fontsize{10.5}{12}\selectfont\mediumfont\color{ink}#1}\par
+    \vspace{0.24cm}
+    \hairline
+    \vspace{0.45cm}
+}
+
+\newcommand{\galleryImage}[2]{%
+    \begin{minipage}[c][#2][c]{\linewidth}
+        \centering
+        \includegraphics[width=\linewidth,height=#2,keepaspectratio]{#1}
+    \end{minipage}
+}
 
 \begin{document}
 
-% --- Page de garde (Minimaliste & Élégante) ---
-{
-\newpage
+% --- Couverture ---
+\begin{titlepage}
 \thispagestyle{empty}
-\begin{center}
-    \vspace*{4.5cm}
-    {\fontsize{18}{22} \lightfont \addfontfeature{LetterSpace=30.0} ALEXANDRE} \par
-    \vspace{0.2cm}
-    {\fontsize{18}{22} \mediumfont \addfontfeature{LetterSpace=30.0} MATHIEU} \par
-    \vspace{0.8cm}
-    {\color{bordergray} \rule{1.5cm}{0.2pt}} \par
-    \vspace{0.8cm}
-    {\fontsize{8}{10} \lightfont \color{mediumgray} \addfontfeature{LetterSpace=20.0} architecture + design + art} \par
-    \vspace{4cm}
-    {\fontsize{24}{28} \lightfont \color{darkgray} \addfontfeature{LetterSpace=40.0} PORTFOLIO} \par
-    \vfill
-    {\fontsize{7}{9} \lightfont \color{lightgray} 2019 --- 2026} \par
-    \vspace{0.5cm}
-    {\fontsize{7}{9} \lightfont \color{lightgray} \url{https://alexandre-mathieu-arch.github.io/works/}}
-\end{center}
-}
+\vspace*{0.45cm}
+{\fontsize{8}{10}\selectfont\lightfont\color{muted} architecture / design / art}\par
+\vspace{1.85cm}
+{\fontsize{24}{26}\selectfont\displayfont\color{ink} Alexandre Mathieu}\par
+\vspace{0.35cm}
+\hairline
+\vspace{0.72cm}
+{\fontsize{13}{15}\selectfont\lightfont\color{ink} Portfolio}\par
+\vfill
+\begin{minipage}[t]{0.45\linewidth}
+    {\fontsize{7}{9}\selectfont\lightfont\color{muted}
+    alexandre.mat+w@protonmail.com\par
+    +33 6 58 21 53 00\par
+    \url{https://alexandre-mathieu-arch.github.io/works/}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.2\linewidth}
+    \raggedleft
+    {\fontsize{7}{9}\selectfont\lightfont\color{muted}2019--2026}
+\end{minipage}
+\end{titlepage}
 
-% --- Deuxième de couverture ---
-\newpage
-\thispagestyle{empty}
-\mbox{}
-
-% --- Sommaire (Deux colonnes) ---
-\newpage
+% --- Sommaire ---
+\clearpage
 \thispagestyle{plain}
-\vspace*{1cm}
-\begin{center}
-    {\Huge \titlefont S O M M A I R E} \par
-    \vspace{1cm}
-\end{center}
+\vspace*{0.25cm}
+{\fontsize{16}{18}\selectfont\displayfont\color{ink} Sommaire}\par
+\vspace{0.28cm}
+\hairline
+\vspace{0.7cm}
 \begin{multicols}{2}
     \makeatletter
     \@starttoc{toc}

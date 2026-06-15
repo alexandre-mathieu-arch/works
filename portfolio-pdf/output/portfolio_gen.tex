@@ -6,40 +6,34 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{xcolor}
-\usepackage{titlesec}
 \usepackage{fancyhdr}
-\usepackage{enumitem}
 \usepackage{tocloft}
 \usepackage{multicol}
-\usepackage{afterpage}
 \usepackage{hyperref}
-\usepackage{tikz}
+\usepackage{microtype}
+\usepackage{ragged2e}
 
-% --- Configuration des liens ---
-\hypersetup{
-    colorlinks=true,
-    linkcolor=darkgray,
-    urlcolor=mediumgray
-}
-
-% --- Configuration des marges ---
+% --- Page ---
 \geometry{
-    left=1.2cm,
-    right=1.2cm,
-    top=1.2cm,
-    bottom=1.2cm,
-    footskip=0.8cm
+    left=1.05cm,
+    right=1.05cm,
+    top=0.95cm,
+    bottom=0.95cm,
+    footskip=0.45cm
 }
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.42em}
+\setlength{\columnsep}{1.2cm}
+\setlength{\emergencystretch}{2em}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
 
 % --- Couleurs ---
-\definecolor{warmdark}{HTML}{1A1614} % Sombre ton chaud
-\definecolor{warmwhite}{HTML}{FDFBF7} % Blanc chaud
-\definecolor{archiblue}{HTML}{1E1B4B} % Indigo profond
-\definecolor{paleblue}{HTML}{F0F4FF}  % Bleu extrêmement pâle
-\definecolor{darkgray}{HTML}{121212}
-\definecolor{mediumgray}{HTML}{5B5453}
-\definecolor{lightgray}{HTML}{A1A1A1}
-\definecolor{bordergray}{HTML}{E5E5E5}
+\definecolor{ink}{HTML}{121212}
+\definecolor{muted}{HTML}{6F6F6F}
+\definecolor{soft}{HTML}{A9A9A9}
+\definecolor{rulegray}{HTML}{D9D9D9}
+\definecolor{paper}{HTML}{FFFFFF}
 
 % --- Typographie ---
 \setmainfont{Satoshi-Regular.otf}[
@@ -47,105 +41,138 @@
     BoldFont = Satoshi-Bold.otf,
     ItalicFont = Satoshi-Italic.otf
 ]
-\newfontfamily\titlefont{Satoshi-Medium.otf}[Path = ../font/]
-\newfontfamily\boldtitlefont{Satoshi-Bold.otf}[Path = ../font/]
-\newfontfamily\lightfont{Satoshi-Light.otf}[Path = ../font/]
-\newfontfamily\mediumfont{Satoshi-Medium.otf}[Path = ../font/]
+\newfontfamily\displayfont{Satoshi-Bold.otf}[Path = ../font/]
+\newfontfamily\mediumfont{Satoshi-Medium.otf}[Path = ../font/, BoldFont = Satoshi-Bold.otf]
+\newfontfamily\lightfont{Satoshi-Light.otf}[Path = ../font/, BoldFont = Satoshi-Bold.otf, ItalicFont = Satoshi-Italic.otf]
 
-% --- Personnalisation du Sommaire ---
-\renewcommand{\contentsname}{S O M M A I R E}
-\renewcommand{\cfttoctitlefont}{\hfill\small\mediumfont\color{darkgray}}
-\renewcommand{\cftaftertoctitle}{\hfill}
-\renewcommand{\cftsecfont}{\lightfont\tiny}
-\renewcommand{\cftsecpagefont}{\lightfont\tiny}
-\renewcommand{\cftsecleader}{\textcolor{bordergray}{\cftdotfill{0.5}}}
+% --- Liens ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ink,
+    urlcolor=muted,
+    pdfauthor={Alexandre Mathieu},
+    pdftitle={Portfolio 2019-2026}
+}
+
+% --- Sommaire ---
+\renewcommand{\contentsname}{}
+\renewcommand{\cftsecfont}{\fontsize{7.4}{9}\selectfont\lightfont\color{ink}}
+\renewcommand{\cftsecpagefont}{\fontsize{7.4}{9}\selectfont\lightfont\color{muted}}
+\renewcommand{\cftsecleader}{\textcolor{rulegray}{\cftdotfill{0.45}}}
 \renewcommand{\cftsecindent}{0pt}
-\setlength{\cftbeforesecskip}{0.15cm}
+\setlength{\cftbeforesecskip}{0.18cm}
 
-% --- Commandes de mise en page ---
-
-\newcommand{\projectIntroPage}[4]{
-    \newpage
-    \thispagestyle{empty}
-    \begin{flushleft}
-        \vspace*{0.4cm}
-        {\fontsize{6}{7}\selectfont \lightfont \color{lightgray} #3} \par
-        \vspace{0.2cm}
-        {\LARGE \titlefont \color{darkgray} #1} \hfill {\small \lightfont \color{lightgray} #2} \par
-        \vspace{0.4cm}
-        {\color{bordergray} \hrule height 0.2pt} \par
-        \vspace{1cm}
-        \ifx&#4&\else
-            \begin{center}
-                \includegraphics[height=8cm,width=17cm,keepaspectratio]{#4}
-            \end{center}
-        \fi
-    \end{flushleft}
-}
-
-\newcommand{\projectDetailsPage}[2]{
-    \newpage
-    \begin{flushleft}
-        {\fontsize{7}{9}\selectfont \mediumfont \color{darkgray} #1}
-    \end{flushleft}
-    \vspace{0.6cm}
-    \begin{multicols}{2}
-        {\fontsize{8}{11}\selectfont \lightfont \color{mediumgray} #2}
-    \end{multicols}
-}
-
-\newcommand{\detailImage}[1]{
-    \par\vspace{0.4cm}
-    \begin{center}
-        \includegraphics[width=\linewidth,height=6cm,keepaspectratio]{#1}
-    \end{center}
-    \vspace{0.4cm}
-}
-
-% --- Entête et pied de page ---
+% --- Entete et pied ---
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
-\fancyfoot[L]{\fontsize{6}{7}\selectfont \lightfont \color{lightgray} Alexandre MATHIEU --- Portfolio}
-\fancyfoot[R]{\fontsize{6}{7}\selectfont \lightfont \color{lightgray} \thepage}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[L]{\fontsize{5.8}{7}\selectfont\lightfont\color{soft} Alexandre Mathieu}
+\fancyfoot[R]{\fontsize{5.8}{7}\selectfont\lightfont\color{soft} \thepage}
+
+\newcommand{\hairline}{\textcolor{rulegray}{\rule{\linewidth}{0.18pt}}}
+
+\newcommand{\projectMetaItem}[2]{%
+    {\fontsize{5.8}{7}\selectfont\mediumfont\color{soft}\MakeUppercase{#1}}\par
+    {\fontsize{7.2}{9}\selectfont\lightfont\color{ink}#2}\par
+    \vspace{0.28cm}
+}
+
+\newcommand{\leadText}[1]{%
+    {\fontsize{8.2}{10.4}\selectfont\mediumfont\color{ink}#1}\par\vspace{0.22cm}
+}
+
+\newcommand{\projectSubheading}[1]{%
+    \vspace{0.15cm}
+    {\fontsize{7.2}{9}\selectfont\mediumfont\color{ink}#1}\par
+    \vspace{-0.08cm}
+}
+
+\newcommand{\projectIntroPage}[5]{%
+    \clearpage
+    \thispagestyle{plain}
+    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#1}\hfill
+    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#3}\par
+    \vspace{0.18cm}
+    {\fontsize{19}{21}\selectfont\displayfont\color{ink}#2}\par
+    \vspace{0.08cm}
+    {\fontsize{6.4}{8}\selectfont\lightfont\color{muted}#4}\par
+    \vspace{0.34cm}
+    \hairline
+    \vspace{0.56cm}
+    \ifx&#5&\else
+        \begin{center}
+            \includegraphics[width=\linewidth,height=8.7cm,keepaspectratio]{#5}
+        \end{center}
+    \fi
+}
+
+\long\def\projectTextPage#1#2{%
+    \clearpage
+    \thispagestyle{plain}
+    \begin{minipage}[t]{0.27\linewidth}
+        #1
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.66\linewidth}
+        \RaggedRight
+        {\fontsize{7.35}{9.75}\selectfont\lightfont\color{ink}#2}
+    \end{minipage}
+}
+
+\newcommand{\galleryHeader}[2]{%
+    \clearpage
+    \thispagestyle{plain}
+    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#2}\par
+    \vspace{0.12cm}
+    {\fontsize{10.5}{12}\selectfont\mediumfont\color{ink}#1}\par
+    \vspace{0.24cm}
+    \hairline
+    \vspace{0.45cm}
+}
+
+\newcommand{\galleryImage}[2]{%
+    \begin{minipage}[c][#2][c]{\linewidth}
+        \centering
+        \includegraphics[width=\linewidth,height=#2,keepaspectratio]{#1}
+    \end{minipage}
+}
 
 \begin{document}
 
-% --- Page de garde (Minimaliste & Élégante) ---
-{
-\newpage
+% --- Couverture ---
+\begin{titlepage}
 \thispagestyle{empty}
-\begin{center}
-    \vspace*{4.5cm}
-    {\fontsize{18}{22} \lightfont \addfontfeature{LetterSpace=30.0} ALEXANDRE} \par
-    \vspace{0.2cm}
-    {\fontsize{18}{22} \mediumfont \addfontfeature{LetterSpace=30.0} MATHIEU} \par
-    \vspace{0.8cm}
-    {\color{bordergray} \rule{1.5cm}{0.2pt}} \par
-    \vspace{0.8cm}
-    {\fontsize{8}{10} \lightfont \color{mediumgray} \addfontfeature{LetterSpace=20.0} architecture + design + art} \par
-    \vspace{4cm}
-    {\fontsize{24}{28} \lightfont \color{darkgray} \addfontfeature{LetterSpace=40.0} PORTFOLIO} \par
-    \vfill
-    {\fontsize{7}{9} \lightfont \color{lightgray} 2019 --- 2026} \par
-    \vspace{0.5cm}
-    {\fontsize{7}{9} \lightfont \color{lightgray} \url{https://alexandre-mathieu-arch.github.io/works/}}
-\end{center}
-}
+\vspace*{0.45cm}
+{\fontsize{8}{10}\selectfont\lightfont\color{muted} architecture / design / art}\par
+\vspace{1.85cm}
+{\fontsize{24}{26}\selectfont\displayfont\color{ink} Alexandre Mathieu}\par
+\vspace{0.35cm}
+\hairline
+\vspace{0.72cm}
+{\fontsize{13}{15}\selectfont\lightfont\color{ink} Portfolio}\par
+\vfill
+\begin{minipage}[t]{0.45\linewidth}
+    {\fontsize{7}{9}\selectfont\lightfont\color{muted}
+    alexandre.mat+w@protonmail.com\par
+    +33 6 58 21 53 00\par
+    \url{https://alexandre-mathieu-arch.github.io/works/}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.2\linewidth}
+    \raggedleft
+    {\fontsize{7}{9}\selectfont\lightfont\color{muted}2019--2026}
+\end{minipage}
+\end{titlepage}
 
-% --- Deuxième de couverture ---
-\newpage
-\thispagestyle{empty}
-\mbox{}
-
-% --- Sommaire (Deux colonnes) ---
-\newpage
+% --- Sommaire ---
+\clearpage
 \thispagestyle{plain}
-\vspace*{1cm}
-\begin{center}
-    {\Huge \titlefont S O M M A I R E} \par
-    \vspace{1cm}
-\end{center}
+\vspace*{0.25cm}
+{\fontsize{16}{18}\selectfont\displayfont\color{ink} Sommaire}\par
+\vspace{0.28cm}
+\hairline
+\vspace{0.7cm}
 \begin{multicols}{2}
     \makeatletter
     \@starttoc{toc}
@@ -153,83 +180,229 @@
 \end{multicols}
 
 % --- Projets ---
+\projectIntroPage{01}{La Marne}{2021}{Lorient}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/av-marne-maquette-a2d3abd8cff5.jpg}
+
 \addcontentsline{toc}{section}{La Marne (2021)}
 
-\projectIntroPage{La Marne}{2021}{LORIENT}{/home/alexandre/projets/atelier-archi/public/images/projects/la-marne/av-marne-maquette.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Résidentiel}
+\projectMetaItem{Lieu}{Lorient}
+\projectMetaItem{Pays}{France, Bretagne}
+\projectMetaItem{Surface}{286 m²}
+\projectMetaItem{Collaboration}{Pascal Debard (KLOUDE) \& Achraf Benbouzid (ABA)}
+\projectMetaItem{Année}{2021}}{\leadText{Situé dans un jardin en intérieur d'îlot urbain, ce local commun a été transformé en résidence de 5 logements, du T2 au T4. Une renaissance architecturale privilégiant la lumière et l'intimité.}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Pays :} France, Bretagne \\ \textbf{Lieu :} Lorient}{\#\#\# Renaissance au cœur d’îlot : Une densification douce et lumineuse\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/la-marne/av-marne-rendu-ext.jpg}Né de la transformation d'un ancien local commun niché en cœur d’îlot, ce projet de réhabilitation propose une nouvelle manière d'habiter la ville, loin du tumulte urbain. Dans cet écrin de verdure préservé, le bâti a été sculpté pour répondre aux exigences du Plan Local d’Urbanisme tout en offrant une réponse architecturale singulière.\par\medskip L'architecture s'efface pour laisser place à l’essentiel : la lumière et l’intimité. Chaque logement a été conçu comme un refuge baigné de clarté naturelle, où les limites entre intérieur et extérieur s'estompent. Des jardins privatifs en rez-de-chaussée aux balcons suspendus en étage, chaque habitant dispose d'un espace de respiration à ciel ouvert, garantissant une qualité de vie rare en milieu dense.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/la-marne/existant.jpg}Le projet illustre une « densification douce », une intervention respectueuse qui valorise le foncier sans saturer le paysage. Les stationnements, discrètement intégrés à la cour, préservent la fluidité des cheminements et la sérénité du jardin.\par\medskip Cette résidence intimiste se compose de cinq unités de vie aux typologies variées, s'adaptant à tous les parcours de vie. Deux appartements T2 en rez-de-chaussée (42 m²), s'ouvrant sur la vie du jardin. Deux appartements T2 à l'étage (38 m² et 35 m²), véritables belvédères de lumière. Un vaste logement T4 de 128 m², conçu comme une maison de ville offrant de grands volumes familiaux.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/la-marne/existant-2.jpg}Au total, ce sont \textbf\{286 m²\} de surface habitable qui redonnent vie à cet intérieur d’îlot, prouvant que la densité peut rimer avec sensibilité et bien-être.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/la-marne/existant-3.jpg}}
+\projectSubheading{Renaissance au cœur d’îlot : Une densification douce et lumineuse}\par Né de la transformation d'un ancien local commun niché en cœur d’îlot, ce projet de réhabilitation propose une nouvelle manière d'habiter la ville, loin du tumulte urbain. Dans cet écrin de verdure préservé, le bâti a été sculpté pour répondre aux exigences du Plan Local d’Urbanisme tout en offrant une réponse architecturale singulière.\par L'architecture s'efface pour laisser place à l’essentiel : la lumière et l’intimité. Chaque logement a été conçu comme un refuge baigné de clarté naturelle, où les limites entre intérieur et extérieur s'estompent. Des jardins privatifs en rez-de-chaussée aux balcons suspendus en étage, chaque habitant dispose d'un espace de respiration à ciel ouvert, garantissant une qualité de vie rare en milieu dense.\par Le projet illustre une « densification douce », une intervention respectueuse qui valorise le foncier sans saturer le paysage. Les stationnements, discrètement intégrés à la cour, préservent la fluidité des cheminements et la sérénité du jardin.\par Cette résidence intimiste se compose de cinq unités de vie aux typologies variées, s'adaptant à tous les parcours de vie. Deux appartements T2 en rez-de-chaussée (42 m²), s'ouvrant sur la vie du jardin. Deux appartements T2 à l'étage (38 m² et 35 m²), véritables belvédères de lumière. Un vaste logement T4 de 128 m², conçu comme une maison de ville offrant de grands volumes familiaux.\par Au total, ce sont \textbf{286 m²} de surface habitable qui redonnent vie à cet intérieur d’îlot, prouvant que la densité peut rimer avec sensibilité et bien-être.}
+
+\galleryHeader{La Marne}{01 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/av-marne-rendu-ext-55bb41d008fb.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/existant-4454ac4f4ed0.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/existant-2-f1f3709ec33d.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/existant-3-2a2f81eb12a6.jpg}{4.25cm}\end{minipage}
+
+
+\galleryHeader{La Marne}{01 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/plan-masse-existant-a56f670204fc.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/plan-niveau-axo-2a3a7227082f.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/rdc-5068665e904d.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/niveau1-38e0aca20b3a.jpg}{4.25cm}\end{minipage}
+
+
+\galleryHeader{La Marne}{01 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/facade-ouest-e75c91c53558.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/facade-sud-a7c5601ad613.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coupe-87c327f26493.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/abris-velo-22d9b9c93c2d.jpg}{4.25cm}\end{minipage}
+
+
+\projectIntroPage{02}{Villa CN}{2024}{Tahanaout, Marrakech / Livré / Réalisé}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/villa-cn.01-5ced8cec2308.jpg}
+
 \addcontentsline{toc}{section}{Villa CN (2024)}
 
-\projectIntroPage{Villa CN}{2024}{TAHANAOUT, MARRAKECH / LIVRÉ}{/home/alexandre/projets/atelier-archi/public/images/projects/villa-cn/villa-cn.01.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Résidentiel}
+\projectMetaItem{Lieu}{Tahanaout, Marrakech}
+\projectMetaItem{Pays}{Maroc}
+\projectMetaItem{Surface}{650 m²}
+\projectMetaItem{Phase}{Livré}
+\projectMetaItem{Année}{2024}}{\leadText{Née d'une volonté radicale, cette villa s'affirme par une architecture brutaliste aux lignes franches. Les murs épais, pétris de terre et de chaux, sculptent des volumes massifs qui capturent la chaleur du jour pour la restituer à la fraîcheur des nuits berbères.}}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Pays :} Maroc \\ \textbf{Lieu :} Tahanaout, Marrakech}{\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/villa-cn/villa-cn-atlas.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/villa-cn/villa-cn02.png}}
+\galleryHeader{Villa CN}{02 / images}
+\noindent\begin{minipage}[c][9.2cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/villa-cn-atlas-dceb74ceb8d8.jpg}{9.2cm}\end{minipage}\hfill\begin{minipage}[c][9.2cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/villa-cn02-2b871312f12a.jpg}{9.2cm}\end{minipage}
+
+
+\projectIntroPage{03}{Base Vie}{2024}{}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/base-vie-ebea9a460ae0.jpg}
+
 \addcontentsline{toc}{section}{Base Vie (2024)}
 
-\projectIntroPage{Base Vie}{2024}{}{/home/alexandre/projets/atelier-archi/public/images/projects/base-vie/base-vie.png}
+\projectTextPage{\projectMetaItem{Typologie}{Éphémère}
+\projectMetaItem{Pays}{France}
+\projectMetaItem{Année}{2024}}{\leadText{Projet de base vie pour chantier.}
 
-\projectDetailsPage{\textbf{Typologie :} Éphémère \\ \textbf{Pays :} France}{Description du projet Base Vie.\par\medskip }
-\addcontentsline{toc}{section}{Toulhars (2024)}
+Description du projet Base Vie.}
 
-\projectIntroPage{Toulhars}{2024}{}{/home/alexandre/projets/atelier-archi/public/images/projects/toulhars/plan-rdc.jpg}
+\projectIntroPage{04}{Coliving Etel}{2023}{Etel / En cours / Projet}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coliving-etel-01-extension-188d8135932e.jpg}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Pays :} France}{Description du projet Toulhars.\par\medskip }
 \addcontentsline{toc}{section}{Coliving Etel (2023)}
 
-\projectIntroPage{Coliving Etel}{2023}{ETEL / EN COURS}{/home/alexandre/projets/atelier-archi/public/images/projects/coliving-etel/coliving-etel-01-extension.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Résidentiel}
+\projectMetaItem{Lieu}{Etel}
+\projectMetaItem{Pays}{France, Bretagne}
+\projectMetaItem{Phase}{En cours}
+\projectMetaItem{Année}{2023}}{\leadText{Projet de coliving à Etel.}}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Pays :} France, Bretagne \\ \textbf{Lieu :} Etel}{\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/coliving-etel/coliving-etel-02-entree.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/coliving-etel/coliving-etel-03-situation.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/coliving-etel/coliving-etel-04-masse.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/coliving-etel/coliving-etel-05-rdc.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/coliving-etel/coliving-etel-06-etage.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/coliving-etel/coliving-etel-07-comble.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/coliving-etel/coliving-etel-08-chambre-haute.jpg}}
+\galleryHeader{Coliving Etel}{04 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coliving-etel-02-entree-83f3d821cd85.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coliving-etel-03-situation-0c5544981eb7.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coliving-etel-04-masse-5a2026dc4503.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coliving-etel-05-rdc-ee0b5c67e61f.jpg}{4.25cm}\end{minipage}
+
+
+\galleryHeader{Coliving Etel}{04 / images}
+\noindent\begin{minipage}[c][8.9cm][c]{0.31\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coliving-etel-06-etage-43134a05463c.jpg}{8.9cm}\end{minipage}\hfill\begin{minipage}[c][8.9cm][c]{0.31\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coliving-etel-07-comble-0665e6be6feb.jpg}{8.9cm}\end{minipage}\hfill\begin{minipage}[c][8.9cm][c]{0.31\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coliving-etel-08-chambre-haute-927338eee263.jpg}{8.9cm}\end{minipage}
+
+
+\projectIntroPage{05}{Porte-portable}{2023}{Prototype / Réalisé}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/porte-portable-okume-28c26720003a.jpg}
+
 \addcontentsline{toc}{section}{Porte-portable (2023)}
 
-\projectIntroPage{Porte-portable}{2023}{PROTOTYPE}{/home/alexandre/projets/atelier-archi/public/images/projects/porte-portable/porte-portable-okume.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Design, Objet}
+\projectMetaItem{Pays}{France}
+\projectMetaItem{Phase}{Prototype}
+\projectMetaItem{Année}{2023}}{\leadText{Série de prototypes pour smartphone en multiplis d'okoumé, cuir et inox. Ces objets ont été conçus pour accompagner la création d'un bureau en bois et acier, offrant une simplicité absolue sans mécanisme.}
 
-\projectDetailsPage{\textbf{Typologie :} Design, Objet \\ \textbf{Matériaux :} Multiplis d'okoumé, Cuir de vachette, Inox \\ \textbf{Pays :} France}{Dans le cadre de la création d'un bureau alliant bois et acier, la question des équipements et accessoires s'est posée naturellement. Pour accompagner cet ensemble, j'ai développé une série de prototypes guidés par une recherche de simplicité absolue.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/porte-portable/okume-2.jpg}Le porte-portable est un objet unique, sans aucun mécanisme. Il combine trois matériaux choisis pour leur complémentarité : le multiplis d'okoumé pour la structure, le cuir de vachette pour le contact et la protection, et un profilé en U en inox. Ce dernier vient rappeler l'esthétique métallique des piétements du bureau en acier associé.\par\medskip Sa géométrie permet quatre positions d'utilisation : deux inclinaisons différentes et deux orientations (portrait ou paysage). Entièrement fabriqué par mes soins, il incarne une vision du design où l'économie de moyens sert la fonctionnalité.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/porte-portable/okume-3.jpg}}
+Dans le cadre de la création d'un bureau alliant bois et acier, la question des équipements et accessoires s'est posée naturellement. Pour accompagner cet ensemble, j'ai développé une série de prototypes guidés par une recherche de simplicité absolue.\par Le porte-portable est un objet unique, sans aucun mécanisme. Il combine trois matériaux choisis pour leur complémentarité : le multiplis d'okoumé pour la structure, le cuir de vachette pour le contact et la protection, et un profilé en U en inox. Ce dernier vient rappeler l'esthétique métallique des piétements du bureau en acier associé.\par Sa géométrie permet quatre positions d'utilisation : deux inclinaisons différentes et deux orientations (portrait ou paysage). Entièrement fabriqué par mes soins, il incarne une vision du design où l'économie de moyens sert la fonctionnalité.}
+
+\galleryHeader{Porte-portable}{05 / images}
+\noindent\begin{minipage}[c][9.2cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/okume-2-2654158522b4.jpg}{9.2cm}\end{minipage}\hfill\begin{minipage}[c][9.2cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/okume-3-770276d512ee.jpg}{9.2cm}\end{minipage}
+
+
+\projectIntroPage{06}{Atrium Organique}{2022}{Vannes / Concours privé (abandonné) / Abandonné}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/night-shift-3ba6f979e490.jpg}
+
 \addcontentsline{toc}{section}{Atrium Organique (2022)}
 
-\projectIntroPage{Atrium Organique}{2022}{VANNES / CONCOURS PRIVÉ (ABANDONNÉ)}{/home/alexandre/projets/atelier-archi/public/images/projects/atrium/night-shift.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Tertiaire, Bureau}
+\projectMetaItem{Lieu}{Vannes}
+\projectMetaItem{Pays}{France, Bretagne}
+\projectMetaItem{Phase}{Concours privé (abandonné)}
+\projectMetaItem{Année}{2022}}{\leadText{Au cœur de la rigueur orthogonale d'un siège bancaire, des structures organiques en toiles tendues créent une rupture inattendue. Un dialogue entre la géométrie réglée de l'espace et la fluidité de bulles programmatiques.}
 
-\projectDetailsPage{\textbf{Typologie :} Tertiaire, Bureau \\ \textbf{Pays :} France, Bretagne \\ \textbf{Lieu :} Vannes}{Le projet s'articule autour de structures métalliques complexes sur lesquelles sont tendues des toiles translucides. Ces « bulles » programmatiques flottent dans l'espace, créant un contraste saisissant avec la trame orthogonale du bâtiment. Chaque bulle possède sa propre ambiance et sa propre fonction, offrant des espaces de réunion ou de détente confidentiels au sein du vaste volume de l'atrium.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/atrium/night-shift-bis.jpg}L'effet de surprise est total : la transparence des toiles laisse deviner les silhouettes et les formes intérieures, préservant une connexion visuelle tout en assurant une intimité nécessaire. Un soin particulier a été apporté à l'acoustique, la géométrie des toiles et les matériaux choisis permettant d'absorber les résonances du grand hall pour créer des cocons de calme.\par\medskip \textbf\{Conception\}  
-Structure métallique légère supportant des toiles tendues translucides à haute performance acoustique. La géométrie organique est conçue pour rompre la rigueur du hall tout en gérant la diffusion lumineuse et sonore.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/atrium/perspective.jpg}\textbf\{Workflow\}  
-Génération paramétrique des formes via Rhinocéros 3D et Grasshopper. Intégration BIM avec Bridge Archicad. Visualisation immersive sous Twinmotion et post-production Photoshop.\par\medskip }
+Le projet s'articule autour de structures métalliques complexes sur lesquelles sont tendues des toiles translucides. Ces « bulles » programmatiques flottent dans l'espace, créant un contraste saisissant avec la trame orthogonale du bâtiment. Chaque bulle possède sa propre ambiance et sa propre fonction, offrant des espaces de réunion ou de détente confidentiels au sein du vaste volume de l'atrium.\par L'effet de surprise est total : la transparence des toiles laisse deviner les silhouettes et les formes intérieures, préservant une connexion visuelle tout en assurant une intimité nécessaire. Un soin particulier a été apporté à l'acoustique, la géométrie des toiles et les matériaux choisis permettant d'absorber les résonances du grand hall pour créer des cocons de calme.\par \textbf{Conception} Structure métallique légère supportant des toiles tendues translucides à haute performance acoustique. La géométrie organique est conçue pour rompre la rigueur du hall tout en gérant la diffusion lumineuse et sonore.\par \textbf{Workflow} Génération paramétrique des formes via Rhinocéros 3D et Grasshopper. Intégration BIM avec Bridge Archicad. Visualisation immersive sous Twinmotion et post-production Photoshop.}
+
+\galleryHeader{Atrium Organique}{06 / images}
+\noindent\begin{minipage}[c][9.2cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/night-shift-bis-7858a44d496f.jpg}{9.2cm}\end{minipage}\hfill\begin{minipage}[c][9.2cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/perspective-d4cd35dc511a.jpg}{9.2cm}\end{minipage}
+
+
+\projectIntroPage{07}{Cap-Horn}{2022}{Quimper / Études en cours / En projet}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/cap-horn-01-perspective-ceb23d251260.jpg}
+
 \addcontentsline{toc}{section}{Cap-Horn (2022)}
 
-\projectIntroPage{Cap-Horn}{2022}{QUIMPER / ÉTUDES EN COURS}{/home/alexandre/projets/atelier-archi/public/images/projects/cap-horn/cap-horn-01-perspective.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Tertiaire, Bureau}
+\projectMetaItem{Lieu}{Quimper}
+\projectMetaItem{Pays}{France, Bretagne}
+\projectMetaItem{Surface}{850 m²}
+\projectMetaItem{Phase}{Études en cours}
+\projectMetaItem{Année}{2022}}{\leadText{Le projet Cap-Horn s'érige comme une figure de proue tertiaire sur une parcelle aux contraintes urbaines exacerbées. Ce bâtiment vertical hybride articule un programme dense mêlant services de santé et espaces de création architecturale, tout en libérant le sol au profit des mobilités.}
 
-\projectDetailsPage{\textbf{Typologie :} Tertiaire, Bureau \\ \textbf{Pays :} France, Bretagne \\ \textbf{Lieu :} Quimper}{Situé sur une parcelle urbaine étroite, le projet Cap-Horn répond à un défi de compacité radicale. La morphologie du bâtiment est dictée par la volonté de superposer des usages distincts tout en maintenant une fluidité fonctionnelle et une identité architecturale forte.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/cap-horn/cap-horn-02-terrasse.png}\#\#\# Verticalité et Mixité Programmatique
-Le rez-de-chaussée est entièrement dédié au stationnement (voitures et vélos), agissant comme un socle perméable qui préserve la fluidité au sol. Les deux niveaux supérieurs (R+1 et R+2) accueillent des cabinets médicaux pour des généralistes et des professions libérales, offrant des plateaux lumineux et modulables.\par\medskip Les deux derniers niveaux sont investis par l'agence d'architecture \textbf\{Brulé Architectes\}. Cette position dominante permet une mise à distance du tumulte de la rue et offre des vues dégagées sur l'horizon urbain. Le toit-terrasse, conçu comme un espace partagé, accueille une salle de réunion panoramique dédiée à l'agence, prolongeant le travail vers l'extérieur.\par\medskip \#\#\# Une Structure Rationnelle
-Pour maximiser la surface utile sur un foncier contraint, les circulations verticales ont été externalisées. Un ascenseur central et un escalier extérieur structurent la façade, libérant les plateaux intérieurs de toute contrainte structurelle lourde. Cette approche permet une flexibilité totale de l'aménagement intérieur, indispensable à l'évolution des pratiques médicales et créatives.\par\medskip }
+Situé sur une parcelle urbaine étroite, le projet Cap-Horn répond à un défi de compacité radicale. La morphologie du bâtiment est dictée par la volonté de superposer des usages distincts tout en maintenant une fluidité fonctionnelle et une identité architecturale forte.\par Verticalité et Mixité Programmatique Le rez-de-chaussée est entièrement dédié au stationnement (voitures et vélos), agissant comme un socle perméable qui préserve la fluidité au sol. Les deux niveaux supérieurs (R+1 et R+2) accueillent des cabinets médicaux pour des généralistes et des professions libérales, offrant des plateaux lumineux et modulables.\par Les deux derniers niveaux sont investis par l'agence d'architecture \textbf{Brulé Architectes}. Cette position dominante permet une mise à distance du tumulte de la rue et offre des vues dégagées sur l'horizon urbain. Le toit-terrasse, conçu comme un espace partagé, accueille une salle de réunion panoramique dédiée à l'agence, prolongeant le travail vers l'extérieur.\par Une Structure Rationnelle Pour maximiser la surface utile sur un foncier contraint, les circulations verticales ont été externalisées. Un ascenseur central et un escalier extérieur structurent la façade, libérant les plateaux intérieurs de toute contrainte structurelle lourde. Cette approche permet une flexibilité totale de l'aménagement intérieur, indispensable à l'évolution des pratiques médicales et créatives.}
+
+\galleryHeader{Cap-Horn}{07 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/cap-horn-02-terrasse-78a4da74d2d6.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/cap-horn-03-elevation-ouest-9404cbf86b0e.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/cap-horn-04-principe-facade-c59ecf0fbb56.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/cap-horn-05-detail-coupe-dff5a49503dc.jpg}{4.25cm}\end{minipage}
+
+
+\galleryHeader{Cap-Horn}{07 / images}
+\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/cap-horn-06-plan-masse-0f645b3070bd.jpg}{9.2cm}
+
+
+\projectIntroPage{08}{Maison Bretonne}{2020}{La Trinité-sur-Mer / Livré / Réalisé}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-ext-13f2e3dd8f2f.jpg}
+
 \addcontentsline{toc}{section}{Maison Bretonne (2020)}
 
-\projectIntroPage{Maison Bretonne}{2020}{LA TRINITÉ-SUR-MER / LIVRÉ}{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-ext.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Résidentiel}
+\projectMetaItem{Lieu}{La Trinité-sur-Mer}
+\projectMetaItem{Pays}{France, Bretagne}
+\projectMetaItem{Surface}{150 m²}
+\projectMetaItem{Phase}{Livré}
+\projectMetaItem{Collaboration}{Pascal Debard (KLOUDE)}
+\projectMetaItem{Année}{2020}}{\leadText{Dialogue entre héritage néo-breton et légèreté contemporaine : rénovation et extension d'une maison côtière en structure bois et zinc blanc.}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Pays :} France, Bretagne \\ \textbf{Lieu :} La Trinité-sur-Mer}{Située à quelques encablures du Golfe du Morbihan, sur un terrain privilégié offrant une vue imprenable sur la mer, la Maison B est le fruit d'une réflexion sur la mutation du patrimoine vernaculaire breton.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-int.jpg}Le projet consistait en la rénovation complète et l'extension d'une maison néo-bretonne classique, caractérisée par son soubassement en granit et sa maçonnerie de parpaings enduits. L'intervention s'attache à réinterpréter la pureté de l'enduit blanc d'origine — figure emblématique du paysage local — en la confrontant à une extension contemporaine en structure bois et vêture de zinc blanc.\par\medskip Cette extension, par sa matérialité et sa géométrie, vient dialoguer avec le volume existant sans le dénaturer. La performance énergétique a été au cœur de la démarche, avec la mise en œuvre d'une isolation thermique par l'extérieur (ITE) unifiant les volumes.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-situation.jpg}Premier projet réalisé en indépendant à la sortie de l'école, cette réalisation pose les jalons d'une pratique attentive au contexte, à la texture et à la pérennité constructive.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-rdc.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-etage.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-facade-sud.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-facade-ouest.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-extrait-coupes.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-extrait-coupe.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-avant.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/maison-bretonne-photogrammetrie.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/non-visible-detail-volet-roulant.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/maison-bretonne/non-visible-facades.jpg}}
+Située à quelques encablures du Golfe du Morbihan, sur un terrain privilégié offrant une vue imprenable sur la mer, la Maison B est le fruit d'une réflexion sur la mutation du patrimoine vernaculaire breton.\par Le projet consistait en la rénovation complète et l'extension d'une maison néo-bretonne classique, caractérisée par son soubassement en granit et sa maçonnerie de parpaings enduits. L'intervention s'attache à réinterpréter la pureté de l'enduit blanc d'origine — figure emblématique du paysage local — en la confrontant à une extension contemporaine en structure bois et vêture de zinc blanc.\par Cette extension, par sa matérialité et sa géométrie, vient dialoguer avec le volume existant sans le dénaturer. La performance énergétique a été au cœur de la démarche, avec la mise en œuvre d'une isolation thermique par l'extérieur (ITE) unifiant les volumes.\par Premier projet réalisé en indépendant à la sortie de l'école, cette réalisation pose les jalons d'une pratique attentive au contexte, à la texture et à la pérennité constructive.}
+
+\galleryHeader{Maison Bretonne}{08 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-int-a2aa46df9bae.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-situation-a03ba1fcdc89.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-rdc-568e23628ed3.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-etage-688a20133c80.jpg}{4.25cm}\end{minipage}
+
+
+\galleryHeader{Maison Bretonne}{08 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-facade-sud-11407970ab21.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-facade-ouest-54bbcfeb83fa.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-extrait-coupes-6a13a8030aca.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-extrait-coupe-f145e20c7488.jpg}{4.25cm}\end{minipage}
+
+
+\galleryHeader{Maison Bretonne}{08 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-avant-2c19ba94eca8.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maison-bretonne-photogrammetrie-91fb7294d7fe.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/non-visible-detail-volet-roulant-ec16eddb045b.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/non-visible-facades-c6da6364d6fd.jpg}{4.25cm}\end{minipage}
+
+
+\projectIntroPage{09}{Portaledge}{2020}{Lorient / Études / En cours}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/studiotetu-3b6ade7a752f.jpg}
+
 \addcontentsline{toc}{section}{Portaledge (2020)}
 
-\projectIntroPage{Portaledge}{2020}{LORIENT / ÉTUDES}{/home/alexandre/projets/atelier-archi/public/images/projects/portaledge/studiotetu.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Résidentiel}
+\projectMetaItem{Lieu}{Lorient}
+\projectMetaItem{Pays}{France, Bretagne}
+\projectMetaItem{Surface}{25 m²}
+\projectMetaItem{Phase}{Études}
+\projectMetaItem{Année}{2020}}{\leadText{Un studio de design suspendu, explorant la verticalité et les formes vernaculaires du désert. Le projet s'ancre dans une paroi rocheuse, offrant une vue imprenable sur l'immensité tout en minimisant son empreinte au sol.}}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Pays :} France, Bretagne \\ \textbf{Lieu :} Lorient}{}
+\projectIntroPage{10}{Bodelio}{2019}{Lorient / Concours / Concours perdu}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/bodelio-pers-65431dc95e23.jpg}
+
 \addcontentsline{toc}{section}{Bodelio (2019)}
 
-\projectIntroPage{Bodelio}{2019}{LORIENT / CONCOURS}{/home/alexandre/projets/atelier-archi/public/images/projects/bodelio/bodelio-pers.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Résidentiel}
+\projectMetaItem{Lieu}{Lorient}
+\projectMetaItem{Pays}{France, Bretagne}
+\projectMetaItem{Surface}{4200 m²}
+\projectMetaItem{Phase}{Concours}
+\projectMetaItem{Collaboration}{DDL Architectes}
+\projectMetaItem{Année}{2019}}{\leadText{Le projet Bodelio s'inscrit dans la reconversion d'un site hospitalier historique à Lorient. Concours de logements résidentiels (perdu).}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Pays :} France, Bretagne \\ \textbf{Lieu :} Lorient}{Situé sur l'ancien site de l'hôpital Bodelio à Lorient, ce projet de logements collectifs s'insère dans un tissu urbain en pleine mutation. L'enjeu principal réside dans la capacité à densifier le centre-ville tout en offrant une qualité d'usage et une relation privilégiée au paysage.\par\medskip \#\#\# Composition Urbaine
-Le projet se compose de plusieurs volumes fragmentés qui reprennent l'échelle des îlots environnants. Cette fragmentation permet de multiplier les orientations pour chaque logement et de créer des percées visuelles au cœur de l'îlot. Le traitement des façades, mêlant minéralité et structures bois, souligne la volonté d'une architecture durable et ancrée dans son territoire.\par\medskip \#\#\# Entre Intimité et Partage
-Chaque unité d'habitation bénéficie d'un prolongement extérieur généreux, conçu comme une pièce supplémentaire à l'air libre. Les espaces communs au rez-de-chaussée et les jardins partagés favorisent le lien social entre les résidents, transformant l'acte d'habiter en une expérience collective et apaisée.\par\medskip \#\#\# Détails Constructifs
-Le projet privilégie des modes constructifs bas carbone et une matérialité durable. Les plateaux sont réalisés en CLT (Cross Laminated Timber), tandis que les étages attiques sont conçus en Murs à Ossature Bois (MOB), allégeant ainsi la structure globale. Les balcons, éléments forts de la façade, sont portés par une structure bois apparente. En sous-sol, un parking souterrain assure le stationnement et regroupe l'ensemble des locaux techniques, libérant ainsi le cœur d'îlot pour des espaces paysagers.\par\medskip }
-\addcontentsline{toc}{section}{230 Volts (2018)}
+Situé sur l'ancien site de l'hôpital Bodelio à Lorient, ce projet de logements collectifs s'insère dans un tissu urbain en pleine mutation. L'enjeu principal réside dans la capacité à densifier le centre-ville tout en offrant une qualité d'usage et une relation privilégiée au paysage.\par Composition Urbaine Le projet se compose de plusieurs volumes fragmentés qui reprennent l'échelle des îlots environnants. Cette fragmentation permet de multiplier les orientations pour chaque logement et de créer des percées visuelles au cœur de l'îlot. Le traitement des façades, mêlant minéralité et structures bois, souligne la volonté d'une architecture durable et ancrée dans son territoire.\par Entre Intimité et Partage Chaque unité d'habitation bénéficie d'un prolongement extérieur généreux, conçu comme une pièce supplémentaire à l'air libre. Les espaces communs au rez-de-chaussée et les jardins partagés favorisent le lien social entre les résidents, transformant l'acte d'habiter en une expérience collective et apaisée.\par Détails Constructifs Le projet privilégie des modes constructifs bas carbone et une matérialité durable. Les plateaux sont réalisés en CLT (Cross Laminated Timber), tandis que les étages attiques sont conçus en Murs à Ossature Bois (MOB), allégeant ainsi la structure globale. Les balcons, éléments forts de la façade, sont portés par une structure bois apparente. En sous-sol, un parking souterrain assure le stationnement et regroupe l'ensemble des locaux techniques, libérant ainsi le cœur d'îlot pour des espaces paysagers.}
 
-\projectIntroPage{230 Volts}{2018}{PROTOTYPE}{/home/alexandre/projets/atelier-archi/public/images/projects/230-volts/montage-prise.png}
+\galleryHeader{Bodelio}{10 / images}
+\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maquette-903d8226298f.jpg}{9.2cm}
 
-\projectDetailsPage{\textbf{Typologie :} Design \\ \textbf{Pays :} France}{Le projet « 230 Volts » est un dispositif d’alimentation électrique modulable couplé à un panier vide-poche. Il s’insère dans l’École d’architecture de Nantes de Lacaton \& Vassal et plus précisément au sein des studios de projets du niveau Oc. L’espace est marqué par une forte caractéristique industrielle, des matériaux bruts et des techniques de constructions en préfabriqué ; la prise s’inspire de ces couleurs et matériaux.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/230-volts/realisation.jpg}Il est une réponse à une problématique issue d’une contrainte liée à l’alimentation électrique des appareils (téléphone, ordinateur, perceuse...) faite au travers de multiprises fixées de manière définitive aux chemins de câbles. L’impossibilité de déplacer momentanément les prises génère de nombreux troubles de circulations et d’usages dans les studios, contraignant les utilisateurs à devoir rester dans un périmètre limité.\par\medskip Si vous levez les yeux au plafond, vous pouvez observer les multiprises positionnées le long des chemins de câbles. Maintenant, si vous tentez de brancher un appareil électrique, vous allez rencontrer un problème : la longueur du câble d’alimentation de ce dernier vous oblige à rester en dessous de cette prise. Dans certains cas, il est même impossible de charger un appareil posé sur une table. En plus de l’inconfort généré, ceci provoque des situations à risques pour les appareils et les usagers : chute de téléphone, casse d’un ordinateur, chute d’un usager... etc.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/230-volts/prise-multi.png}Le projet « 230 Volts » propose d’améliorer l’expérience des usagers en rendant possible le déplacement des prises d’alimentation et le maintien en sécurité d’appareils légers lors de leur charge, tout en conservant libre la surface au sol.\par\medskip Le système de rail coulissant permet à l’objet d’effectuer des mouvements de translation horizontale en plus de la translation verticale rendue possible par le système de store vénitien. Ceci permet à l’utilisateur de modifier, selon son besoin, la position et la hauteur de la prise.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/230-volts/axonometrie.png}\#\#\# L'histoire\par\medskip « 230 Volts » n’est pas qu’une prise, c’est aussi une histoire.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/230-volts/maquette.jpg}En vint un, puis deux, puis trois... puis vingt-trois ! « 230 Volts » est une espèce d’oiseaux vivant en famille et ayant immigré au niveau Oc, endroit qu’elle a choisi pour y faire son nid, le temps d’un semestre. Cet oiseau, plutôt bon pêcheur, a la particularité de ne jamais lâcher ses prises. Conscient qu’il est dans un nouveau territoire, il sait se faire discret et s’adapte à son environnement en prenant les couleurs de celui-ci.\par\medskip Concernant sa prise, électrique, comme une anguille, elle aussi vit en famille, mais n’avait pas choisi d’immigrer ici, en tout cas pas ainsi. Elle compte sur vous pour l’aider à s’échapper afin de retourner vivre dans les courants du fleuve où elle nageait paisiblement. Et pour y retourner, elle est prête à donner beaucoup de son énergie, à vous et à vos amis.\par\medskip \detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/230-volts/maquette-papier.jpg}}
-\addcontentsline{toc}{section}{Les 3 Frères (2018)}
 
-\projectIntroPage{Les 3 Frères}{2018}{SAINT-BRIEUC}{/home/alexandre/projets/atelier-archi/public/images/projects/logements-saint-brieuc/3frereslg-lota-pers.jpg}
+\projectIntroPage{11}{23 Plots}{2018}{Caen / Concours}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/plot-logement-caen-129eb7afdd13.jpg}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Matériaux :} Béton banché, tôle perforée, verre \\ \textbf{Pays :} France, Bretagne \\ \textbf{Lieu :} Saint-Brieuc}{\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/logements-saint-brieuc/3frereslg-lota-pers-jardins.jpg}\detailImage{/home/alexandre/projets/atelier-archi/public/images/projects/logements-saint-brieuc/3frereslg-lotb-pers.jpg}}
 \addcontentsline{toc}{section}{23 Plots (2018)}
 
-\projectIntroPage{23 Plots}{2018}{CAEN / CONCOURS}{/home/alexandre/projets/atelier-archi/public/images/projects/plots-de-logements-caen/plot-logement-caen.jpg}
+\projectTextPage{\projectMetaItem{Typologie}{Résidentiel}
+\projectMetaItem{Lieu}{Caen}
+\projectMetaItem{Pays}{France, Normandie}
+\projectMetaItem{Phase}{Concours}
+\projectMetaItem{Collaboration}{DDL architectes Lorient}
+\projectMetaItem{Année}{2018}}{\leadText{Concours pour la réalisation d'un ensembles de 23 plots de logements à Caen.}}
 
-\projectDetailsPage{\textbf{Typologie :} Résidentiel \\ \textbf{Pays :} France, Normandie \\ \textbf{Lieu :} Caen}{}
+\projectIntroPage{12}{230 Volts}{2018}{Prototype / Réalisé}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/montage-prise-4ca3fef8fb7c.jpg}
+
+\addcontentsline{toc}{section}{230 Volts (2018)}
+
+\projectTextPage{\projectMetaItem{Typologie}{Design}
+\projectMetaItem{Pays}{France}
+\projectMetaItem{Phase}{Prototype}
+\projectMetaItem{Collaboration}{École d'Architecture de Nantes}
+\projectMetaItem{Année}{2018}}{\leadText{Le projet « 230 Volts » est un dispositif d’alimentation électrique modulable couplé à un panier vide-poche, conçu pour s'intégrer dans les studios de l'École d'Architecture de Nantes (Lacaton \& Vassal).}
+
+Le projet « 230 Volts » est un dispositif d’alimentation électrique modulable couplé à un panier vide-poche. Il s’insère dans l’École d’architecture de Nantes de Lacaton \& Vassal et plus précisément au sein des studios de projets du niveau Oc. L’espace est marqué par une forte caractéristique industrielle, des matériaux bruts et des techniques de constructions en préfabriqué ; la prise s’inspire de ces couleurs et matériaux.\par Il est une réponse à une problématique issue d’une contrainte liée à l’alimentation électrique des appareils (téléphone, ordinateur, perceuse...) faite au travers de multiprises fixées de manière définitive aux chemins de câbles. L’impossibilité de déplacer momentanément les prises génère de nombreux troubles de circulations et d’usages dans les studios, contraignant les utilisateurs à devoir rester dans un périmètre limité.\par Si vous levez les yeux au plafond, vous pouvez observer les multiprises positionnées le long des chemins de câbles. Maintenant, si vous tentez de brancher un appareil électrique, vous allez rencontrer un problème : la longueur du câble d’alimentation de ce dernier vous oblige à rester en dessous de cette prise. Dans certains cas, il est même impossible de charger un appareil posé sur une table. En plus de l’inconfort généré, ceci provoque des situations à risques pour les appareils et les usagers : chute de téléphone, casse d’un ordinateur, chute d’un usager... etc.\par Le projet « 230 Volts » propose d’améliorer l’expérience des usagers en rendant possible le déplacement des prises d’alimentation et le maintien en sécurité d’appareils légers lors de leur charge, tout en conservant libre la surface au sol.\par Le système de rail coulissant permet à l’objet d’effectuer des mouvements de translation horizontale en plus de la translation verticale rendue possible par le système de store vénitien. Ceci permet à l’utilisateur de modifier, selon son besoin, la position et la hauteur de la prise.\par \projectSubheading{L'histoire}\par « 230 Volts » n’est pas qu’une prise, c’est aussi une histoire.\par En vint un, puis deux, puis trois... puis vingt-trois ! « 230 Volts » est une espèce d’oiseaux vivant en famille et ayant immigré au niveau Oc, endroit qu’elle a choisi pour y faire son nid, le temps d’un semestre. Cet oiseau, plutôt bon pêcheur, a la particularité de ne jamais lâcher ses prises. Conscient qu’il est dans un nouveau territoire, il sait se faire discret et s’adapte à son environnement en prenant les couleurs de celui-ci.\par Concernant sa prise, électrique, comme une anguille, elle aussi vit en famille, mais n’avait pas choisi d’immigrer ici, en tout cas pas ainsi. Elle compte sur vous pour l’aider à s’échapper afin de retourner vivre dans les courants du fleuve où elle nageait paisiblement. Et pour y retourner, elle est prête à donner beaucoup de son énergie, à vous et à vos amis.}
+
+\galleryHeader{230 Volts}{12 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/realisation-26b9881d02ac.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/prise-multi-2f270cf0bf70.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/axonometrie-183dd94f19fe.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maquette-e22c4b42f198.jpg}{4.25cm}\end{minipage}
+
+
+\galleryHeader{230 Volts}{12 / images}
+\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/maquette-papier-5fb62d820ca9.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/vue-elevation-2398d0230d27.jpg}{4.25cm}\end{minipage}\par\vspace{0.35cm}\noindent\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/coupe-projet-230-d3635687ff07.jpg}{4.25cm}\end{minipage}\hfill\begin{minipage}[c][4.25cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/schema-montage-e2444b972fc0.jpg}{4.25cm}\end{minipage}
+
+
+\galleryHeader{230 Volts}{12 / images}
+\noindent\begin{minipage}[c][9.2cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/materialite-oc-71c65ab19e1f.jpg}{9.2cm}\end{minipage}\hfill\begin{minipage}[c][9.2cm][c]{0.48\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/type_onze_tole_perforee-6d9278d2b8a0.jpg}{9.2cm}\end{minipage}
+
+
+\projectIntroPage{13}{Les 3 Frères}{2018}{Saint-Brieuc}{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/3frereslg-lota-pers-e15a4a644821.jpg}
+
+\addcontentsline{toc}{section}{Les 3 Frères (2018)}
+
+\projectTextPage{\projectMetaItem{Typologie}{Résidentiel}
+\projectMetaItem{Lieu}{Saint-Brieuc}
+\projectMetaItem{Pays}{France, Bretagne}
+\projectMetaItem{Surface}{565 m²}
+\projectMetaItem{Collaboration}{Agence DDL Lorient}
+\projectMetaItem{Année}{2018}}{\leadText{Créations d'immeuble de sept logements allant du T2 au T4 avec parking privatifs sous-terrain dans la rue des trois freres le Goff à Saint Brieuc en collaboration avec l'agence DDL architectes.}}
+
+\galleryHeader{Les 3 Frères}{13 / images}
+\noindent\begin{minipage}[c][8.9cm][c]{0.31\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/3frereslg-lota-pers-jardins-b2b698546775.jpg}{8.9cm}\end{minipage}\hfill\begin{minipage}[c][8.9cm][c]{0.31\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/3frereslg-lotb-pers-a77e0a3a6d81.jpg}{8.9cm}\end{minipage}\hfill\begin{minipage}[c][8.9cm][c]{0.31\linewidth}\galleryImage{/home/alexandre/projets/atelier-archi/portfolio-pdf/output/images/3frereslg-planmasse-7cc3e50246cb.jpg}{8.9cm}\end{minipage}
 
 
 \end{document}
