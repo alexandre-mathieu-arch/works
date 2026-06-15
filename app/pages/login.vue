@@ -13,17 +13,17 @@
             v-model="password"
             type="password"
             placeholder="Mot de passe"
-            class="w-full bg-transparent border-b border-[#121212]/20 dark:border-white/20 py-3 u-h4 focus:outline-none focus:border-primary-900 dark:focus:border-primary-400 transition-colors text-center"
+            class="w-full bg-transparent border-b border-[#121212]/20 dark:border-white/20 py-3 u-h4 focus:outline-none focus:border-primary-900 dark:focus:border-primary-400 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] text-center"
             autofocus
           />
-          <p v-if="error" class="absolute top-full left-0 right-0 text-center text-red-500 text-[10px] uppercase tracking-widest mt-2 animate-pulse">
+          <p v-if="error" class="absolute top-full left-0 right-0 text-center text-red-500 text-[10px] uppercase tracking-widest mt-2 motion-luxury-pulse">
             Accès refusé
           </p>
         </div>
 
         <button
           type="submit"
-          class="w-full h-[45px] border border-[#121212] dark:border-white u-h4 uppercase tracking-[0.2em] hover:bg-[#121212] hover:text-white dark:hover:bg-white dark:hover:text-[#121212] transition-all duration-500"
+          class="w-full h-[45px] border border-[#121212] dark:border-white u-h4 uppercase tracking-[0.2em] hover:bg-[#121212] hover:text-white dark:hover:bg-white dark:hover:text-[#121212] transition-all duration-[900ms] ease-[var(--motion-luxury-ease)]"
         >
           Entrer
         </button>

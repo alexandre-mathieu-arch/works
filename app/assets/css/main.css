@@ -108,7 +108,7 @@ header a[href="https://ui.nuxt.com"] {
 .page-leave-active,
 .layout-enter-active,
 .layout-leave-active {
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--motion-luxury-slow) var(--motion-luxury-ease);
 }
 .page-enter-from,
 .page-leave-to,
@@ -119,7 +119,7 @@ header a[href="https://ui.nuxt.com"] {
 
 .title-fade-enter-active,
 .title-fade-leave-active {
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--motion-luxury-medium) var(--motion-luxury-ease);
 }
 .title-fade-enter-from,
 .title-fade-leave-to {
@@ -175,6 +175,11 @@ header a[href="https://ui.nuxt.com"] {
   --font-body: 'Satoshi', sans-serif;
   --header-height: 45px;
   --main-padding: 5%;
+  --motion-luxury-medium: 950ms;
+  --motion-luxury-slow: 1350ms;
+  --motion-luxury-extra-slow: 1800ms;
+  --motion-luxury-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-luxury-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @media (min-width: 768px) {
@@ -231,7 +236,7 @@ header a[href="https://ui.nuxt.com"] {
 }
 
 @utility ease-curtain {
-  transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  transition-timing-function: var(--motion-luxury-ease-in-out);
 }
 
 @utility glass-fluted {
@@ -361,26 +366,26 @@ header a[href="https://ui.nuxt.com"] {
 
 /* View Transitions animations */
 ::view-transition-group(*) {
-  animation-duration: 0.8s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: var(--motion-luxury-slow);
+  animation-timing-function: var(--motion-luxury-ease);
 }
 
 /* Global Transition Timing for all view transitions */
 ::view-transition-old(*),
 ::view-transition-new(*) {
-  animation-duration: 0.8s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: var(--motion-luxury-slow);
+  animation-timing-function: var(--motion-luxury-ease);
 }
 
 /* Dreamy / Vaporous Page Transitions */
 ::view-transition-old(root) {
-  animation: 0.8s cubic-bezier(0.4, 0, 0.2, 1) both fade-out,
-             0.8s cubic-bezier(0.4, 0, 0.2, 1) both slide-to-top;
+  animation: var(--motion-luxury-slow) var(--motion-luxury-ease) both fade-out,
+             var(--motion-luxury-slow) var(--motion-luxury-ease) both slide-to-top;
 }
 
 ::view-transition-new(root) {
-  animation: 0.8s cubic-bezier(0.4, 0, 0.2, 1) both fade-in,
-             0.8s cubic-bezier(0.4, 0, 0.2, 1) both slide-from-bottom;
+  animation: var(--motion-luxury-slow) var(--motion-luxury-ease) both fade-in,
+             var(--motion-luxury-slow) var(--motion-luxury-ease) both slide-from-bottom;
 }
 
 @keyframes fade-in {
@@ -394,7 +399,37 @@ header a[href="https://ui.nuxt.com"] {
 
 .wave-text span {
   display: inline-block;
-  animation: wave-pulse 3s infinite ease-in-out;
+  animation: wave-pulse 4.8s infinite var(--motion-luxury-ease-in-out);
+}
+
+@keyframes luxury-pulse {
+  0%, 100% {
+    opacity: 0.38;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.72;
+    transform: translateY(1px);
+  }
+}
+
+@keyframes luxury-drift {
+  0%, 100% {
+    opacity: 0.32;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.62;
+    transform: translateY(6px);
+  }
+}
+
+.motion-luxury-pulse {
+  animation: luxury-pulse 4.6s infinite var(--motion-luxury-ease-in-out);
+}
+
+.motion-luxury-drift {
+  animation: luxury-drift 3.8s infinite var(--motion-luxury-ease-in-out);
 }
 
 @keyframes fade-out {
@@ -402,36 +437,36 @@ header a[href="https://ui.nuxt.com"] {
 }
 
 @keyframes slide-from-bottom {
-  from { transform: translateY(20px); }
+  from { transform: translateY(12px); }
 }
 
 @keyframes slide-to-top {
-  to { transform: translateY(-20px); }
+  to { transform: translateY(-12px); }
 }
 
 .transition-next::view-transition-old(project-description),
 .transition-next::view-transition-old(project-carousel) {
-  animation: slide-out-to-left 0.8s forwards;
+  animation: slide-out-to-left 1.1s var(--motion-luxury-ease) forwards;
 }
 
 .transition-next::view-transition-new(project-description),
 .transition-next::view-transition-new(project-carousel) {
-  animation: slide-in-from-right 0.8s forwards;
+  animation: slide-in-from-right 1.1s var(--motion-luxury-ease) forwards;
 }
 
 .transition-prev::view-transition-old(project-description),
 .transition-prev::view-transition-old(project-carousel) {
-  animation: slide-out-to-right 0.8s forwards;
+  animation: slide-out-to-right 1.1s var(--motion-luxury-ease) forwards;
 }
 
 .transition-prev::view-transition-new(project-description),
 .transition-prev::view-transition-new(project-carousel) {
-  animation: slide-in-from-left 0.8s forwards;
+  animation: slide-in-from-left 1.1s var(--motion-luxury-ease) forwards;
 }
 
 ::view-transition-old(page-triggers),
 ::view-transition-new(page-triggers) {
-  animation: fade-transition 0.4s ease-in-out;
+  animation: fade-transition 0.85s var(--motion-luxury-ease);
 }
 
 @keyframes fade-transition {
@@ -441,21 +476,21 @@ header a[href="https://ui.nuxt.com"] {
 
 @keyframes slide-out-to-left {
   from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(-18px); opacity: 0; }
 }
 
 @keyframes slide-in-from-right {
-  from { transform: translateX(30px); opacity: 0; }
+  from { transform: translateX(18px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes slide-out-to-right {
   from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(18px); opacity: 0; }
 }
 
 @keyframes slide-in-from-left {
-  from { transform: translateX(-30px); opacity: 0; }
+  from { transform: translateX(-18px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
 
@@ -464,22 +499,22 @@ header a[href="https://ui.nuxt.com"] {
   .page-leave-active,
   .layout-enter-active,
   .layout-leave-active {
-    transition-duration: 0.25s;
+    transition-duration: 0.55s;
     transition-property: opacity;
   }
 
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) {
-    animation-duration: 0.25s;
+    animation-duration: 0.55s;
   }
 
   ::view-transition-old(root) {
-    animation: 0.25s ease both fade-out;
+    animation: 0.55s var(--motion-luxury-ease) both fade-out;
   }
 
   ::view-transition-new(root) {
-    animation: 0.25s ease both fade-in;
+    animation: 0.55s var(--motion-luxury-ease) both fade-in;
   }
 }
 

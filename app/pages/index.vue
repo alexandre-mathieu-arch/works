@@ -198,7 +198,7 @@ const cancelActiveScroll = () => {
   activeScrollFrame = null;
 };
 
-const animateDesktopScrollTo = (targetPosition: number, duration = 900) => {
+const animateDesktopScrollTo = (targetPosition: number, duration = 1300) => {
   if (!import.meta.client) return;
 
   const top = Math.max(0, targetPosition);
@@ -216,11 +216,15 @@ const animateDesktopScrollTo = (targetPosition: number, duration = 900) => {
   }
 
   const startTime = performance.now();
-  const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
+  const easeInOutCubic = (progress: number) => {
+    return progress < 0.5
+      ? 4 * progress * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+  };
 
   const step = (currentTime: number) => {
     const progress = Math.min(1, (currentTime - startTime) / duration);
-    window.scrollTo(0, startPosition + distance * easeOutCubic(progress));
+    window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
 
     if (progress < 1) {
       activeScrollFrame = requestAnimationFrame(step);
@@ -233,7 +237,7 @@ const animateDesktopScrollTo = (targetPosition: number, duration = 900) => {
   activeScrollFrame = requestAnimationFrame(step);
 };
 
-const scrollToSection = (targetId: string, offset: number = 96, duration = 900) => {
+const scrollToSection = (targetId: string, offset: number = 96, duration = 1300) => {
   const target = document.getElementById(targetId);
   if (!target) return;
 
@@ -242,11 +246,11 @@ const scrollToSection = (targetId: string, offset: number = 96, duration = 900) 
 };
 
 const scrollToContact = () => {
-  scrollToSection('contact', 80, 800);
+  scrollToSection('contact', 80, 1100);
 };
 
 const scrollToProjects = () => {
-  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, 900);
+  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, 1300);
 };
 
 watchEffect(() => {

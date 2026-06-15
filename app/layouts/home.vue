@@ -8,14 +8,14 @@
   >
     <Header 
       v-if="!route.meta.hideHeader"
-      :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-1000']"
+      :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-[1400ms] ease-[var(--motion-luxury-ease)]']"
       @linkClick="handleLinkClick" 
       @linkHover="handleLinkHover" 
     />
     
     <!-- Curtain Overlay (Top) -->
     <div 
-      class="fixed inset-x-0 top-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain pointer-events-none"
+      class="fixed inset-x-0 top-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1800ms] ease-curtain pointer-events-none"
       :class="[
         isRevealed ? '-translate-y-full' : 'translate-y-0'
       ]"
@@ -23,7 +23,7 @@
     ></div>
     <!-- Curtain Overlay (Bottom) -->
     <div 
-      class="fixed inset-x-0 bottom-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain pointer-events-none"
+      class="fixed inset-x-0 bottom-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1800ms] ease-curtain pointer-events-none"
       :class="[
         isRevealed ? 'translate-y-full' : 'translate-y-0'
       ]"
@@ -32,7 +32,7 @@
 
     <!-- UI Overlay (Title & Info) -->
     <div 
-      class="fixed inset-0 z-[70] flex flex-col items-center justify-center pointer-events-none transition-all duration-[1200ms] ease-curtain"
+      class="fixed inset-0 z-[70] flex flex-col items-center justify-center pointer-events-none transition-all duration-[1800ms] ease-curtain"
       :class="isRevealed ? 'opacity-0 scale-105' : 'opacity-100 scale-100'"
       :style="!isRevealed ? { opacity: 1 - revealProgress, transform: `scale(${1 + revealProgress * 0.05})` } : {}"
     >
@@ -40,17 +40,17 @@
       <div 
         class="main-container w-full flex flex-col items-center group/text"
       >
-        <div class="relative border border-[#121212]/10 dark:border-white/10 px-8 py-10 md:px-16 md:py-12 flex flex-col items-center space-y-2 transition-colors duration-1000 group-hover/text:border-[#121212]/30 dark:group-hover/text:border-white/30">
-          <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.3em] group-hover/text:opacity-100 transition-opacity">
+        <div class="relative border border-[#121212]/10 dark:border-white/10 px-8 py-10 md:px-16 md:py-12 flex flex-col items-center space-y-2 transition-colors duration-[1400ms] ease-[var(--motion-luxury-ease)] group-hover/text:border-[#121212]/30 dark:group-hover/text:border-white/30">
+          <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.3em] group-hover/text:opacity-100 transition-opacity duration-[1200ms] ease-[var(--motion-luxury-ease)]">
             Alexandre MATHIEU
           </div>
-          <span class="u-h4 text-white animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors text-[14px] md:text-[16px]">works</span>
+          <span class="u-h4 text-white motion-luxury-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors duration-[1200ms] ease-[var(--motion-luxury-ease)] text-[14px] md:text-[16px]">works</span>
           <svg 
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
             stroke-width="1.5" 
-            class="w-5 h-5 text-white group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors animate-bounce mt-2 opacity-60"
+            class="w-5 h-5 text-white group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors duration-[1200ms] ease-[var(--motion-luxury-ease)] motion-luxury-drift mt-2 opacity-60"
           >
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
@@ -60,22 +60,22 @@
 
     <!-- Content -->
     <div 
-      class="transition-all duration-1000"
+      class="transition-all duration-[1400ms] ease-[var(--motion-luxury-ease)]"
       :class="[!isRevealed ? 'h-screen overflow-hidden' : 'min-h-screen']"
     >
       <main class="pb-12 main-container" :style="{ paddingTop: 'var(--header-height)' }">
         <PageTitle 
           v-if="!route.meta.hideLayoutTitle"
-          :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-1000']"
+          :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-[1400ms] ease-[var(--motion-luxury-ease)]']"
           :title="pageTitle" 
           :show-filters="route.meta.showFilters === true" 
           :readonly-filters="route.meta.readonlyFilters === true"
         />
-        <div :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-1000 delay-300']">
+        <div :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-[1400ms] ease-[var(--motion-luxury-ease)] delay-300']">
           <slot />
         </div>
       </main>
-      <TheFooter :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-1000']" />
+      <TheFooter :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-[1400ms] ease-[var(--motion-luxury-ease)]']" />
     </div>
   </div>
 </template>
