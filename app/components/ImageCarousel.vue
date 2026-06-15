@@ -47,36 +47,6 @@
       ></div>
     </div>
 
-    <div class="absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 justify-between px-3 pointer-events-none">
-      <button
-        type="button"
-        class="pointer-events-auto flex h-11 w-11 items-center justify-center border border-[#121212]/20 bg-white/80 text-[#121212] transition-all duration-300 hover:border-[#121212]/50 dark:border-white/20 dark:bg-[#121212]/80 dark:text-white doux:bg-[#E5E1E0]/85 nuit:bg-[#1A2238]/85 md:opacity-0 md:group-hover:opacity-100"
-        :class="{ 'opacity-30 cursor-default': !canGoPrev }"
-        :disabled="!canGoPrev"
-        aria-label="Image precedente"
-        @click="prev"
-      >
-        <span aria-hidden="true">&lt;</span>
-      </button>
-      <button
-        type="button"
-        class="pointer-events-auto flex h-11 w-11 items-center justify-center border border-[#121212]/20 bg-white/80 text-[#121212] transition-all duration-300 hover:border-[#121212]/50 dark:border-white/20 dark:bg-[#121212]/80 dark:text-white doux:bg-[#E5E1E0]/85 nuit:bg-[#1A2238]/85 md:opacity-0 md:group-hover:opacity-100"
-        :class="{ 'opacity-30 cursor-default': !canGoNext }"
-        :disabled="!canGoNext"
-        aria-label="Image suivante"
-        @click="next"
-      >
-        <span aria-hidden="true">&gt;</span>
-      </button>
-    </div>
-
-    <div
-      v-if="images.length > 1"
-      class="absolute bottom-3 right-3 z-20 border border-[#121212]/15 bg-white/80 px-2 py-1 u-legend text-[#121212] dark:border-white/15 dark:bg-[#121212]/80 dark:text-white doux:bg-[#E5E1E0]/85 nuit:bg-[#1A2238]/85"
-      aria-live="polite"
-    >
-      {{ currentIndex + 1 }} / {{ images.length }}
-    </div>
   </div>
 </template>
 

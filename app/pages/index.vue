@@ -5,7 +5,6 @@
       <HeroSection 
         :scroll-progress="scrollProgress" 
         @scroll-to-projects="scrollToProjects"
-        @scroll-to-contact="scrollToContact"
       />
     </div>
 
