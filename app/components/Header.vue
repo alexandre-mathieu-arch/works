@@ -8,7 +8,7 @@
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] relative">
       <!-- Logo -->
       <NuxtLink 
-        :to="{ path: '/', query: { view: 'grid' } }" 
+        :to="projectsLinkTarget" 
         class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link px-2 py-1 transition-all duration-500 hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
         @click="handleLinkClick('Projets')"
         @mouseenter="emit('linkHover', 'Projets')"
@@ -23,7 +23,7 @@
           <NuxtLink 
             v-for="link in links" 
             :key="link.to" 
-            :to="link.to === '/' ? { path: '/', query: { view: 'grid' } } : link.to"
+            :to="link.to === '/' ? projectsLinkTarget : link.to"
             class="u-h4 transition-all duration-500 px-2 py-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238] relative flex flex-col items-center group/link"
             :class="[
               (link.to === '/' ? route.path === '/' : route.path.startsWith(link.to)) ? 'is-active' : 'group-hover/nav:opacity-50 hover:!opacity-100'
@@ -232,7 +232,7 @@
           <NuxtLink 
             v-for="link in links" 
             :key="link.to" 
-            :to="link.to === '/' ? { path: '/', query: { view: 'grid' } } : link.to"
+            :to="link.to === '/' ? projectsLinkTarget : link.to"
             class="u-h2 text-[24px] text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] mobile-link px-4 py-3 min-h-11 border border-[#121212]/10 dark:border-white/10 w-fit"
             @click="handleLinkClick(link.label); isMenuOpen = false"
           >
@@ -276,6 +276,8 @@ const links = [
   { label: 'Corpus', to: '/corpus' },
   { label: 'Art', to: '/art' }
 ];
+
+const projectsLinkTarget = { path: '/', query: { view: 'grid' }, hash: '#projects-grid' };
 
 const emit = defineEmits(['linkClick', 'linkHover']);
 

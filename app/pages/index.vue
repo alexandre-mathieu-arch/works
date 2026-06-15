@@ -112,11 +112,17 @@ const handleScroll = () => {
   }
 };
 
-const jumpToProjects = () => {
+const shouldOpenProjectsGrid = () => {
+  return route.query.view === 'grid' || route.hash === '#projects-grid';
+};
+
+const jumpToProjects = (attempt = 0) => {
   const target = document.getElementById('projects-grid');
   if (target) {
     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 120;
-    window.scrollTo({ top: targetPosition, behavior: 'instant' as any });
+    window.scrollTo({ top: targetPosition, behavior: 'auto' });
+  } else if (attempt < 10) {
+    setTimeout(() => jumpToProjects(attempt + 1), 80);
   }
 };
 
@@ -124,12 +130,18 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll);
   handleScroll();
   
-  if (route.query.view === 'grid') {
+  if (shouldOpenProjectsGrid()) {
     // Immediate jump if view=grid is present
-    setTimeout(jumpToProjects, 50);
+    setTimeout(() => jumpToProjects(), 50);
   } else if (route.query.scroll === 'contact') {
     // Scroll to contact if requested
     setTimeout(scrollToContact, 100);
+  }
+});
+
+watch(() => route.fullPath, () => {
+  if (import.meta.client && shouldOpenProjectsGrid()) {
+    setTimeout(() => jumpToProjects(), 50);
   }
 });
 
