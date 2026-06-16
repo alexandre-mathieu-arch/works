@@ -174,11 +174,14 @@
         </button>
       </div>
 
+    </div>
+
+    <Teleport to="body">
       <!-- Mobile Navigation Overlay -->
       <div
         v-if="isMenuOpen"
         id="mobile-menu"
-        class="md:hidden fixed inset-0 h-screen w-screen glass-fluted bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] z-[70] flex flex-col items-end justify-start pt-24 px-6 space-y-4"
+        class="md:hidden fixed inset-0 z-[100] min-h-dvh w-screen overflow-y-auto bg-white/95 backdrop-blur-xl dark:bg-[#121212]/95 doux:bg-[#E5E1E0]/95 nuit:bg-[#1A2238]/95 flex flex-col items-end justify-start px-6 pb-8 pt-24 space-y-4"
         role="dialog"
         aria-modal="true"
         @click.stop
@@ -196,23 +199,23 @@
 
         <!-- Search Bar (Mobile) -->
         <div class="w-full max-w-xs mb-8">
-          <UInput 
-            v-model="searchTerm" 
+          <UInput
+            v-model="searchTerm"
             id="mobile-site-search"
-            placeholder="Rechercher..." 
-            icon="i-heroicons-magnifying-glass-20-solid" 
+            placeholder="Rechercher..."
+            icon="i-heroicons-magnifying-glass-20-solid"
             class="header-search-input"
             color="[#121212]"
             variant="none"
             size="lg"
           />
-          <div 
-            v-if="searchTerm && searchResults.length > 0" 
+          <div
+            v-if="searchTerm && searchResults.length > 0"
             class="mt-3 w-full glass-fluted bg-white/80 dark:bg-[#121212]/80 border border-gray-100 dark:border-gray-800 shadow-xl max-h-64 overflow-y-auto"
           >
-            <NuxtLink 
-              v-for="result in searchResults" 
-              :key="result.path" 
+            <NuxtLink
+              v-for="result in searchResults"
+              :key="result.path"
               :to="result.path"
               class="block px-4 py-3 hover:bg-[#121212]/5 dark:hover:bg-white/5 border-b border-gray-50 dark:border-gray-800 last:border-0 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]"
               @click="handleMobileSearchResultClick"
@@ -221,8 +224,8 @@
               <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
             </NuxtLink>
           </div>
-          <div 
-            v-else-if="searchTerm && !isSearching" 
+          <div
+            v-else-if="searchTerm && !isSearching"
             class="mt-3 w-full bg-white/80 dark:bg-[#121212]/80 border border-gray-100 dark:border-gray-800 p-4 shadow-xl text-[10px] text-gray-400 tracking-widest text-center"
           >
             Aucun resultat
@@ -230,9 +233,9 @@
         </div>
 
         <nav class="flex flex-col items-end space-y-4 w-full">
-          <NuxtLink 
-            v-for="link in links" 
-            :key="link.to" 
+          <NuxtLink
+            v-for="link in links"
+            :key="link.to"
             :to="link.to === '/' ? projectsLinkTarget : link.to"
             class="u-h2 text-[24px] text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] mobile-link px-4 py-3 min-h-11 border border-[#121212]/10 dark:border-white/10 w-fit"
             @click="handleMobileLinkClick(link, $event)"
@@ -241,7 +244,7 @@
           </NuxtLink>
         </nav>
       </div>
-    </div>
+    </Teleport>
   </header>
 </template>
 
