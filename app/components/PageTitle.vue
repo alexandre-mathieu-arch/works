@@ -42,7 +42,7 @@
           <button
             type="button"
             @click="isMobileFiltersOpen = true"
-            class="flex min-h-11 flex-1 items-center justify-between border border-[#121212]/30 bg-white/50 px-3 text-left u-h4 !tracking-normal text-[#121212] transition-colors duration-500 dark:border-white/20 dark:bg-white/5 dark:text-white doux:text-[#4A4443] nuit:bg-[#161D2F] nuit:text-[#CDD6F4]"
+            class="flex min-h-11 flex-1 items-center justify-between border border-[#121212]/30 bg-white/50 px-3 text-left u-h4 !tracking-normal text-[#121212] transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] dark:border-white/20 dark:bg-white/5 dark:text-white doux:text-[#4A4443] nuit:bg-[#161D2F] nuit:text-[#CDD6F4]"
             :aria-expanded="isMobileFiltersOpen"
             aria-controls="mobile-filters-panel"
           >
@@ -55,7 +55,7 @@
             v-if="hasActiveFilters"
             type="button"
             @click="resetFilters"
-            class="flex h-11 w-11 shrink-0 items-center justify-center border border-primary-900/30 bg-white/50 text-primary-900 transition-colors duration-500 dark:border-primary-400/30 dark:bg-white/5 dark:text-primary-400 nuit:bg-[#161D2F]"
+            class="flex h-11 w-11 shrink-0 items-center justify-center border border-primary-900/30 bg-white/50 text-primary-900 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] dark:border-primary-400/30 dark:bg-white/5 dark:text-primary-400 nuit:bg-[#161D2F]"
             aria-label="Réinitialiser les filtres"
           >
             <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
@@ -115,7 +115,7 @@
                       <button
                         type="button"
                         @click="selectMobileFilter(group.id, null)"
-                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-300"
+                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]"
                         :class="isMobileFilterActive(group.id, null) ? 'border-primary-900 bg-primary-900 text-white dark:border-primary-400 dark:bg-primary-400 dark:text-[#121212]' : 'border-[#121212]/20 text-[#121212]/70 dark:border-white/20 dark:text-white/70 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70'"
                       >
                         {{ group.emptyLabel }}
@@ -125,7 +125,7 @@
                         :key="option"
                         type="button"
                         @click="selectMobileFilter(group.id, option)"
-                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-300"
+                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]"
                         :class="isMobileFilterActive(group.id, option) ? 'border-primary-900 bg-primary-900 text-white dark:border-primary-400 dark:bg-primary-400 dark:text-[#121212]' : 'border-[#121212]/20 text-[#121212]/70 dark:border-white/20 dark:text-white/70 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70'"
                       >
                         {{ option }}
@@ -221,7 +221,7 @@
                     <template v-if="activeMenu === 'typology'">
                       <button 
                         @click="selectedTypology = null; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedTypology === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Toutes
@@ -230,7 +230,7 @@
                         v-for="opt in typologyOptions" 
                         :key="opt" 
                         @click="selectedTypology = opt; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedTypology === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -239,7 +239,7 @@
                     <template v-if="activeMenu === 'year'">
                       <button 
                         @click="selectedYear = null; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedYear === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Toutes
@@ -248,7 +248,7 @@
                         v-for="opt in yearOptions" 
                         :key="opt" 
                         @click="selectedYear = opt; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedYear === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -257,7 +257,7 @@
                     <template v-if="activeMenu === 'country'">
                       <button 
                         @click="selectedCountry = null; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedCountry === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Tous
@@ -266,7 +266,7 @@
                         v-for="opt in countryOptions" 
                         :key="opt" 
                         @click="selectedCountry = opt; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedCountry === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -300,7 +300,7 @@
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex items-center gap-2 u-h4 px-3 min-h-11 md:h-[30px] md:min-h-0 border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 nuit:bg-[#161D2F] hover:bg-primary-900 hover:text-white dark:hover:bg-primary-400 dark:hover:text-[#121212] transition-all duration-700 -mt-[1px] whitespace-nowrap group/reset !tracking-normal"
+              class="flex items-center gap-2 u-h4 px-3 min-h-11 md:h-[30px] md:min-h-0 border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 nuit:bg-[#161D2F] hover:bg-primary-900/10 hover:text-primary-900 dark:hover:bg-primary-400/10 dark:hover:text-primary-400 transition-all duration-[900ms] ease-[var(--motion-luxury-ease)] -mt-[1px] whitespace-nowrap group/reset !tracking-normal"
               title="Réinitialiser les filtres"
             >
               <span class="text-[9px] md:text-[10px] capitalize font-medium">Tout effacer</span>

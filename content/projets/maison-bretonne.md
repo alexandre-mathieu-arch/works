@@ -28,10 +28,16 @@ phase: "Livré"
 statut: "Réalisé"
 ---
 
-Située à quelques encablures du Golfe du Morbihan, sur un terrain privilégié offrant une vue imprenable sur la mer, la Maison B est le fruit d'une réflexion sur la mutation du patrimoine vernaculaire breton. 
+Située près du Golfe du Morbihan, la Maison Bretonne engage un dialogue entre héritage néo-breton et écriture contemporaine. Le projet conserve la présence du volume existant tout en l’ouvrant à de nouveaux usages.
 
-Le projet consistait en la rénovation complète et l'extension d'une maison néo-bretonne classique, caractérisée par son soubassement en granit et sa maçonnerie de parpaings enduits. L'intervention s'attache à réinterpréter la pureté de l'enduit blanc d'origine — figure emblématique du paysage local — en la confrontant à une extension contemporaine en structure bois et vêture de zinc blanc.
+### Intervention
 
-Cette extension, par sa matérialité et sa géométrie, vient dialoguer avec le volume existant sans le dénaturer. La performance énergétique a été au cœur de la démarche, avec la mise en œuvre d'une isolation thermique par l'extérieur (ITE) unifiant les volumes.
+La rénovation complète s’accompagne d’une extension en structure bois et zinc blanc. L’enduit clair unifie les volumes et prolonge l’image sobre des maisons côtières.
 
-Premier projet réalisé en indépendant à la sortie de l'école, cette réalisation pose les jalons d'une pratique attentive au contexte, à la texture et à la pérennité constructive.
+### Confort
+
+L’isolation thermique par l’extérieur améliore la performance énergétique et donne une lecture plus calme de l’ensemble. Les espaces intérieurs gagnent en lumière, en continuité et en rapport au paysage.
+
+### Pratique
+
+Réalisé en indépendant, ce projet installe une attention durable au contexte, à la matière et à la précision constructive.

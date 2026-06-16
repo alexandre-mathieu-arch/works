@@ -2,7 +2,7 @@
   <div class="collapsible-bio mb-[10px]">
     <button 
       @click="toggleLocal" 
-      class="u-h3 flex items-center gap-4 text-left hover:text-primary-900 transition-colors duration-300 w-full group tracking-widest"
+      class="u-h3 flex items-center gap-4 text-left hover:text-primary-900 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] w-full group tracking-widest"
     >
       <span>{{ name }}</span>
       <svg 

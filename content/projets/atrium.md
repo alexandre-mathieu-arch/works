@@ -8,7 +8,7 @@ images:
   - "/images/projects/atrium/night-shift.jpg"
   - "/images/projects/atrium/night-shift-bis.jpg"
   - "/images/projects/atrium/perspective.jpg"
-description: "Au cœur de la rigueur orthogonale d'un siège bancaire, des structures organiques en toiles tendues créent une rupture inattendue. Un dialogue entre la géométrie réglée de l'espace et la fluidité de bulles programmatiques."
+description: "Des bulles en toile tendue introduisent des espaces calmes et confidentiels au cœur d’un atrium bancaire très orthogonal."
 typologies: ["Tertiaire", "Bureau"]
 tailles: ["L"]
 pays: ["France", "Bretagne"]
@@ -18,12 +18,14 @@ statut: "Abandonné"
 logiciels: ["Rhinocéros 3D", "Grasshopper", "Bridge Archicad", "Twinmotion", "Photoshop"]
 ---
 
-Le projet s'articule autour de structures métalliques complexes sur lesquelles sont tendues des toiles translucides. Ces « bulles » programmatiques flottent dans l'espace, créant un contraste saisissant avec la trame orthogonale du bâtiment. Chaque bulle possède sa propre ambiance et sa propre fonction, offrant des espaces de réunion ou de détente confidentiels au sein du vaste volume de l'atrium.
+Le projet installe des structures métalliques légères habillées de toiles translucides. Elles dessinent des bulles programmatiques qui flottent dans le volume, en contraste avec la trame régulière du bâtiment.
 
-L'effet de surprise est total : la transparence des toiles laisse deviner les silhouettes et les formes intérieures, préservant une connexion visuelle tout en assurant une intimité nécessaire. Un soin particulier a été apporté à l'acoustique, la géométrie des toiles et les matériaux choisis permettant d'absorber les résonances du grand hall pour créer des cocons de calme.
+Chaque bulle accueille une fonction précise : réunion, détente ou échange informel. La toile laisse deviner les silhouettes et conserve une relation visuelle avec l’atrium, tout en offrant un degré d’intimité.
 
-**Conception**  
-Structure métallique légère supportant des toiles tendues translucides à haute performance acoustique. La géométrie organique est conçue pour rompre la rigueur du hall tout en gérant la diffusion lumineuse et sonore.
+### Ambiance
 
-**Workflow**  
-Génération paramétrique des formes via Rhinocéros 3D et Grasshopper. Intégration BIM avec Bridge Archicad. Visualisation immersive sous Twinmotion et post-production Photoshop.
+La géométrie organique adoucit la lecture du hall et filtre la lumière. Les matériaux choisis participent aussi au confort acoustique, pour transformer un grand volume résonant en espace plus feutré.
+
+### Mise au point
+
+Les formes sont générées avec Rhinocéros 3D et Grasshopper, puis intégrées au modèle BIM via Bridge Archicad. Les images de travail sont produites avec Twinmotion et Photoshop.

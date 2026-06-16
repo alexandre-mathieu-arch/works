@@ -21,7 +21,7 @@
             format="webp"
             width="800"
             height="800"
-            class="w-full h-full object-cover transition-all duration-[1800ms] ease-[var(--motion-luxury-ease)] scale-110 group-hover:scale-115 grayscale-[0.4] group-hover:grayscale-0"
+            class="w-full h-full object-cover transition-all duration-[2200ms] ease-[var(--motion-luxury-ease)] scale-[1.025] group-hover:scale-[1.055] grayscale-[0.22] group-hover:grayscale-0"
             :style="{ 
               viewTransitionName: 'image-' + project.path.replace(/\//g, '-') 
             }"
@@ -69,7 +69,7 @@ import { useRevealedState } from '~/composables/useRevealedState';
 
 const { setHoveredProject } = useHoverProject();
 const { addVisited } = useVisitedProjects();
-const { getParallaxStyle } = useParallax(15);
+const { getParallaxStyle } = useParallax(6);
 const { isRevealed } = useRevealedState();
 
 const parallaxRef = ref<HTMLElement | null>(null);

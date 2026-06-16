@@ -15,7 +15,7 @@
         {{ page.title }}
       </h1>
       
-      <p v-if="page.description" class="mt-6 u-body text-[18px] md:text-[21px] font-light italic opacity-80 leading-relaxed">
+      <p v-if="page.description" class="mt-6 u-body text-[18px] md:text-[21px] font-light opacity-80 leading-relaxed">
         {{ page.description }}
       </p>
     </header>
@@ -27,7 +27,7 @@
         class="prose prose-lg dark:prose-invert max-w-none 
                prose-p:leading-loose prose-p:opacity-90 
                prose-headings:font-bold prose-headings:tracking-tight 
-               prose-a:underline prose-a:underline-offset-4 hover:prose-a:opacity-70"
+               hover:prose-a:opacity-70"
       />
     </div>
 
@@ -69,9 +69,7 @@ useSeoMeta({
 </script>
 
 <style scoped>
-/* Scoped overrides to ensure no underlines on the main text, matching global styling */
 .prose a {
   text-decoration: none !important;
-  border-bottom: 1px solid currentColor;
 }
 </style>

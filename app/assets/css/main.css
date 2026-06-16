@@ -85,18 +85,28 @@ html, body {
   color: rgba(74, 68, 67, 0.9) !important;
 }
 
+.dark .text-primary-900,
+.nuit .text-primary-900 {
+  color: #D8B586 !important;
+}
+
+.dark .border-primary-900,
+.nuit .border-primary-900 {
+  border-color: rgba(216, 181, 134, 0.65) !important;
+}
+
 @theme {
-  --color-primary-50: #ECFDF5;
-  --color-primary-100: #D1FAE5;
-  --color-primary-200: #A7F3D0;
-  --color-primary-300: #6EE7B7;
-  --color-primary-400: #34D399;
-  --color-primary-500: #10B981;
-  --color-primary-600: #059669;
-  --color-primary-700: #047857;
-  --color-primary-800: #065F46;
-  --color-primary-900: #064E3B;
-  --color-primary-950: #022C22;
+  --color-primary-50: #FAF7F2;
+  --color-primary-100: #F1E7D9;
+  --color-primary-200: #E4CFB1;
+  --color-primary-300: #D1AE7D;
+  --color-primary-400: #B98B55;
+  --color-primary-500: #986D3E;
+  --color-primary-600: #78552F;
+  --color-primary-700: #5F4226;
+  --color-primary-800: #42301D;
+  --color-primary-900: #2B2015;
+  --color-primary-950: #17100A;
 }
 
 /* Force hide Nuxt UI default logo */
@@ -175,9 +185,9 @@ header a[href="https://ui.nuxt.com"] {
   --font-body: 'Satoshi', sans-serif;
   --header-height: 45px;
   --main-padding: 5%;
-  --motion-luxury-medium: 950ms;
-  --motion-luxury-slow: 1350ms;
-  --motion-luxury-extra-slow: 1800ms;
+  --motion-luxury-medium: 1150ms;
+  --motion-luxury-slow: 1650ms;
+  --motion-luxury-extra-slow: 2200ms;
   --motion-luxury-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --motion-luxury-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -357,11 +367,49 @@ header a[href="https://ui.nuxt.com"] {
 
 /* Prose overrides for Markdown content */
 .prose h1 { @apply u-h1; }
-.prose h2 { @apply u-h2 mb-4; }
-.prose h3 { @apply u-h3 mb-2; }
-.prose h4 { @apply u-h4 mb-2; }
-.prose p, .prose li { @apply u-body mb-3; }
-.prose a { @apply underline decoration-[0.06em] underline-offset-[0.18em]; }
+.prose h2 {
+  @apply u-h2 mb-4;
+  margin-top: 2rem;
+  font-weight: 600;
+}
+.prose h3 {
+  @apply u-h3 mb-3;
+  margin-top: 1.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+.prose h4 {
+  @apply u-h4 mb-3;
+  font-weight: 500;
+}
+.prose p,
+.prose li {
+  @apply u-body mb-4;
+  line-height: 1.58;
+}
+.prose strong {
+  font-weight: 500;
+  color: inherit;
+}
+.prose em {
+  font-style: normal;
+}
+.prose a {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--motion-luxury-medium) var(--motion-luxury-ease),
+              opacity var(--motion-luxury-medium) var(--motion-luxury-ease);
+}
+.prose a:hover {
+  color: var(--color-primary-600);
+  opacity: 0.82;
+}
+.dark .prose a:hover,
+.nuit .prose a:hover {
+  color: #D8B586;
+}
 .dark .prose { @apply prose-invert; }
 
 /* View Transitions animations */

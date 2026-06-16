@@ -29,14 +29,16 @@ surface: "286 m²"
 collaboration: "Pascal Debard (KLOUDE) & Achraf Benbouzid (ABA)"
 ---
 
-### Renaissance au cœur d’îlot : Une densification douce et lumineuse
+Né de la transformation d’un ancien local commun en cœur d’îlot, La Marne propose une densification douce, à distance du tumulte urbain. Le projet conserve la qualité du jardin tout en redonnant une vraie valeur d’usage au bâti existant.
 
-Né de la transformation d'un ancien local commun niché en cœur d’îlot, ce projet de réhabilitation propose une nouvelle manière d'habiter la ville, loin du tumulte urbain. Dans cet écrin de verdure préservé, le bâti a été sculpté pour répondre aux exigences du Plan Local d’Urbanisme tout en offrant une réponse architecturale singulière.
+### Lumière
 
-L'architecture s'efface pour laisser place à l’essentiel : la lumière et l’intimité. Chaque logement a été conçu comme un refuge baigné de clarté naturelle, où les limites entre intérieur et extérieur s'estompent. Des jardins privatifs en rez-de-chaussée aux balcons suspendus en étage, chaque habitant dispose d'un espace de respiration à ciel ouvert, garantissant une qualité de vie rare en milieu dense.
+Les logements sont dessinés comme des refuges lumineux. Les rez-de-chaussée s’ouvrent sur des jardins privatifs, tandis que les logements à l’étage profitent de balcons et de vues dégagées vers le cœur d’îlot.
 
-Le projet illustre une « densification douce », une intervention respectueuse qui valorise le foncier sans saturer le paysage. Les stationnements, discrètement intégrés à la cour, préservent la fluidité des cheminements et la sérénité du jardin.
+### Densité
 
-Cette résidence intimiste se compose de cinq unités de vie aux typologies variées, s'adaptant à tous les parcours de vie. Deux appartements T2 en rez-de-chaussée (42 m²), s'ouvrant sur la vie du jardin. Deux appartements T2 à l'étage (38 m² et 35 m²), véritables belvédères de lumière. Un vaste logement T4 de 128 m², conçu comme une maison de ville offrant de grands volumes familiaux.
+La résidence rassemble cinq logements, du T2 au T4, pour une surface habitable totale de 286 m². Les stationnements sont intégrés avec discrétion afin de préserver la fluidité des cheminements et la sérénité du jardin.
 
-Au total, ce sont **286 m²** de surface habitable qui redonnent vie à cet intérieur d’îlot, prouvant que la densité peut rimer avec sensibilité et bien-être.
+### Intimité
+
+L’intervention cherche un équilibre entre optimisation du foncier et qualité de vie. Chaque logement dispose d’un espace extérieur, d’une orientation travaillée et d’un rapport mesuré aux voisins.

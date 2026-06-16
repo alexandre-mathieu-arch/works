@@ -17,8 +17,12 @@ phase: "Prototype"
 statut: "Réalisé"
 ---
 
-Dans le cadre de la création d'un bureau alliant bois et acier, la question des équipements et accessoires s'est posée naturellement. Pour accompagner cet ensemble, j'ai développé une série de prototypes guidés par une recherche de simplicité absolue.
+Le porte-portable accompagne la création d’un bureau en bois et acier. Il prolonge la même recherche : un objet simple, précis, sans mécanisme superflu.
 
-Le porte-portable est un objet unique, sans aucun mécanisme. Il combine trois matériaux choisis pour leur complémentarité : le multiplis d'okoumé pour la structure, le cuir de vachette pour le contact et la protection, et un profilé en U en inox. Ce dernier vient rappeler l'esthétique métallique des piétements du bureau en acier associé.
+### Matières
 
-Sa géométrie permet quatre positions d'utilisation : deux inclinaisons différentes et deux orientations (portrait ou paysage). Entièrement fabriqué par mes soins, il incarne une vision du design où l'économie de moyens sert la fonctionnalité.
+Le multiplis d’okoumé forme la structure, le cuir protège le contact avec le téléphone et l’inox rappelle les piétements du bureau. Les assemblages restent lisibles et volontairement sobres.
+
+### Usage
+
+La géométrie permet quatre positions : deux inclinaisons et deux orientations, portrait ou paysage. L’objet est fabriqué à la main, avec une économie de moyens au service de la fonctionnalité.

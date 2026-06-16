@@ -19,19 +19,19 @@
           <template v-if="index % 6 === 5">
             <button 
               @click="scrollToContact"
-              class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-700 hover:border-[#121212] text-left"
+              class="hidden xl:block aspect-square border border-[#121212]/25 relative group transition-colors duration-[1200ms] ease-[var(--motion-luxury-ease)] hover:border-[#121212]/50 dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/25 nuit:border-[#CDD6F4]/20 nuit:hover:border-[#CDD6F4]/45 text-left"
             >
-              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
+              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-[1200ms] ease-[var(--motion-luxury-ease)]">
+                <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Démarrer un projet ?</span>
               </div>
             </button>
             <ProjectCard :project="project" />
             <button 
               @click="scrollToContact"
-              class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-700 hover:border-[#121212] text-left"
+              class="hidden xl:block aspect-square border border-[#121212]/25 relative group transition-colors duration-[1200ms] ease-[var(--motion-luxury-ease)] hover:border-[#121212]/50 dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/25 nuit:border-[#CDD6F4]/20 nuit:hover:border-[#CDD6F4]/45 text-left"
             >
-              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
+              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-[1200ms] ease-[var(--motion-luxury-ease)]">
+                <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Démarrer un projet ?</span>
               </div>
             </button>
           </template>
@@ -48,7 +48,7 @@
       <button
         type="button"
         @click="scrollToContact"
-        class="xl:hidden mt-8 flex min-h-11 w-full items-center justify-between border border-[#121212]/20 px-4 py-3 text-left transition-colors duration-500 hover:border-[#121212] dark:border-white/20 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
+        class="xl:hidden mt-8 flex min-h-11 w-full items-center justify-between border border-[#121212]/20 px-4 py-3 text-left transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] hover:border-[#121212]/50 dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
       >
         <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Demarrer un projet ?</span>
         <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]" aria-hidden="true">-&gt;</span>
@@ -65,10 +65,10 @@
           </p>
         </div>
         <div class="flex flex-col gap-y-6">
-          <a href="mailto:alexandre.mat+w@protonmail.com" class="u-h3 text-[13px] sm:text-[15px] font-normal tracking-[0.08em] sm:tracking-[0.2em] hover:text-gray-500 transition-colors w-fit break-all sm:break-normal">
+          <a href="mailto:alexandre.mat+w@protonmail.com" class="u-h3 text-[13px] sm:text-[15px] font-normal tracking-[0.08em] sm:tracking-[0.2em] hover:text-[#121212]/55 dark:hover:text-white/65 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] w-fit break-all sm:break-normal">
             alexandre.mat+w@protonmail.com
           </a>
-          <a href="tel:+33658215300" class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit">
+          <a href="tel:+33658215300" class="u-h3 font-normal tracking-[0.2em] hover:text-[#121212]/55 dark:hover:text-white/65 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] w-fit">
             +33 6 58 21 53 00
           </a>
         </div>

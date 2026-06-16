@@ -134,8 +134,8 @@ onUnmounted(() => {
   inset: 0;
   position: absolute;
   transition:
-    transform 1.15s var(--motion-luxury-ease),
-    opacity 1.15s var(--motion-luxury-ease);
+    transform 1.45s var(--motion-luxury-ease),
+    opacity 1.45s var(--motion-luxury-ease);
   will-change: transform, opacity;
 }
 
