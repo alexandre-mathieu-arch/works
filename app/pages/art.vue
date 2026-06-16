@@ -4,17 +4,17 @@
       <div 
         v-for="(item, index) in filteredArt" 
         :key="item.path"
-        class="flex flex-col group transition-all duration-1000"
+        class="flex flex-col group transition-all duration-(--duration-hero) ease-(--ease-atelier)"
       >
         <div 
-          class="relative overflow-hidden cursor-zoom-in transition-all duration-700 rounded-none bg-gray-50 dark:bg-gray-900 flex items-center justify-center min-h-[200px]"
+          class="relative overflow-hidden cursor-zoom-in transition-all duration-(--duration-menu) ease-(--ease-atelier) rounded-none bg-gray-50 dark:bg-gray-900 flex items-center justify-center min-h-[200px]"
           @click="selectedImage = item"
         >
           <img
             v-if="item.image"
             :src="formatImagePath(item.image)"
             :alt="item.title"
-            class="w-full h-auto transition-transform duration-[1.5s] ease-out rounded-none"
+            class="w-full h-auto transition-transform duration-(--duration-image) ease-(--ease-atelier) rounded-none"
             @error="(e) => console.error('Image load error:', formatImagePath(item.image))"
           />
           <div v-else class="flex flex-col items-center gap-2 opacity-20">
@@ -22,11 +22,11 @@
             <span class="u-legend">{{ item.title }}</span>
           </div>
           <!-- Subtle overlay for texture -->
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-10 dark:bg-white bg-black transition-opacity duration-700 pointer-events-none"></div>
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-10 dark:bg-white bg-black transition-opacity duration-(--duration-menu) ease-(--ease-atelier) pointer-events-none"></div>
         </div>
         
         <!-- Sober Legend -->
-        <div class="mt-4 flex flex-col space-y-0.5 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="mt-4 flex flex-col space-y-0.5 opacity-80 group-hover:opacity-100 transition-opacity duration-(--duration-hover) ease-(--ease-atelier)">
           <span class="u-h4 font-medium tracking-wider text-[#121212] dark:text-white">{{ item.title }}</span>
           <p v-if="item.description" class="u-legend font-normal opacity-50 max-w-[300px] leading-tight">
             {{ item.description }}
@@ -44,10 +44,10 @@
 
     <!-- Exhibition Lightbox -->
     <Transition
-      enter-active-class="transition duration-500 ease-curtain"
+      enter-active-class="transition duration-(--duration-hover) ease-curtain"
       enter-from-class="opacity-0 scale-95"
       enter-to-class="opacity-100 scale-100"
-      leave-active-class="transition duration-400 ease-curtain"
+      leave-active-class="transition duration-(--duration-hover) ease-curtain"
       leave-from-class="opacity-100 scale-100"
       leave-to-class="opacity-0 scale-95"
     >
@@ -72,7 +72,7 @@
         </div>
         
         <!-- Close button (minimal) -->
-        <button class="absolute top-8 right-8 u-h4 opacity-40 hover:opacity-100 transition-opacity">FERMER</button>
+        <button class="absolute top-8 right-8 u-h4 opacity-40 hover:opacity-100 transition-opacity duration-(--duration-hover) ease-(--ease-atelier)">FERMER</button>
       </div>
     </Transition>
   </div>

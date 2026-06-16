@@ -1,11 +1,11 @@
 <template>
-  <div v-if="project" class="w-full relative bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-700">
+  <div v-if="project" class="w-full relative bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-(--duration-menu) ease-(--ease-atelier)">
     <div :class="isHero ? 'pt-32 pb-24' : 'pt-0 pb-12'">
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8">
         <!-- Carousel Section -->
         <div class="col-span-1 md:col-span-1 xl:col-span-3 z-0 order-1 md:order-2" :class="isHero ? '' : '-mx-[var(--main-padding)] md:mx-0'">
           <div 
-            class="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] transition-colors duration-700"
+            class="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] transition-colors duration-(--duration-menu) ease-(--ease-atelier)"
           >
             <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="project.path" :alt="project.title" />
           </div>
@@ -13,7 +13,7 @@
 
         <!-- Info / Description -->
         <div class="col-span-1 pt-0 z-0 order-2 md:order-1" :style="!isHero ? 'view-transition-name: project-description;' : ''">
-          <div class="project-description flex flex-col pr-0 md:pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-700" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
+          <div class="project-description flex flex-col pr-0 md:pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-(--duration-menu) ease-(--ease-atelier)" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
             <div class="flex-grow pb-4 md:pb-6">
               <p v-if="project.description" class="u-body mb-8 max-w-prose font-normal opacity-75 leading-[1.58]">{{ project.description }}</p>
               <div class="content-renderer">
@@ -60,7 +60,7 @@
               <NuxtLink
                 v-if="mobilePrevProject"
                 :to="mobilePrevProject.path"
-                class="min-h-11 border border-[#121212]/15 px-3 py-3 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] hover:border-[#121212]/40 dark:border-white/15 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
+                class="min-h-11 border border-[#121212]/15 px-3 py-3 transition-colors duration-(--duration-hover) ease-(--ease-atelier) hover:border-[#121212]/40 dark:border-white/15 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
               >
                 <span class="u-legend block opacity-50">Precedent</span>
                 <span class="u-h4 block truncate !tracking-normal">{{ mobilePrevProject.title }}</span>
@@ -69,7 +69,7 @@
               <NuxtLink
                 v-if="mobileNextProject"
                 :to="mobileNextProject.path"
-                class="min-h-11 border border-[#121212]/15 px-3 py-3 text-right transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] hover:border-[#121212]/40 dark:border-white/15 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
+                class="min-h-11 border border-[#121212]/15 px-3 py-3 text-right transition-colors duration-(--duration-hover) ease-(--ease-atelier) hover:border-[#121212]/40 dark:border-white/15 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
               >
                 <span class="u-legend block opacity-50">Suivant</span>
                 <span class="u-h4 block truncate !tracking-normal">{{ mobileNextProject.title }}</span>

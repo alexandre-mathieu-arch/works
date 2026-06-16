@@ -21,15 +21,15 @@
         <!-- Content Column -->
         <div class="flex-grow">
           <NuxtLink :to="article.path" class="block">
-            <h2 class="u-h2 mb-4 group-hover:opacity-70 transition-opacity duration-700">
+            <h2 class="u-h2 mb-4 group-hover:opacity-70 transition-opacity duration-(--duration-menu) ease-(--ease-atelier)">
               {{ article.title }}
             </h2>
             <p class="u-body opacity-80 leading-relaxed max-w-2xl">
               {{ article.description }}
             </p>
-            <div class="mt-6 inline-flex items-center gap-2 u-h4 uppercase tracking-widest text-[#121212] dark:text-white group-hover:gap-4 transition-all duration-700">
+            <div class="mt-6 inline-flex items-center gap-2 u-h4 uppercase tracking-widest text-[#121212] dark:text-white group-hover:gap-4 transition-all duration-(--duration-menu) ease-(--ease-atelier)">
               <span>Lire l'article</span>
-              <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-700">→</span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-(--duration-menu) ease-(--ease-atelier)">→</span>
             </div>
           </NuxtLink>
         </div>

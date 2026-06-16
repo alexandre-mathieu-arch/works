@@ -33,8 +33,8 @@
 
     <!-- Back Navigation -->
     <div class="mt-20 pt-8 border-t border-[#121212]/10 dark:border-white/10">
-      <NuxtLink to="/corpus" class="inline-flex items-center gap-4 u-h4 uppercase tracking-widest text-[#121212] dark:text-white group transition-all duration-700">
-        <span class="transform transition-transform duration-700 group-hover:-translate-x-2">←</span>
+      <NuxtLink to="/corpus" class="inline-flex items-center gap-4 u-h4 uppercase tracking-widest text-[#121212] dark:text-white group transition-all duration-(--duration-menu) ease-(--ease-atelier)">
+        <span class="transform transition-transform duration-(--duration-menu) ease-(--ease-atelier) group-hover:-translate-x-2">←</span>
         <span>Retour au Corpus</span>
       </NuxtLink>
     </div>

@@ -2,13 +2,13 @@
   <div class="collapsible-bio mb-[10px]">
     <button 
       @click="toggleLocal" 
-      class="u-h3 flex items-center gap-4 text-left hover:text-primary-900 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] w-full group tracking-widest"
+      class="u-h3 flex items-center gap-4 text-left hover:text-primary-900 transition-colors duration-(--duration-hover) ease-(--ease-atelier) w-full group tracking-widest"
     >
       <span>{{ name }}</span>
       <svg 
         viewBox="0 0 20 20" 
         fill="currentColor" 
-        class="w-5 h-5 transform transition-transform duration-1000"
+        class="w-5 h-5 transform transition-transform duration-(--duration-menu) ease-(--ease-atelier)"
         :class="{ 'rotate-180': isOpen }"
       >
         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -16,7 +16,7 @@
     </button>
     
     <div 
-      class="grid transition-all duration-1000 ease-in-out" 
+      class="grid transition-all duration-(--duration-menu) ease-(--ease-atelier)"
       :class="isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
     >
       <div class="overflow-hidden">

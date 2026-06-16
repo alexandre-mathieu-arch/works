@@ -1,6 +1,6 @@
 <template>
   <header 
-    class="fixed top-0 left-0 right-0 z-50 glass-fluted transition-all duration-[1800ms] ease-[var(--motion-luxury-ease)]"
+    class="fixed top-0 left-0 right-0 z-50 glass-fluted transition-all duration-(--duration-page) ease-(--ease-atelier-soft)"
     :class="[
       transparent ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
     ]"
@@ -9,7 +9,7 @@
       <!-- Logo -->
       <NuxtLink 
         :to="projectsLinkTarget" 
-        class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link nav-soft-hover px-2 py-1"
+        class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link px-2 py-1 transition-all duration-(--duration-hover) ease-(--ease-atelier) hover:bg-[#121212] hover:!text-white dark:hover:bg-white dark:hover:!text-[#121212] doux:hover:bg-[#4A4443] doux:hover:!text-[#E5E1E0] nuit:hover:bg-[#CDD6F4] nuit:hover:!text-[#1A2238]"
         @click.prevent="handleProjectsClick"
         @mouseenter="emit('linkHover', 'Projets')"
         @mouseleave="emit('linkHover', '')"
@@ -24,7 +24,7 @@
             v-for="link in links" 
             :key="link.to" 
             :to="link.to === '/' ? projectsLinkTarget : link.to"
-            class="u-h4 nav-soft-hover px-2 py-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] relative flex flex-col items-center group/link"
+            class="u-h4 transition-all duration-(--duration-hover) ease-(--ease-atelier) px-2 py-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212] hover:!text-white dark:hover:bg-white dark:hover:!text-[#121212] doux:hover:bg-[#4A4443] doux:hover:!text-[#E5E1E0] nuit:hover:bg-[#CDD6F4] nuit:hover:!text-[#1A2238] relative flex flex-col items-center group/link"
             :class="[
               (link.to === '/' ? route.path === '/' : route.path.startsWith(link.to)) ? 'is-active' : 'group-hover/nav:opacity-50 hover:!opacity-100'
             ]"
@@ -35,7 +35,7 @@
             {{ link.label }}
             <!-- Active Dot -->
             <span 
-              class="absolute -bottom-1 w-1 h-1 rounded-full bg-current transition-all duration-[900ms] ease-[var(--motion-luxury-ease)] scale-0"
+              class="absolute -bottom-1 w-1 h-1 rounded-full bg-current transition-all duration-(--duration-hover) ease-(--ease-atelier) scale-0"
               :class="{ 'scale-100': (link.to === '/' ? route.path === '/' : route.path.startsWith(link.to)) }"
             ></span>
           </NuxtLink>
@@ -51,7 +51,7 @@
         <button 
           type="button"
           @click="cycleTheme" 
-          class="p-2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] nav-soft-hover flex items-center justify-center"
+          class="p-2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] transition-all duration-(--duration-hover) ease-(--ease-atelier) hover:bg-[#121212] hover:!text-white dark:hover:bg-white dark:hover:!text-[#121212] doux:hover:bg-[#4A4443] doux:hover:!text-[#E5E1E0] nuit:hover:bg-[#CDD6F4] nuit:hover:!text-[#1A2238] flex items-center justify-center"
           :title="themeTitle"
           :aria-label="themeTitle"
         >
@@ -78,7 +78,7 @@
         <!-- Search Bar -->
         <div class="flex items-center relative">
           <div 
-            class="flex items-center transition-all duration-[1100ms] ease-[var(--motion-luxury-ease)] overflow-hidden"
+            class="flex items-center transition-all duration-(--duration-menu) ease-(--ease-atelier) overflow-hidden"
             :class="isSearchExpanded ? 'w-64 opacity-100' : 'w-0 opacity-0'"
           >
             <UInput 
@@ -98,7 +98,7 @@
             v-if="!isSearchExpanded"
             type="button"
             @click="isSearchExpanded = true"
-            class="p-2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] nav-soft-hover flex items-center justify-center"
+            class="p-2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] transition-all duration-(--duration-hover) ease-(--ease-atelier) hover:bg-[#121212] hover:!text-white dark:hover:bg-white dark:hover:!text-[#121212] doux:hover:bg-[#4A4443] doux:hover:!text-[#E5E1E0] nuit:hover:bg-[#CDD6F4] nuit:hover:!text-[#1A2238] flex items-center justify-center"
             aria-label="Ouvrir la recherche"
             :aria-expanded="isSearchExpanded"
             aria-controls="site-search"
@@ -115,10 +115,10 @@
               v-for="result in searchResults" 
               :key="result.path" 
               :to="result.path"
-              class="block px-4 py-3 hover:bg-[#121212]/5 dark:hover:bg-white/5 border-b border-gray-50 dark:border-gray-800 last:border-0 group transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]"
+              class="block px-4 py-3 hover:bg-[#121212]/5 dark:hover:bg-white/5 border-b border-gray-50 dark:border-gray-800 last:border-0 group transition-colors duration-(--duration-hover) ease-(--ease-atelier)"
               @click="clearSearch"
             >
-              <div class="text-[12px] font-bold text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] tracking-wider group-hover:text-black dark:group-hover:text-gray-300 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]">{{ result.title }}</div>
+              <div class="text-[12px] font-bold text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] tracking-wider group-hover:text-black dark:group-hover:text-gray-300 transition-colors duration-(--duration-hover) ease-(--ease-atelier)">{{ result.title }}</div>
               <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
             </NuxtLink>
           </div>
@@ -162,7 +162,7 @@
         <button 
           type="button"
           @click.stop="toggleMenu" 
-          class="p-2 rounded-md text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212]/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]"
+          class="p-2 rounded-md text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212]/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 transition-colors duration-(--duration-hover) ease-(--ease-atelier)"
           :aria-expanded="isMenuOpen"
           aria-controls="mobile-menu"
           :aria-label="isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
@@ -177,15 +177,23 @@
     </div>
 
     <Teleport to="body">
-      <!-- Mobile Navigation Overlay -->
-      <div
-        v-if="isMenuOpen"
-        id="mobile-menu"
-        class="md:hidden fixed inset-0 z-[100] min-h-dvh w-screen overflow-y-auto bg-white/95 backdrop-blur-xl dark:bg-[#121212]/95 doux:bg-[#E5E1E0]/95 nuit:bg-[#1A2238]/95 flex flex-col items-end justify-start px-6 pb-8 pt-24 space-y-4"
-        role="dialog"
-        aria-modal="true"
-        @click.stop
+      <Transition
+        enter-active-class="transition duration-(--duration-menu) ease-(--ease-atelier)"
+        enter-from-class="opacity-0 translate-y-2"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-active-class="transition duration-(--duration-hover) ease-(--ease-atelier)"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-to-class="opacity-0 translate-y-2"
       >
+        <!-- Mobile Navigation Overlay -->
+        <div
+          v-if="isMenuOpen"
+          id="mobile-menu"
+          class="md:hidden fixed inset-0 z-[100] min-h-dvh w-screen overflow-y-auto bg-white/95 backdrop-blur-xl dark:bg-[#121212]/95 doux:bg-[#E5E1E0]/95 nuit:bg-[#1A2238]/95 flex flex-col items-end justify-start px-6 pb-8 pt-24 space-y-4"
+          role="dialog"
+          aria-modal="true"
+          @click.stop
+        >
         <button
           type="button"
           @click.stop="closeMenu"
@@ -217,7 +225,7 @@
               v-for="result in searchResults"
               :key="result.path"
               :to="result.path"
-              class="block px-4 py-3 hover:bg-[#121212]/5 dark:hover:bg-white/5 border-b border-gray-50 dark:border-gray-800 last:border-0 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]"
+              class="block px-4 py-3 hover:bg-[#121212]/5 dark:hover:bg-white/5 border-b border-gray-50 dark:border-gray-800 last:border-0 transition-colors duration-(--duration-hover) ease-(--ease-atelier)"
               @click="handleMobileSearchResultClick"
             >
               <div class="text-[12px] font-bold text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] tracking-wider">{{ result.title }}</div>
@@ -243,7 +251,8 @@
             {{ link.label }}
           </NuxtLink>
         </nav>
-      </div>
+        </div>
+      </Transition>
     </Teleport>
   </header>
 </template>
@@ -478,33 +487,6 @@ onUnmounted(() => {
 
 .logo-link.router-link-active {
   @apply text-[#121212] dark:text-white;
-}
-
-.nav-soft-hover {
-  transition:
-    background-color var(--motion-luxury-medium) var(--motion-luxury-ease),
-    color var(--motion-luxury-medium) var(--motion-luxury-ease),
-    opacity var(--motion-luxury-medium) var(--motion-luxury-ease);
-}
-
-.nav-soft-hover:hover {
-  background-color: rgba(18, 18, 18, 0.055);
-  color: #121212 !important;
-}
-
-.dark .nav-soft-hover:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF !important;
-}
-
-.doux .nav-soft-hover:hover {
-  background-color: rgba(74, 68, 67, 0.08);
-  color: #4A4443 !important;
-}
-
-.nuit .nav-soft-hover:hover {
-  background-color: rgba(205, 214, 244, 0.1);
-  color: #CDD6F4 !important;
 }
 
 .doux .logo-link {

@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="relative z-40 transition-colors duration-700"
+    class="relative z-40 transition-colors duration-(--duration-menu) ease-(--ease-atelier)"
     :class="[
       isProjectPage ? 'pb-1' : 'pb-2',
       { 'glass-fluted -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters || $slots.triggers },
@@ -10,10 +10,10 @@
     <!-- Project Title Slot: Permanent height to avoid folding effect -->
     <div class="h-9 md:h-[30px] relative flex items-center"> 
       <Transition
-        enter-active-class="transition duration-700 ease-out"
+        enter-active-class="transition duration-(--duration-menu) ease-(--ease-atelier)"
         enter-from-class="opacity-0 translate-y-1"
         enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition duration-200 ease-in absolute top-0 left-0"
+        leave-active-class="transition duration-(--duration-hover) ease-(--ease-atelier) absolute top-0 left-0"
         leave-from-class="opacity-100"
         leave-to-class="opacity-0 -translate-y-1"
       >
@@ -42,7 +42,7 @@
           <button
             type="button"
             @click="isMobileFiltersOpen = true"
-            class="flex min-h-11 flex-1 items-center justify-between border border-[#121212]/30 bg-white/50 px-3 text-left u-h4 !tracking-normal text-[#121212] transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] dark:border-white/20 dark:bg-white/5 dark:text-white doux:text-[#4A4443] nuit:bg-[#161D2F] nuit:text-[#CDD6F4]"
+            class="flex min-h-11 flex-1 items-center justify-between border border-[#121212]/30 bg-white/50 px-3 text-left u-h4 !tracking-normal text-[#121212] transition-colors duration-(--duration-hover) ease-(--ease-atelier) dark:border-white/20 dark:bg-white/5 dark:text-white doux:text-[#4A4443] nuit:bg-[#161D2F] nuit:text-[#CDD6F4]"
             :aria-expanded="isMobileFiltersOpen"
             aria-controls="mobile-filters-panel"
           >
@@ -55,7 +55,7 @@
             v-if="hasActiveFilters"
             type="button"
             @click="resetFilters"
-            class="flex h-11 w-11 shrink-0 items-center justify-center border border-primary-900/30 bg-white/50 text-primary-900 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] dark:border-primary-400/30 dark:bg-white/5 dark:text-primary-400 nuit:bg-[#161D2F]"
+            class="flex h-11 w-11 shrink-0 items-center justify-center border border-primary-900/30 bg-white/50 text-primary-900 transition-colors duration-(--duration-hover) ease-(--ease-atelier) dark:border-primary-400/30 dark:bg-white/5 dark:text-primary-400 nuit:bg-[#161D2F]"
             aria-label="Réinitialiser les filtres"
           >
             <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
@@ -66,10 +66,10 @@
 
         <Teleport to="body">
           <Transition
-            enter-active-class="transition duration-300 ease-out"
+            enter-active-class="transition duration-(--duration-menu) ease-(--ease-atelier)"
             enter-from-class="opacity-0"
             enter-to-class="opacity-100"
-            leave-active-class="transition duration-200 ease-in"
+            leave-active-class="transition duration-(--duration-hover) ease-(--ease-atelier)"
             leave-from-class="opacity-100"
             leave-to-class="opacity-0"
           >
@@ -115,7 +115,7 @@
                       <button
                         type="button"
                         @click="selectMobileFilter(group.id, null)"
-                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]"
+                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-(--duration-hover) ease-(--ease-atelier)"
                         :class="isMobileFilterActive(group.id, null) ? 'border-primary-900 bg-primary-900 text-white dark:border-primary-400 dark:bg-primary-400 dark:text-[#121212]' : 'border-[#121212]/20 text-[#121212]/70 dark:border-white/20 dark:text-white/70 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70'"
                       >
                         {{ group.emptyLabel }}
@@ -125,7 +125,7 @@
                         :key="option"
                         type="button"
                         @click="selectMobileFilter(group.id, option)"
-                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)]"
+                        class="min-h-10 border px-3 py-2 u-h4 !tracking-normal transition-colors duration-(--duration-hover) ease-(--ease-atelier)"
                         :class="isMobileFilterActive(group.id, option) ? 'border-primary-900 bg-primary-900 text-white dark:border-primary-400 dark:bg-primary-400 dark:text-[#121212]' : 'border-[#121212]/20 text-[#121212]/70 dark:border-white/20 dark:text-white/70 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70'"
                       >
                         {{ option }}
@@ -173,7 +173,7 @@
             >
               <button 
                 @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-                class="flex items-center justify-between gap-2 u-h4 transition-all duration-700 px-3 min-h-11 md:h-[30px] md:min-h-0 -mt-[1px] w-full group !tracking-normal capitalize"
+                class="flex items-center justify-between gap-2 u-h4 transition-all duration-(--duration-menu) ease-(--ease-atelier) px-3 min-h-11 md:h-[30px] md:min-h-0 -mt-[1px] w-full group !tracking-normal capitalize"
                 :aria-expanded="activeMenu === filter.id"
                 :aria-controls="'filter-menu-' + filter.id"
                 :class="[
@@ -193,7 +193,7 @@
                   <svg 
                     viewBox="0 0 20 20" 
                     fill="currentColor" 
-                    class="w-4 h-4 flex-shrink-0 transition-transform duration-700"
+                    class="w-4 h-4 flex-shrink-0 transition-transform duration-(--duration-menu) ease-(--ease-atelier)"
                     :class="{ 'rotate-180': activeMenu === filter.id }"
                   >
                     <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -204,10 +204,10 @@
               <!-- Local Dropdown Menu (Vertical List) -->
               <Transition
                 mode="out-in"
-                enter-active-class="transition duration-400 ease-out"
+                enter-active-class="transition duration-(--duration-menu) ease-(--ease-atelier)"
                 enter-from-class="opacity-0 -translate-y-2"
                 enter-to-class="opacity-100 translate-y-0"
-                leave-active-class="transition duration-300 ease-in"
+                leave-active-class="transition duration-(--duration-hover) ease-(--ease-atelier)"
                 leave-from-class="opacity-100 translate-y-0"
                 leave-to-class="opacity-0 -translate-y-2"
               >
@@ -221,7 +221,7 @@
                     <template v-if="activeMenu === 'typology'">
                       <button 
                         @click="selectedTypology = null; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-(--duration-hover) ease-(--ease-atelier) whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedTypology === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Toutes
@@ -230,7 +230,7 @@
                         v-for="opt in typologyOptions" 
                         :key="opt" 
                         @click="selectedTypology = opt; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-(--duration-hover) ease-(--ease-atelier) whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedTypology === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -239,7 +239,7 @@
                     <template v-if="activeMenu === 'year'">
                       <button 
                         @click="selectedYear = null; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-(--duration-hover) ease-(--ease-atelier) whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedYear === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Toutes
@@ -248,7 +248,7 @@
                         v-for="opt in yearOptions" 
                         :key="opt" 
                         @click="selectedYear = opt; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-(--duration-hover) ease-(--ease-atelier) whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedYear === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -257,7 +257,7 @@
                     <template v-if="activeMenu === 'country'">
                       <button 
                         @click="selectedCountry = null; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-(--duration-hover) ease-(--ease-atelier) whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedCountry === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Tous
@@ -266,7 +266,7 @@
                         v-for="opt in countryOptions" 
                         :key="opt" 
                         @click="selectedCountry = opt; activeMenu = null" 
-                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
+                        class="u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center transition-colors duration-(--duration-hover) ease-(--ease-atelier) whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5"
                         :class="selectedCountry === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
@@ -300,7 +300,7 @@
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex items-center gap-2 u-h4 px-3 min-h-11 md:h-[30px] md:min-h-0 border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 nuit:bg-[#161D2F] hover:bg-primary-900/10 hover:text-primary-900 dark:hover:bg-primary-400/10 dark:hover:text-primary-400 transition-all duration-[900ms] ease-[var(--motion-luxury-ease)] -mt-[1px] whitespace-nowrap group/reset !tracking-normal"
+              class="flex items-center gap-2 u-h4 px-3 min-h-11 md:h-[30px] md:min-h-0 border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 nuit:bg-[#161D2F] hover:bg-primary-900 hover:text-white dark:hover:bg-primary-400 dark:hover:text-[#121212] transition-all duration-(--duration-menu) ease-(--ease-atelier) -mt-[1px] whitespace-nowrap group/reset !tracking-normal"
               title="Réinitialiser les filtres"
             >
               <span class="text-[9px] md:text-[10px] capitalize font-medium">Tout effacer</span>

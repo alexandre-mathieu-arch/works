@@ -17,7 +17,7 @@
         :style="id && currentIndex === 0 ? { viewTransitionName: 'image-' + id.replace(/\//g, '-') } : {}"
       />
       <div v-else-if="images && images.length > 0" class="w-full h-full flex items-center justify-center bg-transparent">
-         <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-300 motion-luxury-pulse" />
+         <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-300 animate-pulse" />
       </div>
     </Transition>
 
@@ -134,13 +134,13 @@ onUnmounted(() => {
   inset: 0;
   position: absolute;
   transition:
-    transform 1.45s var(--motion-luxury-ease),
-    opacity 1.45s var(--motion-luxury-ease);
+    transform var(--duration-carousel) var(--ease-atelier),
+    opacity var(--duration-carousel) var(--ease-atelier);
   will-change: transform, opacity;
 }
 
 .slide-left-enter-from {
-  opacity: 0.98;
+  opacity: 1;
   transform: translate3d(100%, 0, 0);
 }
 .slide-left-enter-to,
@@ -151,16 +151,16 @@ onUnmounted(() => {
   transform: translate3d(0, 0, 0);
 }
 .slide-left-leave-to {
-  opacity: 0.98;
+  opacity: 1;
   transform: translate3d(-100%, 0, 0);
 }
 
 .slide-right-enter-from {
-  opacity: 0.98;
+  opacity: 1;
   transform: translate3d(-100%, 0, 0);
 }
 .slide-right-leave-to {
-  opacity: 0.98;
+  opacity: 1;
   transform: translate3d(100%, 0, 0);
 }
 

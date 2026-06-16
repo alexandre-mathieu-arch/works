@@ -19,18 +19,18 @@
           <template v-if="index % 6 === 5">
             <button 
               @click="scrollToContact"
-              class="hidden xl:block aspect-square border border-[#121212]/25 relative group transition-colors duration-[1200ms] ease-[var(--motion-luxury-ease)] hover:border-[#121212]/50 dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/25 nuit:border-[#CDD6F4]/20 nuit:hover:border-[#CDD6F4]/45 text-left"
+              class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-(--duration-menu) ease-(--ease-atelier) hover:border-[#121212] dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/25 nuit:border-[#CDD6F4]/20 nuit:hover:border-[#CDD6F4]/45 text-left"
             >
-              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-[1200ms] ease-[var(--motion-luxury-ease)]">
+              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-(--duration-menu) ease-(--ease-atelier)">
                 <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Démarrer un projet ?</span>
               </div>
             </button>
             <ProjectCard :project="project" />
             <button 
               @click="scrollToContact"
-              class="hidden xl:block aspect-square border border-[#121212]/25 relative group transition-colors duration-[1200ms] ease-[var(--motion-luxury-ease)] hover:border-[#121212]/50 dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/25 nuit:border-[#CDD6F4]/20 nuit:hover:border-[#CDD6F4]/45 text-left"
+              class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-(--duration-menu) ease-(--ease-atelier) hover:border-[#121212] dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/25 nuit:border-[#CDD6F4]/20 nuit:hover:border-[#CDD6F4]/45 text-left"
             >
-              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-[1200ms] ease-[var(--motion-luxury-ease)]">
+              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-(--duration-menu) ease-(--ease-atelier)">
                 <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Démarrer un projet ?</span>
               </div>
             </button>
@@ -48,7 +48,7 @@
       <button
         type="button"
         @click="scrollToContact"
-        class="xl:hidden mt-8 flex min-h-11 w-full items-center justify-between border border-[#121212]/20 px-4 py-3 text-left transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] hover:border-[#121212]/50 dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
+        class="xl:hidden mt-8 flex min-h-11 w-full items-center justify-between border border-[#121212]/20 px-4 py-3 text-left transition-colors duration-(--duration-hover) ease-(--ease-atelier) hover:border-[#121212]/50 dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
       >
         <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Demarrer un projet ?</span>
         <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]" aria-hidden="true">-&gt;</span>
@@ -65,10 +65,10 @@
           </p>
         </div>
         <div class="flex flex-col gap-y-6">
-          <a href="mailto:alexandre.mat+w@protonmail.com" class="u-h3 text-[13px] sm:text-[15px] font-normal tracking-[0.08em] sm:tracking-[0.2em] hover:text-[#121212]/55 dark:hover:text-white/65 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] w-fit break-all sm:break-normal">
+          <a href="mailto:alexandre.mat+w@protonmail.com" class="u-h3 text-[13px] sm:text-[15px] font-normal tracking-[0.08em] sm:tracking-[0.2em] hover:text-[#121212]/55 dark:hover:text-white/65 transition-colors duration-(--duration-hover) ease-(--ease-atelier) w-fit break-all sm:break-normal">
             alexandre.mat+w@protonmail.com
           </a>
-          <a href="tel:+33658215300" class="u-h3 font-normal tracking-[0.2em] hover:text-[#121212]/55 dark:hover:text-white/65 transition-colors duration-[900ms] ease-[var(--motion-luxury-ease)] w-fit">
+          <a href="tel:+33658215300" class="u-h3 font-normal tracking-[0.2em] hover:text-[#121212]/55 dark:hover:text-white/65 transition-colors duration-(--duration-hover) ease-(--ease-atelier) w-fit">
             +33 6 58 21 53 00
           </a>
         </div>
@@ -107,6 +107,18 @@ const route = useRoute();
 const scrollProgress = ref(0);
 const PROJECTS_GRID_SCROLL_OFFSET = 160;
 let activeScrollFrame: number | null = null;
+
+const getMotionDuration = (name: string, fallback: number) => {
+  if (!import.meta.client) return fallback;
+
+  const rawValue = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  if (!rawValue) return fallback;
+
+  const value = parseFloat(rawValue);
+  if (Number.isNaN(value)) return fallback;
+
+  return rawValue.endsWith('ms') ? value : value * 1000;
+};
 
 const handleScroll = () => {
   if (import.meta.client) {
@@ -198,7 +210,7 @@ const cancelActiveScroll = () => {
   activeScrollFrame = null;
 };
 
-const animateDesktopScrollTo = (targetPosition: number, duration = 1300) => {
+const animateDesktopScrollTo = (targetPosition: number, duration = getMotionDuration('--duration-page', 900)) => {
   if (!import.meta.client) return;
 
   const top = Math.max(0, targetPosition);
@@ -216,15 +228,15 @@ const animateDesktopScrollTo = (targetPosition: number, duration = 1300) => {
   }
 
   const startTime = performance.now();
-  const easeInOutCubic = (progress: number) => {
+  const easeInOutQuad = (progress: number) => {
     return progress < 0.5
-      ? 4 * progress * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      ? 2 * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 2) / 2;
   };
 
   const step = (currentTime: number) => {
     const progress = Math.min(1, (currentTime - startTime) / duration);
-    window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+    window.scrollTo(0, startPosition + distance * easeInOutQuad(progress));
 
     if (progress < 1) {
       activeScrollFrame = requestAnimationFrame(step);
@@ -246,15 +258,15 @@ const scrollToSection = (targetId: string, offset: number = 96, duration = 1300)
 };
 
 const scrollToContact = () => {
-  scrollToSection('contact', 80, 1100);
+  scrollToSection('contact', 80, getMotionDuration('--duration-image', 1200));
 };
 
 const scrollToProjects = () => {
-  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, 1300);
+  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, getMotionDuration('--duration-page', 900));
 };
 
 const scrollToProjectsFromHero = () => {
-  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, 2200);
+  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, getMotionDuration('--duration-scroll', 2000));
 };
 
 watchEffect(() => {
