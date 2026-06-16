@@ -121,10 +121,11 @@ html, body {
   --duration-hover: 500ms;
   --duration-menu: 700ms;
   --duration-page: 900ms;
-  --duration-image: 1200ms;
+  --duration-image: 1600ms;
+  --duration-card-copy: 950ms;
   --duration-carousel: 900ms;
   --duration-hero: 1000ms;
-  --duration-scroll: 2000ms;
+  --duration-scroll: 2400ms;
 }
 
 /* Force hide Nuxt UI default logo */
@@ -136,7 +137,9 @@ header a[href="https://ui.nuxt.com"] {
 .page-leave-active,
 .layout-enter-active,
 .layout-leave-active {
-  transition: all var(--duration-page) var(--ease-atelier);
+  transition-property: opacity;
+  transition-duration: var(--duration-page);
+  transition-timing-function: var(--ease-atelier);
 }
 .page-enter-from,
 .page-leave-to,
@@ -435,13 +438,11 @@ header a[href="https://ui.nuxt.com"] {
 
 /* Dreamy / Vaporous Page Transitions */
 ::view-transition-old(root) {
-  animation: var(--duration-page) var(--ease-atelier) both fade-out,
-             var(--duration-page) var(--ease-atelier) both slide-to-top;
+  animation: var(--duration-page) var(--ease-atelier) both fade-out;
 }
 
 ::view-transition-new(root) {
-  animation: var(--duration-page) var(--ease-atelier) both fade-in,
-             var(--duration-page) var(--ease-atelier) both slide-from-bottom;
+  animation: var(--duration-page) var(--ease-atelier) both fade-in;
 }
 
 @keyframes fade-in {
@@ -472,22 +473,22 @@ header a[href="https://ui.nuxt.com"] {
 
 .transition-next::view-transition-old(project-description),
 .transition-next::view-transition-old(project-carousel) {
-  animation: slide-out-to-left var(--duration-page) var(--ease-atelier) forwards;
+  animation: fade-out var(--duration-page) var(--ease-atelier) forwards;
 }
 
 .transition-next::view-transition-new(project-description),
 .transition-next::view-transition-new(project-carousel) {
-  animation: slide-in-from-right var(--duration-page) var(--ease-atelier) forwards;
+  animation: fade-in var(--duration-page) var(--ease-atelier) forwards;
 }
 
 .transition-prev::view-transition-old(project-description),
 .transition-prev::view-transition-old(project-carousel) {
-  animation: slide-out-to-right var(--duration-page) var(--ease-atelier) forwards;
+  animation: fade-out var(--duration-page) var(--ease-atelier) forwards;
 }
 
 .transition-prev::view-transition-new(project-description),
 .transition-prev::view-transition-new(project-carousel) {
-  animation: slide-in-from-left var(--duration-page) var(--ease-atelier) forwards;
+  animation: fade-in var(--duration-page) var(--ease-atelier) forwards;
 }
 
 ::view-transition-old(page-triggers),

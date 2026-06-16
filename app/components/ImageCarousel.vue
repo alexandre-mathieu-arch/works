@@ -14,7 +14,6 @@
         width="1600"
         height="900"
         class="w-full h-full object-contain absolute inset-0"
-        :style="id && currentIndex === 0 ? { viewTransitionName: 'image-' + id.replace(/\//g, '-') } : {}"
       />
       <div v-else-if="images && images.length > 0" class="w-full h-full flex items-center justify-center bg-transparent">
          <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-300 animate-pulse" />

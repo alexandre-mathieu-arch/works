@@ -21,7 +21,6 @@
           v-if="hoveredProjectTitle || (!hideMainTitle && title) || (hideMainTitle && title)" 
           :key="hoveredProjectTitle || (typeof title === 'string' ? title : title.main)"
           class="text-[18px] sm:text-[20px] font-bold leading-none text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
-          :style="{ viewTransitionName: route.path.startsWith('/projets/') ? 'title-' + route.path.replace(/\//g, '-') : 'project-title-continuity' }"
         >
           <template v-if="hoveredProjectTitle">
             {{ hoveredProjectTitle }}
@@ -160,10 +159,7 @@
       <!-- Custom triggers slot -->
       <slot name="triggers">
         <!-- Grid aligned triggers -->
-        <div 
-          class="hidden md:grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-3 md:gap-8 items-start"
-          style="view-transition-name: page-triggers;"
-        >
+        <div class="hidden md:grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-3 md:gap-8 items-start">
           <!-- Standard Filters (Grid) or Project Info (Detail) -->
           <template v-if="showFilters">
             <div 

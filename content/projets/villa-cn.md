@@ -9,7 +9,7 @@ images:
   - "/images/projects/villa-cn/villa-cn.01.jpg"
   - "/images/projects/villa-cn/villa-cn-atlas.jpg"
   - "/images/projects/villa-cn/villa-cn02.png"
-description: "Une villa minérale au Maroc, dessinée autour de murs épais, de patios calmes et d’une relation précise à la lumière."
+description: "Une villa familiale nichée dans les plaines bordant l’Atlas nord, entre murs épais, patios calmes et lumière maîtrisée."
 typologies: ["Résidentiel"]
 tailles: ["XL"]
 pays: ["Maroc"]

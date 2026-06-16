@@ -12,7 +12,7 @@
         </div>
 
         <!-- Info / Description -->
-        <div class="col-span-1 pt-0 z-0 order-2 md:order-1" :style="!isHero ? 'view-transition-name: project-description;' : ''">
+        <div class="col-span-1 pt-0 z-0 order-2 md:order-1">
           <div class="project-description flex flex-col pr-0 md:pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-(--duration-menu) ease-(--ease-atelier)" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
             <div class="flex-grow pb-4 md:pb-6">
               <p v-if="project.description" class="u-body mb-8 max-w-prose font-normal opacity-75 leading-[1.58]">{{ project.description }}</p>

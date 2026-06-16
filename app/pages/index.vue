@@ -13,7 +13,6 @@
       <div 
         v-if="filteredProjects?.length" 
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-center mt-3"
-        style="view-transition-name: projects-grid;"
       >
         <template v-for="(project, index) in filteredProjects" :key="project.path">
           <template v-if="index % 6 === 5">
@@ -228,15 +227,15 @@ const animateDesktopScrollTo = (targetPosition: number, duration = getMotionDura
   }
 
   const startTime = performance.now();
-  const easeInOutQuad = (progress: number) => {
+  const easeInOutCubic = (progress: number) => {
     return progress < 0.5
-      ? 2 * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+      ? 4 * progress * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
   };
 
   const step = (currentTime: number) => {
     const progress = Math.min(1, (currentTime - startTime) / duration);
-    window.scrollTo(0, startPosition + distance * easeInOutQuad(progress));
+    window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
 
     if (progress < 1) {
       activeScrollFrame = requestAnimationFrame(step);
