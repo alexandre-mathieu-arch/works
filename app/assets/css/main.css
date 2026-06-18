@@ -121,6 +121,8 @@ html, body {
   --duration-hover: 520ms;
   --duration-menu: 780ms;
   --duration-page: 1100ms;
+  --duration-page-enter: 720ms;
+  --duration-page-leave: 420ms;
   --duration-shared-media: 1350ms;
   --duration-detail-copy: 900ms;
   --duration-image: 1600ms;
@@ -139,19 +141,26 @@ header a[href="https://ui.nuxt.com"] {
 .page-enter-active,
 .page-leave-active {
   transition-property: opacity;
-  transition-duration: var(--duration-page);
   transition-timing-function: var(--ease-atelier-soft);
+  will-change: opacity;
 }
+
+.page-enter-active {
+  transition-duration: var(--duration-page-enter);
+}
+
+.page-leave-active {
+  transition-duration: var(--duration-page-leave);
+}
+
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
 }
 
-@supports (view-transition-name: none) {
-  .page-enter-active,
-  .page-leave-active {
-    transition: none;
-  }
+.page-enter-to,
+.page-leave-from {
+  opacity: 1;
 }
 
 .title-fade-enter-active,
@@ -699,5 +708,19 @@ header a[href="https://ui.nuxt.com"] {
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation-duration: 0.01ms !important;
+  }
+
+  .page-enter-active,
+  .page-leave-active {
+    transition-property: opacity !important;
+    transition-timing-function: var(--ease-atelier-soft) !important;
+  }
+
+  .page-enter-active {
+    transition-duration: 480ms !important;
+  }
+
+  .page-leave-active {
+    transition-duration: 320ms !important;
   }
 }
