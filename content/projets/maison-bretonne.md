@@ -26,18 +26,13 @@ surface: "150 m²"
 cout: "nc"
 phase: "Livré"
 statut: "Réalisé"
+workflow: "Photogrammétrie avec Agisoft + ArchiCAD + Twinmotion + ComfyUI + Photoshop"
 ---
 
 Située près du Golfe du Morbihan, la Maison Bretonne engage un dialogue entre héritage néo-breton et écriture contemporaine. Le projet conserve la présence du volume existant tout en l’ouvrant à de nouveaux usages.
 
-### Intervention
-
 La rénovation complète s’accompagne d’une extension en structure bois et zinc blanc. L’enduit clair unifie les volumes et prolonge l’image sobre des maisons côtières.
 
-### Confort
-
 L’isolation thermique par l’extérieur améliore la performance énergétique et donne une lecture plus calme de l’ensemble. Les espaces intérieurs gagnent en lumière, en continuité et en rapport au paysage.
-
-### Pratique
 
 Réalisé en indépendant, ce projet installe une attention durable au contexte, à la matière et à la précision constructive.

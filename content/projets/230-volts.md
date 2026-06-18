@@ -23,16 +23,13 @@ pays: ["France"]
 ecole: "École d'Architecture de Nantes"
 phase: "Prototype"
 statut: "Réalisé"
+workflow: ""
 ---
 
 Le projet 230 Volts transforme une contrainte technique en objet mobile. Dans les studios de l’ENSA Nantes, les prises fixées aux chemins de câbles limitent les déplacements et imposent une position de travail.
 
 Le dispositif associe une alimentation descendante, un rail de translation et un panier vide-poche. Il rapproche l’énergie du poste de travail sans encombrer le sol et sécurise les appareils légers pendant la charge.
 
-### Intention
-
 L’objet reprend la logique constructive du bâtiment de Lacaton & Vassal : matériaux simples, assemblage lisible, présence mesurée. La tôle perforée, le métal et les détails de suspension prolongent l’atmosphère industrielle des ateliers.
-
-### Usage
 
 La prise se déplace horizontalement et verticalement selon le besoin. Elle accompagne les gestes quotidiens avec une économie de moyens volontaire.

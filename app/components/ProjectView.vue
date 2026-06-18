@@ -15,41 +15,31 @@
         <div class="col-span-1 pt-0 z-0 order-2 md:order-1">
           <div class="project-description flex flex-col pr-0 md:pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-(--duration-menu) ease-(--ease-atelier)" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
             <div class="flex-grow pb-4 md:pb-6">
-              <p v-if="project.description" class="u-body mb-8 max-w-prose font-normal opacity-75 leading-[1.58]">{{ project.description }}</p>
               <div class="content-renderer">
                 <ContentRenderer :value="project" class="prose max-w-none prose-sm md:prose-base dark:prose-invert" />
               </div>
-            </div>
 
-            <!-- Metadata -->
-            <div class="mt-8 border-t border-[#121212]/10 dark:border-white/10 pt-4">
-               <div class="space-y-1">
-                <div v-if="project.surface" class="flex gap-4 u-legend">
-                  <span class="w-20 opacity-50">Surface:</span>
-                  <span>{{ project.surface }}</span>
+              <!-- Metadata -->
+              <dl v-if="projectMetadata.length" class="mt-8 border-t border-[#121212]/10 pt-4 dark:border-white/10">
+                <div class="space-y-1.5">
+                  <div
+                    v-for="item in projectMetadata"
+                    :key="item.label"
+                    class="grid grid-cols-[7rem_1fr] gap-4 u-legend"
+                  >
+                    <dt class="opacity-50">{{ item.label }}</dt>
+                    <dd class="min-w-0">{{ item.value }}</dd>
+                  </div>
                 </div>
-                <div v-if="project.lieu" class="flex gap-4 u-legend">
-                  <span class="w-20 opacity-50">Lieu:</span>
-                  <span>{{ project.lieu }}</span>
-                </div>
-                <!-- Additional fields -->
-                <div v-if="project.cout" class="flex gap-4 u-legend">
-                  <span class="w-20 opacity-50 text-nowrap">Coût:</span>
-                  <span>{{ project.cout }}</span>
-                </div>
-                <div v-if="project.materiaux" class="flex gap-4 u-legend">
-                  <span class="w-20 opacity-50 text-nowrap">Matériaux:</span>
-                  <span>{{ Array.isArray(project.materiaux) ? project.materiaux.join(', ') : project.materiaux }}</span>
-                </div>
-                <div v-if="project.collaboration" class="flex gap-4 u-legend">
-                  <span class="w-20 opacity-50 text-nowrap">Collaboration:</span>
-                  <span>{{ project.collaboration }}</span>
-                </div>
-                <div v-if="project.logiciels" class="flex gap-4 u-legend">
-                  <span class="w-20 opacity-50 text-nowrap">Logiciels:</span>
-                  <span>{{ Array.isArray(project.logiciels) ? project.logiciels.join(', ') : project.logiciels }}</span>
+              </dl>
+
+              <div v-if="projectWorkflow" class="mt-5 border-t border-[#121212]/10 pt-4 dark:border-white/10">
+                <div class="grid grid-cols-[7rem_1fr] gap-4 u-legend">
+                  <p class="opacity-50">Workflow</p>
+                  <p class="min-w-0 leading-[1.45]">{{ projectWorkflow }}</p>
                 </div>
               </div>
+
             </div>
 
             <nav
@@ -137,6 +127,41 @@ const detailImgRefs = ref<HTMLElement[]>([]);
 const setDetailImgRef = (el: any, index: number) => {
   if (el) detailImgRefs.value[index] = el.$el || el;
 };
+
+const formatMetadataValue = (value: unknown) => {
+  if (Array.isArray(value)) return value.filter(Boolean).join(', ');
+  if (typeof value === 'number') return value.toString();
+  if (typeof value === 'string') return value.trim();
+  return '';
+};
+
+const projectMetadata = computed(() => {
+  if (!props.project) return [];
+
+  const fields = [
+    { label: 'Typologie', value: props.project.typologies },
+    { label: 'Taille', value: props.project.tailles },
+    { label: 'Pays', value: props.project.pays },
+    { label: 'Agence', value: props.project.agence },
+    { label: 'Lieu', value: props.project.lieu },
+    { label: 'Surface', value: props.project.surface },
+    { label: 'Phase', value: props.project['phase réalisées'] ?? props.project.phase },
+    { label: 'Statut', value: props.project.statut }
+  ];
+
+  return fields
+    .map(field => ({ label: field.label, value: formatMetadataValue(field.value) }))
+    .filter(field => field.value.length > 0);
+});
+
+const projectWorkflow = computed(() => {
+  const fields = [props.project?.workflow, props.project?.workflows, props.project?.logiciels];
+  for (const field of fields) {
+    const value = formatMetadataValue(field);
+    if (value.length > 0) return value;
+  }
+  return '';
+});
 
 watchEffect(() => {
   if (props.project) {

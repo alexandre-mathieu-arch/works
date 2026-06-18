@@ -1,5 +1,5 @@
 ---
-title: "Cap-Horn"
+title: "Cap-Horn - Brule Architectes"
 date: "2022"
 ratio: "16/9"
 draft: false
@@ -12,26 +12,22 @@ details:
   - "/images/projects/cap-horn/cap-horn-04-principe-facade.jpg"
   - "/images/projects/cap-horn/cap-horn-05-detail-coupe.jpg"
   - "/images/projects/cap-horn/cap-horn-06-plan-masse.png"
-description: "Un bâtiment tertiaire compact qui superpose stationnement, santé et espaces de travail sur une parcelle urbaine contrainte."
 typologies: ["Tertiaire", "Bureau"]
 tailles: ["M"]
 pays: ["France", "Bretagne"]
+agence: "Brule Architectes Associés"
 lieu: "Quimper"
 surface: "850 m²"
-phase: "Études en cours"
-statut: "En projet"
+phase réalisées: "Esquisse, APS, APD, Permis de Construire, Plan détaillés, Coordination des bureau d'études"
+statut: "Réalisé"
+workflow: ""
 ---
+# Projet réalisé au sein de l'agence Brulé Architectes Associés, Quimper
 
-Situé sur une parcelle étroite, Cap-Horn répond par une organisation verticale claire. Le bâtiment superpose des usages distincts sans perdre la fluidité des accès ni la lecture de chaque programme.
+Cap-Horn est un projet d’agence développé au sein de Brulé Architectes Associés. Situé sur une parcelle étroite à Quimper, il répond par une organisation verticale claire, capable de superposer plusieurs usages sans brouiller la lecture du bâtiment.
 
-### Verticalité
+Le projet rassemble un socle de stationnement, des plateaux destinés aux professions libérales et les espaces de l’agence dans les derniers niveaux. Cette stratification donne au bâtiment une logique simple : les usages les plus ouverts restent au contact de la ville, tandis que les espaces de travail prennent de la hauteur.
 
-Le rez-de-chaussée accueille les stationnements voitures et vélos, avec un socle perméable qui préserve les circulations au sol. Les niveaux intermédiaires reçoivent des cabinets médicaux et des plateaux modulables pour professions libérales.
+Les derniers niveaux offrent une position plus calme, à distance de la rue, avec des vues dégagées sur l’horizon urbain. Le toit-terrasse prolonge cette qualité d’usage par une salle de réunion panoramique.
 
-### Travail
-
-Les derniers niveaux sont occupés par l’agence Brulé Architectes. Cette position haute met les espaces de travail à distance de la rue et ouvre des vues plus calmes sur l’horizon urbain. Le toit-terrasse prolonge cette logique avec une salle de réunion panoramique.
-
-### Structure
-
-Les circulations verticales sont externalisées pour libérer les plateaux. L’ascenseur et l’escalier structurent la façade et permettent des aménagements intérieurs plus souples.
+Les circulations verticales sont externalisées afin de libérer les plateaux et de préserver leur souplesse d’aménagement. L’ascenseur et l’escalier deviennent ainsi des éléments structurants de la façade autant que des outils d’organisation intérieure.

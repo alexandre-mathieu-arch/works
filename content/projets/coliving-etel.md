@@ -18,14 +18,11 @@ pays: ["France", "Bretagne"]
 lieu: "Etel"
 phase: "En cours"
 statut: "Projet"
+workflow: ""
 ---
 
 À Étel, le projet s’appuie sur une maison existante pour imaginer un lieu de vie partagé, simple et lumineux. L’intervention cherche à préserver l’échelle domestique tout en clarifiant les usages collectifs.
 
-### Organisation
-
 Les espaces communs sont placés au cœur de la maison, comme des lieux de rencontre quotidiens. Les chambres conservent une lecture plus intime, avec des seuils nets et des vues choisies.
-
-### Extension
 
 L’extension prolonge la maison sans la dominer. Elle apporte de la lumière, des surfaces utiles et une relation plus directe au jardin.

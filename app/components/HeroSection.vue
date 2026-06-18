@@ -12,7 +12,7 @@
     >
       <button
         type="button"
-        @click="emitScrollToProjects"
+        @click.stop.prevent="emitScrollToProjects"
         class="relative px-8 py-10 md:px-16 md:py-12 flex flex-col items-center space-y-2 transition-colors duration-(--duration-hero) ease-(--ease-atelier) cursor-pointer appearance-none border-0 bg-transparent text-center"
         aria-label="Voir les projets"
       >
@@ -35,7 +35,7 @@
     <!-- Scroll Indicator -->
     <button
       type="button"
-      @click="emitScrollToProjects"
+      @click.stop.prevent="emitScrollToProjects"
       class="absolute bottom-10 left-1/2 -translate-x-1/2 transition-opacity duration-(--duration-menu) ease-(--ease-atelier) cursor-pointer group/scroll appearance-none border-0 bg-transparent p-0"
       :style="{ opacity: 1 - scrollProgress * 5 }"
       aria-label="Voir les projets"

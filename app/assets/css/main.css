@@ -122,10 +122,11 @@ html, body {
   --duration-menu: 700ms;
   --duration-page: 900ms;
   --duration-image: 1600ms;
+  --duration-zoom-card: 2400ms;
   --duration-card-copy: 950ms;
   --duration-carousel: 900ms;
   --duration-hero: 1000ms;
-  --duration-scroll: 2400ms;
+  --duration-scroll: 3200ms;
 }
 
 /* Force hide Nuxt UI default logo */
@@ -258,6 +259,44 @@ header a[href="https://ui.nuxt.com"] {
 
 @utility ease-curtain {
   transition-timing-function: var(--ease-atelier-curtain);
+}
+
+@utility atelier-hover-invert {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity;
+  transition-duration: var(--duration-hover);
+  transition-timing-function: var(--ease-atelier);
+
+  &:hover {
+    background-color: #121212;
+    color: #fff !important;
+  }
+
+  .dark &:hover {
+    background-color: #fff;
+    color: #121212 !important;
+  }
+
+  .doux &:hover {
+    background-color: #4A4443;
+    color: #E5E1E0 !important;
+  }
+
+  .nuit &:hover {
+    background-color: #CDD6F4;
+    color: #1A2238 !important;
+  }
+}
+
+@utility atelier-hover-surface {
+  @apply transition-colors duration-(--duration-hover) ease-(--ease-atelier) hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 nuit:hover:bg-[#CDD6F4]/5;
+}
+
+@utility atelier-filter-trigger {
+  @apply transition-colors duration-(--duration-menu) ease-(--ease-atelier) hover:border-primary-900 hover:text-primary-900 dark:hover:border-primary-400 dark:hover:text-primary-400;
+}
+
+@utility atelier-filter-option {
+  @apply u-h4 min-h-11 md:min-h-[34px] px-4 flex items-center whitespace-nowrap transition-colors duration-(--duration-hover) ease-(--ease-atelier) hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 nuit:hover:bg-[#CDD6F4]/5;
 }
 
 @utility glass-fluted {
@@ -394,10 +433,78 @@ header a[href="https://ui.nuxt.com"] {
   @apply u-h4 mb-3;
   font-weight: 500;
 }
+.project-description .prose h1,
+.project-description .prose h2,
+.project-description .prose h3,
+.project-description .prose h4 {
+  color: #121212 !important;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  -webkit-text-stroke: 0 !important;
+}
+.project-description .prose h3 {
+  color: #050505 !important;
+  letter-spacing: 0;
+  opacity: 1;
+  text-transform: none;
+}
+.project-description .prose h1 {
+  margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  .project-description .prose h1 {
+    font-size: 14px;
+  }
+}
+.doux .project-description .prose h1,
+.doux .project-description .prose h2,
+.doux .project-description .prose h3,
+.doux .project-description .prose h4 {
+  color: #4A4443 !important;
+}
+.dark .project-description .prose h1,
+.dark .project-description .prose h2,
+.dark .project-description .prose h3,
+.dark .project-description .prose h4 {
+  color: #FFFFFF !important;
+}
+.nuit .project-description .prose h1,
+.nuit .project-description .prose h2,
+.nuit .project-description .prose h3,
+.nuit .project-description .prose h4 {
+  color: #CDD6F4 !important;
+}
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a {
+  color: inherit;
+  cursor: default;
+  font-weight: inherit;
+  opacity: 1;
+  pointer-events: none;
+  text-decoration: none;
+  transition: none;
+}
+.prose h1 a:hover,
+.prose h2 a:hover,
+.prose h3 a:hover,
+.prose h4 a:hover {
+  color: inherit;
+  opacity: 1;
+}
 .prose p,
 .prose li {
-  @apply u-body mb-4;
+  @apply u-body mb-3;
   line-height: 1.58;
+}
+.project-description .prose p {
+  max-width: 34rem;
+}
+.project-description .prose p + p {
+  margin-top: 0.85rem;
 }
 .prose strong {
   font-weight: 500;

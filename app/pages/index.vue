@@ -105,7 +105,10 @@ useSeoMeta({
 const route = useRoute();
 const scrollProgress = ref(0);
 const PROJECTS_GRID_SCROLL_OFFSET = 160;
+const HERO_SCROLL_DURATION = 1900;
 let activeScrollFrame: number | null = null;
+let restoreScrollBehavior: (() => void) | null = null;
+const isHeroScrollRunning = ref(false);
 
 const getMotionDuration = (name: string, fallback: number) => {
   if (!import.meta.client) return fallback;
@@ -207,42 +210,69 @@ const cancelActiveScroll = () => {
 
   cancelAnimationFrame(activeScrollFrame);
   activeScrollFrame = null;
+
+  if (restoreScrollBehavior) {
+    restoreScrollBehavior();
+    restoreScrollBehavior = null;
+  }
 };
 
-const animateDesktopScrollTo = (targetPosition: number, duration = getMotionDuration('--duration-page', 900)) => {
+const animateScrollTo = (
+  targetPosition: number,
+  duration = getMotionDuration('--duration-page', 900),
+  onComplete?: () => void
+) => {
   if (!import.meta.client) return;
 
+  const scroller = document.scrollingElement || document.documentElement;
   const top = Math.max(0, targetPosition);
-  const startPosition = window.scrollY;
+  const startPosition = scroller.scrollTop;
   const distance = top - startPosition;
-  const shouldAnimate = window.matchMedia('(min-width: 768px)').matches
-    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    && Math.abs(distance) > 2;
+  const scrollDuration = Math.max(1200, duration);
+  const shouldAnimate = Math.abs(distance) > 2 && scrollDuration > 0;
 
   cancelActiveScroll();
 
   if (!shouldAnimate) {
-    window.scrollTo({ top, behavior: 'smooth' });
+    scroller.scrollTop = top;
+    onComplete?.();
     return;
   }
 
+  const root = document.documentElement;
+  const body = document.body;
+  const previousRootScrollBehavior = root.style.scrollBehavior;
+  const previousBodyScrollBehavior = body.style.scrollBehavior;
+
+  root.style.scrollBehavior = 'auto';
+  body.style.scrollBehavior = 'auto';
+  restoreScrollBehavior = () => {
+    root.style.scrollBehavior = previousRootScrollBehavior;
+    body.style.scrollBehavior = previousBodyScrollBehavior;
+  };
+
   const startTime = performance.now();
-  const easeInOutCubic = (progress: number) => {
-    return progress < 0.5
-      ? 4 * progress * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+  const easeInOutSine = (progress: number) => {
+    return -(Math.cos(Math.PI * progress) - 1) / 2;
   };
 
   const step = (currentTime: number) => {
-    const progress = Math.min(1, (currentTime - startTime) / duration);
-    window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+    const progress = Math.min(1, (currentTime - startTime) / scrollDuration);
+    const nextPosition = startPosition + distance * easeInOutSine(progress);
+    scroller.scrollTop = nextPosition;
 
     if (progress < 1) {
       activeScrollFrame = requestAnimationFrame(step);
       return;
     }
 
+    scroller.scrollTop = top;
     activeScrollFrame = null;
+    if (restoreScrollBehavior) {
+      restoreScrollBehavior();
+      restoreScrollBehavior = null;
+    }
+    onComplete?.();
   };
 
   activeScrollFrame = requestAnimationFrame(step);
@@ -253,7 +283,7 @@ const scrollToSection = (targetId: string, offset: number = 96, duration = 1300)
   if (!target) return;
 
   const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
-  animateDesktopScrollTo(targetPosition, duration);
+  animateScrollTo(targetPosition, duration);
 };
 
 const scrollToContact = () => {
@@ -265,7 +295,16 @@ const scrollToProjects = () => {
 };
 
 const scrollToProjectsFromHero = () => {
-  scrollToSection('projects-grid', PROJECTS_GRID_SCROLL_OFFSET, getMotionDuration('--duration-scroll', 2000));
+  if (isHeroScrollRunning.value) return;
+
+  const target = document.getElementById('projects-grid');
+  if (!target) return;
+
+  isHeroScrollRunning.value = true;
+  const targetPosition = target.getBoundingClientRect().top + window.scrollY - PROJECTS_GRID_SCROLL_OFFSET;
+  animateScrollTo(targetPosition, HERO_SCROLL_DURATION, () => {
+    isHeroScrollRunning.value = false;
+  });
 };
 
 watchEffect(() => {

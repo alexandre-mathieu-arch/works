@@ -2,7 +2,7 @@
   <div class="pt-0 pb-6">
     <section class="mb-12 max-w-3xl">
       <h1 class="u-h2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">À propos</h1>
-      <p class="u-body mt-5 max-w-2xl text-[#121212]/70 dark:text-white/70 doux:text-[#4A4443]/75 nuit:text-[#CDD6F4]/75">
+      <p class="u-body mt-5 max-w-2xl font-bold text-[#121212]/70 dark:text-white/70 doux:text-[#4A4443]/75 nuit:text-[#CDD6F4]/75">
         Une pratique attentive aux lieux, aux usages et aux atmosphères, avec une exigence constructive simple et durable.
       </p>
     </section>
@@ -11,25 +11,25 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 items-start">
       <!-- Column 1: Equipe -->
       <div class="opacity-100 pt-0 order-1">
-        <div v-if="equipe" class="prose dark:prose-invert max-w-none pb-4">
+        <div v-if="equipe" class="prose dark:prose-invert w-full max-w-[280px] pb-4 md:max-w-[300px] xl:max-w-[320px]">
           <ContentRenderer :value="equipe" />
         </div>
       </div>
 
       <!-- Column 2: Pratique -->
       <div class="opacity-100 order-3 md:order-2">
-        <div v-if="pratique" class="prose dark:prose-invert max-w-none pb-4">
+        <div v-if="pratique" class="prose dark:prose-invert w-full max-w-[280px] pb-4 md:max-w-[300px] xl:max-w-[320px]">
           <ContentRenderer :value="pratique" />
         </div>
       </div>
 
       <!-- Column 3: Portrait -->
       <div class="opacity-100 order-2 md:order-3 md:sticky md:top-24">
-        <div class="overflow-hidden w-full aspect-[4/5]">
+        <div class="w-full max-w-[280px] overflow-hidden aspect-square md:max-w-[300px] xl:max-w-[320px]">
           <NuxtImg 
             src="/profil.jpg" 
             alt="Alexandre Mathieu" 
-            class="w-full h-full object-cover scale-125 origin-center"
+            class="w-full h-full object-cover object-[center_32%] scale-[1.7] origin-[50%_36%]"
           />
         </div>
       </div>

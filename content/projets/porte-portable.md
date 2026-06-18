@@ -15,14 +15,11 @@ pays: ["France"]
 materiaux: ["Multiplis d'okoumé", "Cuir de vachette", "Inox"]
 phase: "Prototype"
 statut: "Réalisé"
+workflow: ""
 ---
 
 Le porte-portable accompagne la création d’un bureau en bois et acier. Il prolonge la même recherche : un objet simple, précis, sans mécanisme superflu.
 
-### Matières
-
 Le multiplis d’okoumé forme la structure, le cuir protège le contact avec le téléphone et l’inox rappelle les piétements du bureau. Les assemblages restent lisibles et volontairement sobres.
-
-### Usage
 
 La géométrie permet quatre positions : deux inclinaisons et deux orientations, portrait ou paysage. L’objet est fabriqué à la main, avec une économie de moyens au service de la fonctionnalité.
