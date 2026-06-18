@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 interface ProjectHoverData {
   title: string;
@@ -8,9 +8,9 @@ interface ProjectHoverData {
   pays?: string[];
 }
 
-const hoveredProject = ref<ProjectHoverData | null>(null);
-
 export const useHoverProject = () => {
+  const hoveredProject = useState<ProjectHoverData | null>('hovered-project', () => null);
+
   const setHoveredProject = (project: ProjectHoverData | null) => {
     hoveredProject.value = project;
   };

@@ -7,25 +7,31 @@
     @pointerleave="handleProjectPointerLeave"
     @focus="handleProjectFocus"
     @blur="handleProjectBlur"
-    @click="isRevealed ? addVisited(project.path) : (e) => e.preventDefault()"
+    @click.capture="handleProjectClick"
   >
     <div class="relative w-full aspect-square overflow-hidden" ref="parallaxRef">
       <template v-if="displayImage">
-        <!-- Parallax Wrapper -->
-        <div 
-          class="absolute inset-0 w-full h-full"
-          :style="getParallaxStyle(parallaxRef)"
+        <div
+          data-project-media
+          class="absolute inset-0 overflow-hidden"
+          :class="{ '[view-transition-name:project-media]': isTransitionTarget }"
         >
-          <!-- Image with smooth zoom and grayscale -->
-          <div class="h-full w-full origin-center will-change-transform [transform:translate3d(0,0,0)_scale(1)] transition-transform duration-(--duration-zoom-card) ![transition-duration:var(--duration-zoom-card)] ease-(--ease-atelier-soft) group-hover/card:[transform:translate3d(0,0,0)_scale(1.14)]">
-            <NuxtImg
-              :src="displayImage"
-              :alt="project.title"
-              format="webp"
-              width="800"
-              height="800"
-              class="w-full h-full object-cover grayscale-[0.28] transition-[filter] duration-(--duration-zoom-card) ![transition-duration:var(--duration-zoom-card)] ease-(--ease-atelier-soft) group-hover/card:grayscale-0"
-            />
+          <!-- Parallax Wrapper -->
+          <div
+            class="absolute inset-0 w-full h-full"
+            :style="getParallaxStyle(parallaxRef)"
+          >
+            <!-- Image with smooth zoom and grayscale -->
+            <div class="h-full w-full origin-center will-change-transform [transform:translate3d(0,0,0)_scale(1)] transition-transform duration-(--duration-zoom-card) ![transition-duration:var(--duration-zoom-card)] ease-(--ease-atelier-soft) group-hover/card:[transform:translate3d(0,0,0)_scale(1.14)]">
+              <NuxtImg
+                :src="displayImage"
+                :alt="project.title"
+                format="webp"
+                width="800"
+                height="800"
+                class="w-full h-full object-cover grayscale-[0.28] transition-[filter] duration-(--duration-zoom-card) ![transition-duration:var(--duration-zoom-card)] ease-(--ease-atelier-soft) group-hover/card:grayscale-0"
+              />
+            </div>
           </div>
         </div>
       </template>
@@ -59,6 +65,8 @@ const { setHoveredProject } = useHoverProject();
 const { addVisited } = useVisitedProjects();
 const { getParallaxStyle } = useParallax(10);
 const { isRevealed } = useRevealedState();
+const { state: projectTransition, openProject } = useProjectTransition();
+const SHARED_MEDIA_CLASS = '[view-transition-name:project-media]';
 
 const parallaxRef = ref<HTMLElement | null>(null);
 
@@ -102,6 +110,28 @@ const displayImage = computed(() => {
   return imagePath;
 });
 
+const isTransitionTarget = computed(() => {
+  return projectTransition.value.targetProjectPath === props.project.path;
+});
+
+const handleProjectClick = (event: MouseEvent) => {
+  if (!isRevealed.value) {
+    event.preventDefault();
+    event.stopPropagation();
+    return;
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-project-media]').forEach(element => {
+    element.classList.remove(SHARED_MEDIA_CLASS);
+  });
+  const selectedMedia = (event.currentTarget as HTMLElement)
+    .querySelector<HTMLElement>('[data-project-media]');
+  selectedMedia?.classList.add(SHARED_MEDIA_CLASS);
+
+  openProject(props.project.path);
+  addVisited(props.project.path);
+};
+
 const canUseFineHover = () => {
   if (!import.meta.client) return false;
 
@@ -130,7 +160,3 @@ const handleProjectBlur = () => {
   setHoveredProject(null);
 };
 </script>
-
-<style scoped>
-/* Styles personnalisés si nécessaire */
-</style>

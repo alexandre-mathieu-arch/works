@@ -19,19 +19,12 @@
         leave-to-class="opacity-0 -translate-y-1"
       >
         <div 
-          v-if="hoveredProjectTitle || (!hideMainTitle && title) || (hideMainTitle && title)" 
-          :key="hoveredProjectTitle || (typeof title === 'string' ? title : title.main)"
-          class="text-[18px] sm:text-[20px] font-bold leading-none text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
+          v-if="displayedTitle"
+          :key="displayedTitle"
+          class="leading-none text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
+          :class="isProjectPage ? 'text-[20px] font-semibold md:text-[24px]' : 'text-[18px] font-semibold sm:text-[20px]'"
         >
-          <template v-if="hoveredProjectTitle">
-            {{ hoveredProjectTitle }}
-          </template>
-          <template v-else-if="!hideMainTitle && title">
-            {{ typeof title === 'string' ? title : title.main }}
-          </template>
-          <template v-else-if="hideMainTitle && title">
-            {{ typeof title === 'string' ? title : '' }}
-          </template>
+          {{ displayedTitle }}
         </div>
       </Transition>
     </div>
@@ -334,6 +327,7 @@ import SequenceCounter from '~/components/SequenceCounter.vue';
 const { hoveredProject, hoveredProjectTitle } = useHoverProject();
 const { clearVisited, visitedProjects } = useVisitedProjects();
 const { currentImageIndex: carouselCurrentImageIndex, totalImages, setCurrentImageIndex } = useCarouselState();
+const { navigateBetweenProjects } = useProjectTransition();
 
 const props = defineProps<{
   title: string | { main: string; sub?: string };
@@ -383,12 +377,20 @@ const nextProject = computed(() => {
 });
 
 const isProjectPage = computed(() => route.path.startsWith('/projets/'));
+const displayedTitle = computed(() => {
+  const pageTitle = typeof props.title === 'string' ? props.title : props.title?.main;
+
+  if (isProjectPage.value) return pageTitle || '';
+  if (hoveredProjectTitle.value) return hoveredProjectTitle.value;
+  if (!props.hideMainTitle) return pageTitle || '';
+  return typeof props.title === 'string' ? props.title : '';
+});
 
 const setTransitionDirection = (direction: 'next' | 'prev') => {
-  if (import.meta.client) {
-    document.documentElement.classList.remove('transition-next', 'transition-prev');
-    document.documentElement.classList.add(`transition-${direction}`);
-  }
+  const targetProject = direction === 'next' ? nextProject.value : prevProject.value;
+  if (!targetProject?.path) return;
+
+  navigateBetweenProjects(route.path, targetProject.path, direction);
 };
 
 const filterContainer = ref<HTMLElement | null>(null);

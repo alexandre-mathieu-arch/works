@@ -21,7 +21,7 @@
               class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-(--duration-menu) ease-(--ease-atelier) hover:border-[#121212] dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/25 nuit:border-[#CDD6F4]/20 nuit:hover:border-[#CDD6F4]/45 text-left"
             >
               <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-(--duration-menu) ease-(--ease-atelier)">
-                <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Démarrer un projet ?</span>
+                <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Parlons de votre projet</span>
               </div>
             </button>
             <ProjectCard :project="project" />
@@ -30,7 +30,7 @@
               class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-(--duration-menu) ease-(--ease-atelier) hover:border-[#121212] dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/25 nuit:border-[#CDD6F4]/20 nuit:hover:border-[#CDD6F4]/45 text-left"
             >
               <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-(--duration-menu) ease-(--ease-atelier)">
-                <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Démarrer un projet ?</span>
+                <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Parlons de votre projet</span>
               </div>
             </button>
           </template>
@@ -49,7 +49,7 @@
         @click="scrollToContact"
         class="xl:hidden mt-8 flex min-h-11 w-full items-center justify-between border border-[#121212]/20 px-4 py-3 text-left transition-colors duration-(--duration-hover) ease-(--ease-atelier) hover:border-[#121212]/50 dark:border-white/20 dark:hover:border-white/45 doux:border-[#4A4443]/20 nuit:border-[#CDD6F4]/20"
       >
-        <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Demarrer un projet ?</span>
+        <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]">Parlons de votre projet</span>
         <span class="u-h3 dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]" aria-hidden="true">-&gt;</span>
       </button>
 
@@ -103,6 +103,7 @@ useSeoMeta({
 })
 
 const route = useRoute();
+const { state: projectTransition } = useProjectTransition();
 const scrollProgress = ref(0);
 const PROJECTS_GRID_SCROLL_OFFSET = 160;
 const HERO_SCROLL_DURATION = 1900;
@@ -146,8 +147,11 @@ const jumpToProjects = (attempt = 0) => {
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
   handleScroll();
-  
-  if (shouldOpenProjectsGrid()) {
+
+  const isReturningFromProject = projectTransition.value.mode === 'close'
+    && projectTransition.value.hasGridScrollPosition;
+
+  if (shouldOpenProjectsGrid() && !isReturningFromProject) {
     // Immediate jump if view=grid is present
     setTimeout(() => jumpToProjects(), 50);
   } else if (route.query.scroll === 'contact') {

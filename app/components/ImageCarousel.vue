@@ -4,7 +4,14 @@
     @touchstart.passive="handleTouchStart"
     @touchend.passive="handleTouchEnd"
   >
-    <Transition :name="transitionName">
+    <Transition
+      enter-active-class="absolute inset-0 transition-[transform,opacity] duration-(--duration-carousel) ease-(--ease-atelier-soft) will-change-transform"
+      enter-to-class="translate-x-0 opacity-100"
+      leave-active-class="absolute inset-0 transition-[transform,opacity] duration-(--duration-carousel) ease-(--ease-atelier-soft) will-change-transform"
+      leave-from-class="translate-x-0 opacity-100"
+      :enter-from-class="transitionName === 'slide-left' ? 'translate-x-full opacity-100' : '-translate-x-full opacity-100'"
+      :leave-to-class="transitionName === 'slide-left' ? '-translate-x-full opacity-100' : 'translate-x-full opacity-100'"
+    >
       <NuxtImg
         v-if="images && images.length > 0 && images[currentIndex]"
         :key="currentIndex"
@@ -126,43 +133,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-  inset: 0;
-  position: absolute;
-  transition:
-    transform var(--duration-carousel) var(--ease-atelier),
-    opacity var(--duration-carousel) var(--ease-atelier);
-  will-change: transform, opacity;
-}
-
-.slide-left-enter-from {
-  opacity: 1;
-  transform: translate3d(100%, 0, 0);
-}
-.slide-left-enter-to,
-.slide-left-leave-from,
-.slide-right-enter-to,
-.slide-right-leave-from {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-.slide-left-leave-to {
-  opacity: 1;
-  transform: translate3d(-100%, 0, 0);
-}
-
-.slide-right-enter-from {
-  opacity: 1;
-  transform: translate3d(-100%, 0, 0);
-}
-.slide-right-leave-to {
-  opacity: 1;
-  transform: translate3d(100%, 0, 0);
-}
-
 /* Custom cursors using inline SVGs */
 .cursor-left {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E") 16 16, auto;

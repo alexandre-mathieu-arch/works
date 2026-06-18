@@ -18,11 +18,10 @@ pays: ["France", "Bretagne"]
 agence: "Brule Architectes Associés"
 lieu: "Quimper"
 surface: "850 m²"
-phase réalisées: "Esquisse, APS, APD, Permis de Construire, Plan détaillés, Coordination des bureau d'études"
+phase réalisées: "Esquisse, APS, APD, permis de construire, plans détaillés, coordination des bureaux d'études"
 statut: "Réalisé"
 workflow: ""
 ---
-# Projet réalisé au sein de l'agence Brulé Architectes Associés, Quimper
 
 Cap-Horn est un projet d’agence développé au sein de Brulé Architectes Associés. Situé sur une parcelle étroite à Quimper, il répond par une organisation verticale claire, capable de superposer plusieurs usages sans brouiller la lecture du bâtiment.
 
