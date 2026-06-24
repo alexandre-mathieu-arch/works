@@ -290,6 +290,7 @@ type HeaderLink = {
 
 const links: HeaderLink[] = [
   { label: 'Projets', to: '/' },
+  { label: 'Portfolio', to: '/portfolio' },
   { label: 'À propos', to: '/about' },
   { label: 'Corpus', to: '/corpus' },
   { label: 'Art', to: '/art' }

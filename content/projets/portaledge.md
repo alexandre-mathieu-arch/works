@@ -3,7 +3,20 @@ title: "Portaledge"
 date: "2020"
 draft: false
 images:
+  - "/images/projects/portaledge/salle-bain.jpg"
+  - "/images/projects/portaledge/salle-bain2.jpg"
   - "/images/projects/portaledge/studiotetu.jpg"
+details:
+  - "/images/projects/portaledge/plan-rdc.jpg"
+portfolio:
+  cover: "/images/projects/portaledge/salle-bain.jpg"
+  story: "/images/projects/portaledge/salle-bain2.jpg"
+  pages:
+    - layout: "duo"
+      images:
+        - path: "/images/projects/portaledge/studiotetu.jpg"
+        - path: "/images/projects/portaledge/plan-rdc.jpg"
+          zoom: true
 description: "Un studio suspendu compact, pensé comme un refuge de travail minimal, entre verticalité, silence et concentration."
 typologies: ["Résidentiel"]
 tailles: ["S"]

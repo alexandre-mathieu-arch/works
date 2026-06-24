@@ -8,6 +8,10 @@ images:
   - "/images/projects/atrium/night-shift.jpg"
   - "/images/projects/atrium/night-shift-bis.jpg"
   - "/images/projects/atrium/perspective.jpg"
+portfolio:
+  cover: "/images/projects/atrium/night-shift.jpg"
+  story: "/images/projects/atrium/night-shift-bis.jpg"
+  pages: []
 description: "Des bulles en toile tendue introduisent des espaces calmes et confidentiels au cœur d’un atrium bancaire très orthogonal."
 typologies: ["Tertiaire", "Bureau"]
 tailles: ["L"]

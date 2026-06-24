@@ -11,6 +11,30 @@ images:
   - "/images/projects/coliving-etel/coliving-etel-06-etage.jpg"
   - "/images/projects/coliving-etel/coliving-etel-07-comble.jpg"
   - "/images/projects/coliving-etel/coliving-etel-08-chambre-haute.jpg"
+portfolio:
+  cover: "/images/projects/coliving-etel/title-coliving.jpg"
+  story:
+    path: "/images/projects/coliving-etel/coliving-etel-02-entree.jpg"
+    zoom: true
+  pages:
+    - layout: "duo"
+      images:
+        - path: "/images/projects/coliving-etel/coliving-etel-03-situation.jpg"
+          zoom: true
+        - path: "/images/projects/coliving-etel/coliving-etel-04-masse.jpg"
+          zoom: true
+    - layout: "plans-equal"
+      images:
+        - path: "/images/projects/coliving-etel/coliving-etel-05-rdc.jpg"
+          zoom: true
+        - path: "/images/projects/coliving-etel/coliving-etel-06-etage.jpg"
+          zoom: true
+        - path: "/images/projects/coliving-etel/coliving-etel-07-comble.jpg"
+          zoom: true
+    - layout: "full"
+      images:
+        - path: "/images/projects/coliving-etel/coliving-etel-08-chambre-haute.jpg"
+          zoom: true
 description: "Une maison partagée à Étel, pensée pour associer intimité, espaces communs et relation apaisée au paysage côtier."
 typologies: ["Résidentiel"]
 tailles: ["M"]

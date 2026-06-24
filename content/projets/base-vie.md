@@ -5,6 +5,8 @@ draft: false
 tags: ["chantier", "éphémère"]
 images:
   - "/images/projects/base-vie/base-vie.png"
+portfolio:
+  enabled: false
 description: "Une base vie de chantier pensée comme un lieu clair, robuste et confortable, au service des équipes sur site."
 typologies: ["Éphémère"]
 tailles: ["S"]

@@ -16,6 +16,27 @@ images:
   - "/images/projects/maison-bretonne/maison-bretonne-photogrammetrie.jpg"
   - "/images/projects/maison-bretonne/non-visible-detail-volet-roulant.jpg"
   - "/images/projects/maison-bretonne/non-visible-facades.jpg"
+portfolio:
+  cover: "/images/projects/maison-bretonne/maison-bretonne-ext.jpg"
+  story: "/images/projects/maison-bretonne/maison-bretonne-int.jpg"
+  pages:
+    - layout: "full"
+      images:
+        - path: "/images/projects/maison-bretonne/maison-bretonne-avant.jpg"
+    - layout: "plans-equal-quad"
+      images:
+        - path: "/images/projects/maison-bretonne/maison-bretonne-rdc.jpg"
+        - path: "/images/projects/maison-bretonne/maison-bretonne-etage.jpg"
+        - path: "/images/projects/maison-bretonne/maison-bretonne-facade-sud.jpg"
+        - path: "/images/projects/maison-bretonne/maison-bretonne-facade-ouest.jpg"
+    - layout: "full"
+      images:
+        - path: "/images/projects/maison-bretonne/maison-bretonne-extrait-coupes.jpg"
+          zoom: true
+    - layout: "full-caption"
+      images:
+        - path: "/images/projects/maison-bretonne/maison-bretonne-photogrammetrie.jpg"
+          caption: "Photogrammétrie de façade"
 date: "2020"
 tags: ["rénovation", "maison", "bois", "zinc"]
 typologies: ["Résidentiel"]

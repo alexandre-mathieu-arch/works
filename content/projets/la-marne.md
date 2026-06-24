@@ -20,6 +20,26 @@ details:
   - "/images/projects/la-marne/facade-sud.jpg"
   - "/images/projects/la-marne/coupe.jpg"
   - "/images/projects/la-marne/abris-velo.jpg"
+portfolio:
+  cover: "/images/projects/la-marne/av-marne-maquette.jpg"
+  story: "/images/projects/la-marne/av-marne-rendu-ext.jpg"
+  pages:
+    - layout: "full"
+      images:
+        - path: "/images/projects/la-marne/existant.jpg"
+    - layout: "plans-feature"
+      images:
+        - path: "/images/projects/la-marne/plan-niveau-axo.jpg"
+          crop: "right-half"
+          zoom: true
+        - path: "/images/projects/la-marne/rdc.jpg"
+          zoom: true
+        - path: "/images/projects/la-marne/niveau1.jpg"
+          zoom: true
+    - layout: "full"
+      images:
+        - path: "/images/projects/la-marne/facade-sud.jpg"
+          zoom: true
 description: "Situé dans un jardin en intérieur d'îlot urbain, ce local commun a été transformé en résidence de 5 logements, du T2 au T4. Une renaissance architecturale privilégiant la lumière et l'intimité."
 typologies: ["Résidentiel"]
 tailles: ["M"]

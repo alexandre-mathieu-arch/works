@@ -1,8 +1,8 @@
 <template>
   <div class="mt-20 border-t border-[#121212]/10 pt-10 dark:border-white/10 doux:border-[#4A4443]/10 nuit:border-[#CDD6F4]/10">
-    <h2 class="u-h3 mb-8 w-full max-w-[280px] uppercase text-[#121212]/90 md:max-w-[300px] xl:max-w-[320px] dark:text-white/90 doux:text-[#4A4443]/90 nuit:text-[#CDD6F4]/90">Collaborations & Références</h2>
+    <h2 class="u-h3 mb-8 w-full max-w-[760px] uppercase text-[#121212]/90 dark:text-white/90 doux:text-[#4A4443]/90 nuit:text-[#CDD6F4]/90">Collaborations & Références</h2>
     
-    <div class="w-full max-w-[280px] space-y-8 md:max-w-[300px] xl:max-w-[320px]">
+    <div class="collaborations-copy w-full max-w-[760px] space-y-8">
       <!-- 2024-2025 -->
       <div>
         <p class="u-legend mb-1 uppercase">2024 — 2025</p>
@@ -63,3 +63,11 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.collaborations-copy {
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+</style>

@@ -1,185 +1,206 @@
 \documentclass[10pt,a5paper,landscape]{article}
-
-% --- Packages ---
 \usepackage[french]{babel}
 \usepackage{fontspec}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
-\usepackage{tocloft}
-\usepackage{multicol}
 \usepackage{hyperref}
 \usepackage{microtype}
 \usepackage{ragged2e}
+\usepackage{multicol}
+\usepackage{tikz}
+\usetikzlibrary{calc}
 
-% --- Page ---
-\geometry{
-    left=1.05cm,
-    right=1.05cm,
-    top=0.95cm,
-    bottom=0.95cm,
-    footskip=0.45cm
-}
+\geometry{left=1cm,right=1cm,top=0.85cm,bottom=0.8cm,footskip=0.35cm}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.42em}
-\setlength{\columnsep}{1.2cm}
+\setlength{\parskip}{0.35em}
 \setlength{\emergencystretch}{2em}
-\hyphenpenalty=10000
-\exhyphenpenalty=10000
+\setlength{\columnsep}{0.9cm}
+\hyphenpenalty=8500
+\exhyphenpenalty=8500
 
-% --- Couleurs ---
-\definecolor{ink}{HTML}{121212}
-\definecolor{muted}{HTML}{6F6F6F}
-\definecolor{soft}{HTML}{A9A9A9}
-\definecolor{rulegray}{HTML}{D9D9D9}
-\definecolor{paper}{HTML}{FFFFFF}
+\definecolor{ink}{HTML}{111111}
+\definecolor{paper}{HTML}{F3F1EC}
+\definecolor{acid}{HTML}{D7FF37}
+\definecolor{muted}{HTML}{777570}
+\definecolor{soft}{HTML}{B6B2AA}
+\definecolor{rulegray}{HTML}{D8D4CB}
+\pagecolor{paper}
+\color{ink}
 
-% --- Typographie ---
-\setmainfont{Satoshi-Regular.otf}[
-    Path = ../font/,
-    BoldFont = Satoshi-Bold.otf,
-    ItalicFont = Satoshi-Italic.otf
-]
-\newfontfamily\displayfont{Satoshi-Bold.otf}[Path = ../font/]
-\newfontfamily\mediumfont{Satoshi-Medium.otf}[Path = ../font/, BoldFont = Satoshi-Bold.otf]
-\newfontfamily\lightfont{Satoshi-Light.otf}[Path = ../font/, BoldFont = Satoshi-Bold.otf, ItalicFont = Satoshi-Italic.otf]
+\setmainfont{Satoshi-Regular.otf}[Path=../font/,BoldFont=Satoshi-Bold.otf,ItalicFont=Satoshi-Italic.otf]
+\newfontfamily\displayfont{Satoshi-Black.otf}[Path=../font/]
+\newfontfamily\mediumfont{Satoshi-Medium.otf}[Path=../font/,BoldFont=Satoshi-Bold.otf]
+\newfontfamily\lightfont{Satoshi-Light.otf}[Path=../font/,BoldFont=Satoshi-Bold.otf,ItalicFont=Satoshi-Italic.otf]
 
-% --- Liens ---
-\hypersetup{
-    colorlinks=true,
-    linkcolor=ink,
-    urlcolor=muted,
-    pdfauthor={Alexandre Mathieu},
-    pdftitle={Portfolio 2019-2026}
-}
-
-% --- Sommaire ---
-\renewcommand{\contentsname}{}
-\renewcommand{\cftsecfont}{\fontsize{7.4}{9}\selectfont\lightfont\color{ink}}
-\renewcommand{\cftsecpagefont}{\fontsize{7.4}{9}\selectfont\lightfont\color{muted}}
-\renewcommand{\cftsecleader}{\textcolor{rulegray}{\cftdotfill{0.45}}}
-\renewcommand{\cftsecindent}{0pt}
-\setlength{\cftbeforesecskip}{0.18cm}
-
-% --- Entete et pied ---
+\hypersetup{colorlinks=true,linkcolor=ink,urlcolor=ink,pdfauthor={Alexandre Mathieu},pdftitle={Portfolio V2 2018-2026}}
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-\fancyfoot[L]{\fontsize{5.8}{7}\selectfont\lightfont\color{soft} Alexandre Mathieu}
-\fancyfoot[R]{\fontsize{5.8}{7}\selectfont\lightfont\color{soft} \thepage}
+\fancyfoot[L]{\fontsize{5.3}{6.4}\selectfont\lightfont\color{muted} ALEXANDRE MATHIEU / PORTFOLIO}
+\fancyfoot[R]{\fontsize{5.3}{6.4}\selectfont\lightfont\color{muted} \thepage}
 
-\newcommand{\hairline}{\textcolor{rulegray}{\rule{\linewidth}{0.18pt}}}
+\newcommand{\hairline}{\textcolor{rulegray}{\rule{\linewidth}{0.25pt}}}
+\newcommand{\fullBleedImage}[1]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=center,inner sep=0] at (current page.center)
+      {\includegraphics[width=\paperwidth,height=\paperheight]{#1}};
+  \end{tikzpicture}%
+}
 
 \newcommand{\projectMetaItem}[2]{%
-    {\fontsize{5.8}{7}\selectfont\mediumfont\color{soft}\MakeUppercase{#1}}\par
-    {\fontsize{7.2}{9}\selectfont\lightfont\color{ink}#2}\par
-    \vspace{0.28cm}
+  \begin{minipage}[t]{0.47\linewidth}
+    {\fontsize{4.9}{5.8}\selectfont\mediumfont\color{muted}\MakeUppercase{#1}}\par
+    \vspace{0.04cm}
+    {\fontsize{6.2}{7.3}\selectfont\lightfont\color{ink}#2}\par
+    \vspace{0.20cm}
+  \end{minipage}\hfill
 }
+\newcommand{\leadText}[1]{{\fontsize{8.2}{9.8}\selectfont\mediumfont\color{ink}#1}\par\vspace{0.25cm}}
+\newcommand{\projectSubheading}[1]{\vspace{0.11cm}{\fontsize{6.3}{7.6}\selectfont\mediumfont\color{ink}\MakeUppercase{#1}}\par\vspace{-0.02cm}}
 
-\newcommand{\leadText}[1]{%
-    {\fontsize{8.2}{10.4}\selectfont\mediumfont\color{ink}#1}\par\vspace{0.22cm}
-}
-
-\newcommand{\projectSubheading}[1]{%
-    \vspace{0.15cm}
-    {\fontsize{7.2}{9}\selectfont\mediumfont\color{ink}#1}\par
-    \vspace{-0.08cm}
+\newcommand{\portfolioTocEntry}[3]{%
+  \hyperlink{project-#1}{%
+    \noindent
+    \begin{minipage}[c]{0.10\linewidth}{\fontsize{6.2}{7}\selectfont\mediumfont\color{white!50}#1}\end{minipage}
+    \begin{minipage}[c]{0.70\linewidth}{\fontsize{8.8}{9.7}\selectfont\mediumfont\color{white}#2}\end{minipage}
+    \begin{minipage}[c]{0.16\linewidth}\raggedleft{\fontsize{5.8}{6.8}\selectfont\lightfont\color{white!50}#3}\end{minipage}
+  }\par\vspace{0.10cm}
+  \textcolor{white!18}{\rule{\linewidth}{0.2pt}}\par\vspace{0.10cm}
 }
 
 \newcommand{\projectIntroPage}[5]{%
-    \clearpage
-    \thispagestyle{plain}
-    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#1}\hfill
-    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#3}\par
-    \vspace{0.18cm}
-    {\fontsize{19}{21}\selectfont\displayfont\color{ink}#2}\par
-    \vspace{0.08cm}
-    {\fontsize{6.4}{8}\selectfont\lightfont\color{muted}#4}\par
-    \vspace{0.34cm}
-    \hairline
-    \vspace{0.56cm}
+  \clearpage\thispagestyle{empty}\hypertarget{project-#1}{}
+  \ifx&#5&\else\fullBleedImage{#5}\fi
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[ink,opacity=0.15] (current page.south west) rectangle (current page.north east);
+    \fill[ink,opacity=0.92] (current page.south west) rectangle ([xshift=12.2cm,yshift=4.15cm]current page.south west);
+    \node[anchor=north west,text=white,inner sep=0,text width=10.7cm]
+      at ([xshift=0.8cm,yshift=3.55cm]current page.south west) {%
+        {\fontsize{5.5}{6.5}\selectfont\mediumfont\color{acid}PROJET #1 \hfill #3}\par
+        \vspace{0.28cm}
+        {\fontsize{21}{20.5}\selectfont\displayfont\color{white}#2}\par
+        \vspace{0.20cm}
+        {\fontsize{6.2}{7.3}\selectfont\lightfont\color{white!72}#4}
+      };
+    \node[anchor=south east,rotate=90,text=white,inner sep=0]
+      at ([xshift=-0.33cm,yshift=0.55cm]current page.south east)
+      {\fontsize{4.8}{5.6}\selectfont\mediumfont IMAGE / TERRITOIRE / MATIERE};
+  \end{tikzpicture}\null
+}
+
+\long\def\projectStoryPage#1#2#3#4#5{%
+  \clearpage\thispagestyle{empty}
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[paper] (current page.south west) rectangle (current page.north east);
     \ifx&#5&\else
-        \begin{center}
-            \includegraphics[width=\linewidth,height=8.7cm,keepaspectratio]{#5}
-        \end{center}
+      \node[anchor=north east,inner sep=0] at (current page.north east)
+        {\includegraphics[width=9.7cm,height=14.8cm]{#5}};
     \fi
+    \fill[acid] ([xshift=-9.7cm]current page.north east) rectangle ([xshift=-9.52cm]current page.south east);
+    \node[anchor=north west,inner sep=0,text width=9.45cm]
+      at ([xshift=0.75cm,yshift=-0.65cm]current page.north west) {%
+        {\fontsize{5.3}{6.2}\selectfont\mediumfont\color{muted}#1 / NOTE DE PROJET}\par
+        \vspace{0.18cm}
+        {\fontsize{15.5}{16}\selectfont\displayfont\color{ink}#2}\par
+        \vspace{0.20cm}\hairline\par\vspace{0.28cm}
+        #3
+        \vspace{0.08cm}\hairline\par\vspace{0.30cm}
+        \RaggedRight{\fontsize{6.45}{8.0}\selectfont\lightfont\color{ink}#4}
+      };
+    \node[anchor=south west,inner sep=0,text=muted]
+      at ([xshift=0.75cm,yshift=0.40cm]current page.south west)
+      {\fontsize{4.8}{5.6}\selectfont\lightfont TEXTE + IMAGE / CONTEXTE ET INTENTION};
+  \end{tikzpicture}\null
 }
 
-\long\def\projectTextPage#1#2{%
-    \clearpage
-    \thispagestyle{plain}
-    \begin{minipage}[t]{0.27\linewidth}
-        #1
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{0.66\linewidth}
-        \RaggedRight
-        {\fontsize{7.35}{9.75}\selectfont\lightfont\color{ink}#2}
-    \end{minipage}
+\newcommand{\galleryLabel}[2]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[ink,opacity=0.90] ([xshift=0.45cm,yshift=0.42cm]current page.south west)
+      rectangle ([xshift=7.4cm,yshift=1.45cm]current page.south west);
+    \node[anchor=west,inner sep=0,text=white]
+      at ([xshift=0.72cm,yshift=0.93cm]current page.south west)
+      {\fontsize{5.2}{6.2}\selectfont\mediumfont #2\quad/\quad #1};
+  \end{tikzpicture}%
 }
-
-\newcommand{\galleryHeader}[2]{%
-    \clearpage
-    \thispagestyle{plain}
-    {\fontsize{5.8}{7}\selectfont\lightfont\color{soft}#2}\par
-    \vspace{0.12cm}
-    {\fontsize{10.5}{12}\selectfont\mediumfont\color{ink}#1}\par
-    \vspace{0.24cm}
-    \hairline
-    \vspace{0.45cm}
+\newcommand{\galleryFullPage}[3]{\clearpage\thispagestyle{empty}\fullBleedImage{#3}\galleryLabel{#1}{#2}\null}
+\newcommand{\gallerySplitPage}[4]{%
+  \clearpage\thispagestyle{empty}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0] at (current page.north west){\includegraphics[width=12.7cm,height=14.8cm]{#3}};
+    \node[anchor=north east,inner sep=0] at (current page.north east){\includegraphics[width=8.3cm,height=14.8cm]{#4}};
+    \fill[acid] ([xshift=12.62cm]current page.south west) rectangle ([xshift=12.78cm]current page.north west);
+  \end{tikzpicture}\galleryLabel{#1}{#2}\null
 }
-
-\newcommand{\galleryImage}[2]{%
-    \begin{minipage}[c][#2][c]{\linewidth}
-        \centering
-        \includegraphics[width=\linewidth,height=#2,keepaspectratio]{#1}
-    \end{minipage}
+\newcommand{\galleryTriptychPage}[5]{%
+  \clearpage\thispagestyle{empty}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0] at (current page.north west){\includegraphics[width=12.9cm,height=14.8cm]{#3}};
+    \node[anchor=north east,inner sep=0] at (current page.north east){\includegraphics[width=8.1cm,height=7.4cm]{#4}};
+    \node[anchor=south east,inner sep=0] at (current page.south east){\includegraphics[width=8.1cm,height=7.4cm]{#5}};
+    \fill[acid] ([xshift=12.82cm]current page.south west) rectangle ([xshift=12.98cm]current page.north west);
+    \fill[acid] ([xshift=12.9cm,yshift=7.32cm]current page.south west) rectangle ([yshift=7.48cm]current page.south east);
+  \end{tikzpicture}\galleryLabel{#1}{#2}\null
+}
+\newcommand{\galleryMosaicPage}[6]{%
+  \clearpage\thispagestyle{empty}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0] at (current page.north west){\includegraphics[width=12cm,height=14.8cm]{#3}};
+    \node[anchor=north east,inner sep=0] at (current page.north east){\includegraphics[width=9cm,height=4.934cm]{#4}};
+    \node[anchor=east,inner sep=0] at (current page.east){\includegraphics[width=9cm,height=4.934cm]{#5}};
+    \node[anchor=south east,inner sep=0] at (current page.south east){\includegraphics[width=9cm,height=4.934cm]{#6}};
+    \fill[acid] ([xshift=11.92cm]current page.south west) rectangle ([xshift=12.08cm]current page.north west);
+  \end{tikzpicture}\galleryLabel{#1}{#2}\null
 }
 
 \begin{document}
-
-% --- Couverture ---
 \begin{titlepage}
 \thispagestyle{empty}
-\vspace*{0.45cm}
-{\fontsize{8}{10}\selectfont\lightfont\color{muted} architecture / design / art}\par
-\vspace{1.85cm}
-{\fontsize{24}{26}\selectfont\displayfont\color{ink} Alexandre Mathieu}\par
-\vspace{0.35cm}
-\hairline
-\vspace{0.72cm}
-{\fontsize{13}{15}\selectfont\lightfont\color{ink} Portfolio}\par
-\vfill
-\begin{minipage}[t]{0.45\linewidth}
-    {\fontsize{7}{9}\selectfont\lightfont\color{muted}
-    alexandre.mat+w@protonmail.com\par
-    +33 6 58 21 53 00\par
-    \url{https://alexandre-mathieu-arch.github.io/works/}}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.2\linewidth}
-    \raggedleft
-    {\fontsize{7}{9}\selectfont\lightfont\color{muted}2019--2026}
-\end{minipage}
+\fullBleedImage{%%COVER_IMAGE%%}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[ink,opacity=0.36] (current page.south west) rectangle (current page.north east);
+  \fill[ink,opacity=0.95] (current page.south west) rectangle ([xshift=7.6cm]current page.north west);
+  \fill[acid] ([xshift=7.6cm]current page.south west) rectangle ([xshift=7.82cm]current page.north west);
+  \node[anchor=north west,inner sep=0,text width=6cm]
+    at ([xshift=0.75cm,yshift=-0.72cm]current page.north west) {%
+      {\fontsize{5.2}{6.2}\selectfont\mediumfont\color{acid}ARCHITECTURE / DESIGN / ART}\par
+      \vspace{1.05cm}
+      {\fontsize{24}{22.5}\selectfont\displayfont\color{white}ALEXANDRE\\MATHIEU}\par
+      \vspace{0.38cm}
+      {\fontsize{10}{11.5}\selectfont\lightfont\color{white!72}PORTFOLIO\\2018?2026}
+    };
+  \node[anchor=south west,inner sep=0,text width=5.9cm]
+    at ([xshift=0.75cm,yshift=0.72cm]current page.south west) {%
+      {\fontsize{5.4}{6.6}\selectfont\lightfont\color{white!75}
+      alexandre.mat+w@protonmail.com\par +33 6 58 21 53 00\par alexandre-mathieu-arch.github.io/works/}
+    };
+  \node[anchor=south east,rotate=90,inner sep=0,text=white]
+    at ([xshift=-0.34cm,yshift=0.58cm]current page.south east)
+    {\fontsize{4.8}{5.6}\selectfont\mediumfont SELECTED WORKS / %%PROJECT_COUNT%% PROJECTS};
+\end{tikzpicture}\null
 \end{titlepage}
 
-% --- Sommaire ---
-\clearpage
-\thispagestyle{plain}
-\vspace*{0.25cm}
-{\fontsize{16}{18}\selectfont\displayfont\color{ink} Sommaire}\par
-\vspace{0.28cm}
-\hairline
-\vspace{0.7cm}
+\clearpage\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[ink] (current page.south west) rectangle (current page.north east);
+  \fill[acid] (current page.north west) rectangle ([xshift=0.22cm]current page.south west);
+  \node[anchor=north west,inner sep=0,text width=18.5cm]
+    at ([xshift=0.72cm,yshift=-0.65cm]current page.north west) {%
+      {\fontsize{5.4}{6.3}\selectfont\mediumfont\color{acid}INDEX / SELECTED WORKS / 2018?2026}\par
+      \vspace{0.26cm}
+      {\fontsize{24}{23}\selectfont\displayfont\color{white}SOMMAIRE}\par
+      \vspace{0.28cm}\textcolor{white!20}{\rule{\linewidth}{0.25pt}}
+    };
+  \node[anchor=south east,inner sep=0,text=white!10]
+    at ([xshift=-0.28cm,yshift=0.1cm]current page.south east)
+    {\fontsize{57}{54}\selectfont\displayfont 00};
+\end{tikzpicture}
+\vspace*{3.28cm}
 \begin{multicols}{2}
-    \makeatletter
-    \@starttoc{toc}
-    \makeatother
+%%TOC_PLACEHOLDER%%
 \end{multicols}
 
-% --- Projets ---
 %%PROJECTS_PLACEHOLDER%%
-
 \end{document}

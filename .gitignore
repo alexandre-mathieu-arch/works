@@ -25,3 +25,15 @@ logs
 
 pnpm-lock.yaml
 portfolio-pdf/output/images/
+portfolio-pdf/output/crops/
+
+# Generated/local portfolio artifacts
+portfolio-pdf/__pycache__/
+portfolio-pdf/output-v3/
+portfolio-pdf/Alexandre-MATHIEU_PORTFOLIO-2026-V2.pdf
+portfolio-pdf/Alexandre-MATHIEU_PORTFOLIO-2026-V3.pdf
+public/images/projects/logements-saint-brieuc/3freres-plan-door-aligned-*.jpg
+public/images/projects/logements-saint-brieuc/3freres-plan-stair-aligned-*.jpg
+
+# Windows alternate data streams
+*:Zone.Identifier

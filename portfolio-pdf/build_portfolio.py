@@ -15,10 +15,11 @@ PROJECTS_DIR = REPO_ROOT / "content" / "projets"
 PUBLIC_DIR = REPO_ROOT / "public"
 OUTPUT_DIR = BASE_DIR / "output"
 OPTIMIZED_IMAGE_DIR = OUTPUT_DIR / "images"
+CROPPED_IMAGE_DIR = OUTPUT_DIR / "crops"
 TEMPLATE_FILE = BASE_DIR / "template.tex"
 TEX_FILE = OUTPUT_DIR / "portfolio_gen.tex"
 PDF_FILE = OUTPUT_DIR / "portfolio_gen.pdf"
-FINAL_PDF = BASE_DIR / "Alexandre-MATHIEU_PORTFOLIO-2026.pdf"
+FINAL_PDF = BASE_DIR / "Alexandre-MATHIEU_PORTFOLIO-2026-V2.pdf"
 MAX_IMAGE_DIMENSION = 2200
 JPEG_QUALITY = 88
 
@@ -147,6 +148,46 @@ def prepare_image_for_pdf(path):
         return str(source)
 
 
+def prepare_crop_for_pdf(path, aspect_ratio, crop_key, centering=(0.5, 0.5)):
+    source = Path(path)
+    digest = hashlib.sha1(
+        f"{source}:{aspect_ratio:.5f}:{centering}".encode("utf-8")
+    ).hexdigest()[:12]
+    target = CROPPED_IMAGE_DIR / f"{source.stem}-{crop_key}-{digest}.jpg"
+
+    if target.exists() and target.stat().st_mtime >= source.stat().st_mtime:
+        return str(target)
+
+    try:
+        image = ImageOps.exif_transpose(Image.open(source))
+        if image.mode in ("RGBA", "LA") or (image.mode == "P" and "transparency" in image.info):
+            background = Image.new("RGB", image.size, "white")
+            rgba = image.convert("RGBA")
+            background.paste(rgba, mask=rgba.getchannel("A"))
+            image = background
+        else:
+            image = image.convert("RGB")
+
+        if aspect_ratio >= 1:
+            target_width = MAX_IMAGE_DIMENSION
+            target_height = max(1, round(target_width / aspect_ratio))
+        else:
+            target_height = MAX_IMAGE_DIMENSION
+            target_width = max(1, round(target_height * aspect_ratio))
+
+        cropped = ImageOps.fit(
+            image,
+            (target_width, target_height),
+            method=Image.Resampling.LANCZOS,
+            centering=centering,
+        )
+        cropped.save(target, "JPEG", quality=JPEG_QUALITY, optimize=True, progressive=True)
+        return str(target)
+    except Exception as error:
+        print(f"Recadrage impossible ({source}): {error}")
+        return prepare_image_for_pdf(path)
+
+
 def parse_projects():
     projects_data = []
 
@@ -220,64 +261,67 @@ def text_block(project):
     return "\n\n".join(parts) or r"{\color{muted}Texte a completer.}"
 
 
-def gallery_page(title, label, images):
+def gallery_page(title, label, images, page_index):
     count = len(images)
     title_tex = tex_escape(title)
     label_tex = tex_escape(label)
-    tex = [rf"\galleryHeader{{{title_tex}}}{{{label_tex}}}"]
-
     if count == 1:
-        tex.append(rf"\galleryImage{{{images[0]}}}{{9.2cm}}")
-    elif count == 2:
-        tex.append(
-            rf"\noindent\begin{{minipage}}[c][9.2cm][c]{{0.48\linewidth}}\galleryImage{{{images[0]}}}{{9.2cm}}\end{{minipage}}\hfill"
-            rf"\begin{{minipage}}[c][9.2cm][c]{{0.48\linewidth}}\galleryImage{{{images[1]}}}{{9.2cm}}\end{{minipage}}"
-        )
-    elif count == 3:
-        tex.append(
-            rf"\noindent\begin{{minipage}}[c][8.9cm][c]{{0.31\linewidth}}\galleryImage{{{images[0]}}}{{8.9cm}}\end{{minipage}}\hfill"
-            rf"\begin{{minipage}}[c][8.9cm][c]{{0.31\linewidth}}\galleryImage{{{images[1]}}}{{8.9cm}}\end{{minipage}}\hfill"
-            rf"\begin{{minipage}}[c][8.9cm][c]{{0.31\linewidth}}\galleryImage{{{images[2]}}}{{8.9cm}}\end{{minipage}}"
-        )
-    else:
-        tex.append(
-            rf"\noindent\begin{{minipage}}[c][4.25cm][c]{{0.48\linewidth}}\galleryImage{{{images[0]}}}{{4.25cm}}\end{{minipage}}\hfill"
-            rf"\begin{{minipage}}[c][4.25cm][c]{{0.48\linewidth}}\galleryImage{{{images[1]}}}{{4.25cm}}\end{{minipage}}\par\vspace{{0.35cm}}"
-            rf"\noindent\begin{{minipage}}[c][4.25cm][c]{{0.48\linewidth}}\galleryImage{{{images[2]}}}{{4.25cm}}\end{{minipage}}\hfill"
-            rf"\begin{{minipage}}[c][4.25cm][c]{{0.48\linewidth}}\galleryImage{{{images[3]}}}{{4.25cm}}\end{{minipage}}"
-        )
-
-    return "\n".join(tex) + "\n"
+        image = prepare_crop_for_pdf(images[0], 210 / 148, f"gallery-full-{page_index}")
+        return rf"\galleryFullPage{{{title_tex}}}{{{label_tex}}}{{{image}}}" + "\n"
+    if count == 2:
+        left = prepare_crop_for_pdf(images[0], 12.7 / 14.8, f"gallery-left-{page_index}")
+        right = prepare_crop_for_pdf(images[1], 8.3 / 14.8, f"gallery-right-{page_index}")
+        return rf"\gallerySplitPage{{{title_tex}}}{{{label_tex}}}{{{left}}}{{{right}}}" + "\n"
+    if count == 3:
+        main = prepare_crop_for_pdf(images[0], 12.9 / 14.8, f"gallery-main-{page_index}")
+        top = prepare_crop_for_pdf(images[1], 8.1 / 7.4, f"gallery-top-{page_index}")
+        bottom = prepare_crop_for_pdf(images[2], 8.1 / 7.4, f"gallery-bottom-{page_index}")
+        return rf"\galleryTriptychPage{{{title_tex}}}{{{label_tex}}}{{{main}}}{{{top}}}{{{bottom}}}" + "\n"
+    main = prepare_crop_for_pdf(images[0], 12 / 14.8, f"gallery-main-{page_index}")
+    strips = [
+        prepare_crop_for_pdf(image, 9 / (14.8 / 3), f"gallery-strip-{page_index}-{index}")
+        for index, image in enumerate(images[1:4], start=1)
+    ]
+    return (
+        rf"\galleryMosaicPage{{{title_tex}}}{{{label_tex}}}{{{main}}}"
+        rf"{{{strips[0]}}}{{{strips[1]}}}{{{strips[2]}}}" + "\n"
+    )
 
 
 def generate_tex(projects):
     OUTPUT_DIR.mkdir(exist_ok=True)
     OPTIMIZED_IMAGE_DIR.mkdir(exist_ok=True)
+    CROPPED_IMAGE_DIR.mkdir(exist_ok=True)
     template = TEMPLATE_FILE.read_text(encoding="utf-8")
-
     project_entries = []
+    toc_entries = []
+    cover_image = ""
     for index, project in enumerate(projects, start=1):
         title = project.get("title", "Sans titre")
         date = str(project.get("date", ""))
         label = f"{index:02d}"
-        images = [prepare_image_for_pdf(image) for image in project.get("local_images", [])]
-        intro_image = images[0] if images else ""
+        source_images = project.get("local_images", [])
+        intro_image = prepare_crop_for_pdf(source_images[0], 210 / 148, f"intro-{label}") if source_images else ""
+        story_source = source_images[1] if len(source_images) > 1 else (source_images[0] if source_images else "")
+        story_image = prepare_crop_for_pdf(story_source, 9.7 / 14.8, f"story-{label}", centering=(0.5, 0.46)) if story_source else ""
+        if not cover_image and source_images:
+            cover_image = prepare_crop_for_pdf(source_images[0], 210 / 148, "cover", centering=(0.5, 0.44))
 
-        toc_title = f"{title} ({date})" if date else title
-        project_entries.append(
-            rf"\projectIntroPage{{{label}}}{{{tex_escape(title)}}}{{{tex_escape(date)}}}{{{tex_escape(project_subtitle(project))}}}{{{intro_image}}}"
-        )
-        project_entries.append(rf"\addcontentsline{{toc}}{{section}}{{{tex_escape(toc_title)}}}")
-        project_entries.append(
-            rf"\projectTextPage{{{meta_block(project)}}}{{{text_block(project)}}}"
-        )
-
-        gallery_images = images[1:]
+        toc_entries.append(rf"\portfolioTocEntry{{{label}}}{{{tex_escape(title)}}}{{{tex_escape(date)}}}")
+        project_entries.append(rf"\hypertarget{{project-{label}}}{{}}")
+        project_entries.append(rf"\projectIntroPage{{{label}}}{{{tex_escape(title)}}}{{{tex_escape(date)}}}{{{tex_escape(project_subtitle(project))}}}{{{intro_image}}}")
+        project_entries.append(rf"\projectStoryPage{{{label}}}{{{tex_escape(title)}}}{{{meta_block(project)}}}{{{text_block(project)}}}{{{story_image}}}")
+        gallery_images = source_images[2:]
         for page_index in range(0, len(gallery_images), 4):
             group = gallery_images[page_index : page_index + 4]
-            project_entries.append(gallery_page(title, f"{label} / images", group))
+            project_entries.append(gallery_page(title, f"{label} / {page_index // 4 + 1:02d}", group, page_index))
 
-    TEX_FILE.write_text(template.replace("%%PROJECTS_PLACEHOLDER%%", "\n\n".join(project_entries)), encoding="utf-8")
+    generated = template
+    generated = generated.replace("%%COVER_IMAGE%%", cover_image)
+    generated = generated.replace("%%TOC_PLACEHOLDER%%", "\n".join(toc_entries))
+    generated = generated.replace("%%PROJECT_COUNT%%", str(len(projects)))
+    generated = generated.replace("%%PROJECTS_PLACEHOLDER%%", "\n\n".join(project_entries))
+    TEX_FILE.write_text(generated, encoding="utf-8")
 
 
 def compile_pdf():

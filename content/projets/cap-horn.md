@@ -12,6 +12,20 @@ details:
   - "/images/projects/cap-horn/cap-horn-04-principe-facade.jpg"
   - "/images/projects/cap-horn/cap-horn-05-detail-coupe.jpg"
   - "/images/projects/cap-horn/cap-horn-06-plan-masse.png"
+portfolio:
+  cover_title: "Cap-Horn"
+  story_title: "Cap-Horn — Brulé Architectes"
+  cover: "/images/projects/cap-horn/cap-horn-01-perspective.jpg"
+  story: "/images/projects/cap-horn/cap-horn-02-terrasse.png"
+  pages:
+    - layout: "full"
+      images:
+        - path: "/images/projects/cap-horn/cap-horn-05-detail-coupe.jpg"
+          zoom: true
+    - layout: "full"
+      images:
+        - path: "/images/projects/cap-horn/cap-horn-04-principe-facade.jpg"
+          zoom: true
 typologies: ["Tertiaire", "Bureau"]
 tailles: ["M"]
 pays: ["France", "Bretagne"]

@@ -8,7 +8,7 @@
     </section>
 
     <!-- Content: Integrated desktop grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 items-start">
+    <div class="grid grid-cols-1 gap-y-10 gap-x-8 items-start md:grid-cols-[minmax(0,300px)_minmax(0,300px)] xl:grid-cols-[320px_320px_320px]">
       <!-- Column 1: Equipe -->
       <div class="opacity-100 pt-0 order-1">
         <div v-if="equipe" class="prose dark:prose-invert w-full max-w-[280px] pb-4 md:max-w-[300px] xl:max-w-[320px]">

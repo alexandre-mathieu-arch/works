@@ -9,6 +9,13 @@ images:
   - "/images/projects/villa-cn/villa-cn.01.jpg"
   - "/images/projects/villa-cn/villa-cn-atlas.jpg"
   - "/images/projects/villa-cn/villa-cn02.png"
+portfolio:
+  cover: "/images/projects/villa-cn/villa-cn.01.jpg"
+  story: "/images/projects/villa-cn/villa-cn02.png"
+  pages:
+    - layout: "full"
+      images:
+        - path: "/images/projects/villa-cn/villa-cn-atlas.jpg"
 description: "Une villa familiale nichée dans les plaines bordant l’Atlas nord, entre murs épais, patios calmes et lumière maîtrisée."
 typologies: ["Résidentiel"]
 tailles: ["XL"]
