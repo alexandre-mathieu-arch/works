@@ -258,7 +258,7 @@ def prepare_v3_template():
       \vspace{0.42cm}
       {\fontsize{6.8}{8.0}\selectfont\mediumfont\color{muted}Portfolio 2018–2026}\par
       \vspace{0.28cm}
-      {\fontsize{5.7}{7.0}\selectfont\lightfont\color{muted}Architecture, design, recherche constructive}
+      {\fontsize{5.7}{7.0}\selectfont\lightfont\color{muted}Architecture \& design}
     };
   \node[anchor=south west,inner sep=0,text width=11.50cm]
     at ([xshift=0.72cm,yshift=0.68cm]current page.south west) {%

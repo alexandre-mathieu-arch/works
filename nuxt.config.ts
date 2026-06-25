@@ -12,14 +12,14 @@ export default defineNuxtConfig({
       meta: [
         {
           name: 'description',
-          content: "Portfolio d'Alexandre Mathieu, architecte: projets d'architecture, design, rehabilitation et recherche constructive."
+          content: "Portfolio d'Alexandre Mathieu, architecte: projets d'architecture, design et rehabilitation."
         },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Alexandre Mathieu' },
         { property: 'og:title', content: 'Alexandre Mathieu - architecture & design' },
         {
           property: 'og:description',
-          content: "Portfolio d'Alexandre Mathieu, architecte: projets d'architecture, design, rehabilitation et recherche constructive."
+          content: "Portfolio d'Alexandre Mathieu, architecte: projets d'architecture, design et rehabilitation."
         },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'theme-color', content: '#1A2238' }

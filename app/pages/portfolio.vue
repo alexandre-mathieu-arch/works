@@ -55,7 +55,7 @@ const documents = [
   {
     label: 'Portfolio',
     kicker: 'Selected works',
-    description: 'Architecture, design et recherche constructive.',
+    description: 'Architecture et design.',
     lang: 'PDF',
     url: portfolioUrl
   },
@@ -86,7 +86,7 @@ useHead({
 })
 
 useSeoMeta({
-  description: "Portfolio PDF d'Alexandre Mathieu, architecte : projets d'architecture, design et recherche constructive.",
+  description: "Portfolio PDF d'Alexandre Mathieu, architecte : projets d'architecture et design.",
   ogTitle: 'Portfolio - Alexandre Mathieu',
   ogDescription: "Consulter et télécharger le portfolio PDF d'Alexandre Mathieu."
 })

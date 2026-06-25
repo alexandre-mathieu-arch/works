@@ -95,11 +95,11 @@ useHead({
 })
 
 useSeoMeta({
-  description: "Portfolio d'Alexandre Mathieu: projets d'architecture, design, rehabilitation et recherche constructive.",
+  description: "Portfolio d'Alexandre Mathieu: projets d'architecture, design et rehabilitation.",
   ogTitle: 'Alexandre Mathieu - architecture & design',
-  ogDescription: "Portfolio d'Alexandre Mathieu: projets d'architecture, design, rehabilitation et recherche constructive.",
+  ogDescription: "Portfolio d'Alexandre Mathieu: projets d'architecture, design et rehabilitation.",
   twitterTitle: 'Alexandre Mathieu - architecture & design',
-  twitterDescription: "Portfolio d'Alexandre Mathieu: projets d'architecture, design, rehabilitation et recherche constructive."
+  twitterDescription: "Portfolio d'Alexandre Mathieu: projets d'architecture, design et rehabilitation."
 })
 
 const route = useRoute();
