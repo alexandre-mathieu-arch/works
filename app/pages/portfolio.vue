@@ -48,7 +48,7 @@
 <script setup lang="ts">
 const runtimeConfig = useRuntimeConfig()
 const assetPath = (path: string) => `${runtimeConfig.app.baseURL}${path.replace(/^\//, '')}`
-const portfolioUrl = assetPath('/Alexandre-MATHIEU_PORTFOLIO-2026.pdf')
+const portfolioLightUrl = assetPath('/Alexandre-MATHIEU_PORTFOLIO-2026-light.pdf')
 const cvFrUrl = assetPath('/cv-alexandre-mathieu-fr.pdf')
 const cvEnUrl = assetPath('/cv-alexandre-mathieu-en.pdf')
 const documents = [
@@ -56,8 +56,8 @@ const documents = [
     label: 'Portfolio',
     kicker: 'Selected works',
     description: 'Architecture et design.',
-    lang: 'PDF',
-    url: portfolioUrl
+    lang: 'PDF light',
+    url: portfolioLightUrl
   },
   {
     label: 'CV français',
