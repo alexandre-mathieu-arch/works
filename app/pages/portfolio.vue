@@ -53,10 +53,10 @@ const cvFrUrl = assetPath('/cv-alexandre-mathieu-fr.pdf')
 const cvEnUrl = assetPath('/cv-alexandre-mathieu-en.pdf')
 const documents = [
   {
-    label: 'Portfolio',
+    label: 'Portfolio light',
     kicker: 'Selected works',
-    description: 'Architecture et design.',
-    lang: 'PDF light',
+    description: 'Version PDF légère, inférieure à 7 Mo.',
+    lang: '≤ 7 Mo',
     url: portfolioLightUrl
   },
   {

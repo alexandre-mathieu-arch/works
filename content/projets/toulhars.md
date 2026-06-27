@@ -1,5 +1,5 @@
 ---
-title: "Résidences de Toulhars - Archivolto"
+title: "Résidences de Toulhars"
 date: "2024"
 draft: false
 tags: ["résidentiel", "logement collectif", "littoral"]
@@ -20,6 +20,7 @@ pays: ["France", "Bretagne"]
 lieu: "Larmor-Plage"
 surface: "Parcelle 1 024 m²"
 phase: "Permis de construire"
+"phase réalisées": "ESQ, PC, APS, APD, PRO, DCE"
 statut: "Projet"
 collaboration: "Archivolto"
 agence: "Archivolto"

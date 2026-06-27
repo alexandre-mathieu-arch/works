@@ -235,7 +235,7 @@ def meta_block(project):
         ("Lieu", project.get("lieu")),
         ("Pays", ", ".join(as_list(project.get("pays")))),
         ("Surface", project.get("surface")),
-        ("Phase", project.get("phase") or project.get("statut")),
+        ("Phase", project.get("phase réalisées") or project.get("phase") or project.get("statut")),
         ("Collaboration", project.get("collaboration") or project.get("ecole")),
         ("Workflow", project.get("workflow")),
         ("Année", project.get("date")),
